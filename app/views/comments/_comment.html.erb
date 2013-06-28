@@ -1,0 +1,4 @@
+<%= div_for comment do %>
+      <p><strong><%= comment.user.user_name %> says</strong></p>
+      <div class="hero-unit"><%= simple_format comment.content %>
+  <% end %></div>

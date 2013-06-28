@@ -1,0 +1,60 @@
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <!-- Be sure to leave the brand out there if you want it shown -->
+      <a class="brand" href="#">Phoenix</a>
+
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse collapse">
+        <!-- .nav, .navbar-search, .navbar-form, etc -->
+        <ul class="nav">
+          <li class="active">
+            <%= link_to 'Dashboard' , '/user/dashboard' %>
+          </li>
+        </ul>
+        <form class="navbar-search pull-left" style="text-align: center">
+          <input type="text" class="search-query" placeholder="Search">
+        </form>
+        <ul class="nav pull-right">
+          <% if current_user %>
+              <li><h4 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h4> </li>
+              <li> <%= link_to "Log out", session_path("current"), method: "delete" %> </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+<h1>Articles</h1>
+<div class="container">
+  <table border="2" style="width: 100%">
+    <tr>
+      <th>Article Name</th>
+      <th>Publish Date</th>
+      <th>Posted By</th>
+      <th>Last Comment</th>
+      <th>Total Comments</th>
+    </tr>
+
+    <% @articles.each do |article| %>
+        <tr>
+          <td><center><%= link_to article.name, article %></center></td>
+          <td><center><%= time_ago_in_words(article.created_at) %></center></td>
+          <td><center><%= article.user.user_name %></center></td>
+          <td><center>by <%= article.comments.last.user.user_name %> <%= time_ago_in_words(article.comments.last.created_at) %></center></td>
+          <td><center><%= article.comments.count %></center></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+
+<p><%= link_to "New Article", new_article_path %></p>

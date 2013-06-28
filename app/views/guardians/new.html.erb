@@ -1,0 +1,134 @@
+<div class="navbar" xmlns="http://www.w3.org/1999/html">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <!-- Be sure to leave the brand out there if you want it shown -->
+      <a class="brand" href="#">Phoenix</a>
+
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse collapse">
+        <!-- .nav, .navbar-search, .navbar-form, etc -->
+        <ul class="nav">
+          <li class="active">
+            <%= link_to 'Dashboard' , '/user/dashboard' %>
+          </li>
+        </ul>
+        <form class="navbar-search pull-left" style="text-align: center">
+          <label>
+            <input type="text" class="search-query" placeholder="Search">
+          </label>
+        </form>
+        <ul class="nav pull-right">
+          <% if current_user %>
+              <li><h5 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h5> </li>
+              <li> <%= link_to 'Log out', session_path('current'), method: 'delete' %> </li>
+          <% end %>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<h1>Admission</h1>
+<h4>Step 2 - Parent details</h4>
+
+<div class="row-fluid">
+  <div class="span5 offset1 hero-unit">
+    <%= bootstrap_form_for(@guardian, :url => student_guardians_path(@student), html: { class: 'form-horizontal' },
+                           method: :post) do |f| %>
+        <% if @guardian.errors.any? %>
+            <div id="error_explanation">
+              <div class="alert alert-error">
+                The form contains <%= pluralize(@guardian.errors.count, 'error') %>
+              </div>
+              <ul>
+                <% @guardian.errors.full_messages.each do |msg| %>
+                    <li>* <%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <fieldset>
+        <div class="field">
+          <%= f.text_field :admission_no, value: @student.admission_no, disabled: true, label: 'Student Admission number' %>
+          <%= f.hidden_field :student_id, value: @student.id %>
+
+        </div>
+
+        <h4>Parent - Personal Details</h4>
+        <div class="field">
+          <%= f.text_field :first_name, label: 'First name'%>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :last_name, label: 'Last name' %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :relation, label: 'Relation' %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :dob , class: 'birth', label: 'Date of Birth' %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :education, label: 'Education' %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :occupation, label: 'Occupation' %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :income, label: 'Income' %>
+        </div>
+
+        <h4>Parent - Contact Details</h4>
+
+        <div class="field">
+          <%= f.text_field :email %>
+        </div>
+
+        <div class="field">
+          <%= f.text_field :office_address_line1 %>
+        </div>
+
+          <div class="field">
+            <%= f.text_field :office_address_line2 %>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :city %>
+          </div>
+
+          <div class="field">
+            <%= f.collection_select :country_id, Country.all ,:id , :name  %>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :office_phone1 %>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :office_phone2 %>
+          </div>
+
+          <div class="field">
+            <%= f.text_field :mobile_phone %>
+          </div>
+
+        <div class="actions"><%= f.submit 'Save & Proceed', class: 'btn btn-mini btn-primary' %></div>
+        </fieldset>
+    <% end %>
+  </div>
+</div>
