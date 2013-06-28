@@ -16,7 +16,7 @@ class GuardiansController < ApplicationController
     @guardian = Guardian.new(params[:guardian])
     if @guardian.save
       flash[:success] = ' Parent Record Saved Successfully. Please fill the Additional Details.'
-      redirect_to new_student_student_previous_datum_path(@student)
+      redirect_to new_student_previous_detail_path(@student)
     else
       flash.now[:error] = 'An error occurred please try again!'
       render 'new'

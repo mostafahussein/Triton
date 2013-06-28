@@ -10,7 +10,7 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Phoenix</a>
+      <a class="brand" href="#">Triton</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
@@ -50,7 +50,11 @@
           <td><center><%= link_to article.name, article %></center></td>
           <td><center><%= time_ago_in_words(article.created_at) %></center></td>
           <td><center><%= article.user.user_name %></center></td>
-          <td><center>by <%= article.comments.last.user.user_name %> <%= time_ago_in_words(article.comments.last.created_at) %></center></td>
+          <% if article.comments.empty? %>
+              <td><center>Nobody has commented yet</center></td>
+              <% else %>
+              <td><center>By <%=article.comments.last.user.user_name %> <%= time_ago_in_words(article.comments.last.created_at) %></center></td>
+              <% end %>
           <td><center><%= article.comments.count %></center></td>
         </tr>
     <% end %>

@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Phoenix::Application.load_tasks
+Triton::Application.load_tasks
