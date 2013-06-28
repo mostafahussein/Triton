@@ -1,6 +1,8 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
+    @articles_grid = initialize_grid(Article,
+                                     :include => [:user])
   end
 
   def show
@@ -16,7 +18,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(params[:article])
     @article.user_id = current_user.id
     if @article.save
-      redirect_to articles_url, notice: "Created article."
+      redirect_to articles_url, notice: 'Created article.'
     else
       render :new
     end
@@ -29,7 +31,7 @@ class ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update_attributes(params[:article])
-      redirect_to articles_url, notice: "Updated article."
+      redirect_to articles_url, notice: 'Updated article.'
     else
       render :edit
     end

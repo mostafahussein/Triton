@@ -1,4 +1,4 @@
-<div class="navbar" xmlns="http://www.w3.org/1999/html">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 
@@ -10,14 +10,14 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Phoenix</a>
+      <a class="brand" href="#">Triton</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <ul class="nav">
           <li class="active">
-            <%= link_to 'Dashboard' , '/user/dashboard' %>
+            <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
           </li>
         </ul>
         <form class="navbar-search pull-left" style="text-align: center">
@@ -27,8 +27,17 @@
         </form>
         <ul class="nav pull-right">
           <% if current_user %>
-              <li><h5 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h5> </li>
-              <li> <%= link_to 'Log out', session_path('current'), method: 'delete' %> </li>
+              <div class="btn-group">
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.user_name %></a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
+                  <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+                  <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/sessions/current" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
+                </ul>
+              </div>
           <% end %>
         </ul>
       </div>

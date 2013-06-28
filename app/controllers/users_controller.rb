@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @users_grid = initialize_grid(User)
   end
 
 

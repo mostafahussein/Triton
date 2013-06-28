@@ -1,4 +1,4 @@
-    <div class="navbar">
+    <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
     <div class="container">
      
@@ -10,14 +10,14 @@
     </a>
      
     <!-- Be sure to leave the brand out there if you want it shown -->
-    <a class="brand" href="#">Phoenix</a>
+    <a class="brand" href="#">Triton</a>
      
     <!-- Everything you want hidden at 940px or less, place within here -->
     <div class="nav-collapse collapse">
     <!-- .nav, .navbar-search, .navbar-form, etc -->
     <ul class="nav">
     <li>
-    <%= link_to 'Dashboard' , '/user/dashboard' %>
+      <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
     </li>
     <li><%= link_to 'Manage users' , '/users/new' %></li>
     <li><a href="#">Link</a></li>
@@ -39,7 +39,7 @@
     </form>
     <ul class="nav pull-right">
       <% if current_user %>
-        <li> Logged in as <%= current_user.user_name %> </li>
+        <li><h4 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h4></li>
 	<li> <%= link_to "Log out", session_path("current"), method: "delete" %> </li>
       <% end %>
     </ul>

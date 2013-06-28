@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 
@@ -10,23 +10,36 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Phoenix</a>
+      <a class="brand" href="#">Triton</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <ul class="nav">
           <li class="active">
-            <%= link_to 'Dashboard' , '/user/dashboard' %>
+          <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
           </li>
+
         </ul>
         <form class="navbar-search pull-left" style="text-align: center">
           <input type="text" class="search-query" placeholder="Search">
         </form>
+
+
+
         <ul class="nav pull-right">
           <% if current_user %>
-              <li><h5 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h5> </li>
-              <li> <%= link_to "Log out", session_path("current"), method: "delete" %> </li>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.user_name %></a>
+            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
+              <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+              <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
+              <li class="divider"></li>
+              <li><a href="/sessions/current" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
+            </ul>
+          </div>
           <% end %>
         </ul>
       </div>
@@ -34,41 +47,116 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <table border="0" style="width: 100%; height: 100% ; background-color: #ffffff" cellspacing='0' cellpadding="0">
-    <tr>
-      <td><%= link_to image_tag('admission.jpg', size: '100x100'),'/student/admission1',title: 'Admission' %></td>
-      <td><%= link_to image_tag('student-details.jpg', size: '100x100'),'#',title: 'Student Details' %></td>
-      <td><%= link_to image_tag('manage-users.jpg', size:'100x100' ), '/users#index' ,title: 'Manage Users' %></td>
-      <td><%= link_to image_tag('manage-news.png', size: '100x100'),'/articles#index',title: 'Manage News' %></td>
-      <td><%= link_to image_tag('reminder.png', size: '100x100'),'#',title: 'Reminder' %></td>
-      <td><%= link_to image_tag('human-resource.png', size: '100x100'),'#',title: 'Human Resources' %></td>
-    </tr>
-    <tr>
-      <td><h6>Admission</h6></td>
-      <td><h6>Student details</h6></td>
-      <td><h6>Manage users</h6></td>
-      <td><h6>Manage news</h6></td>
-      <td><h6>Reminder</h6></td>
-      <td><h6>Human resources</h6></td>
-    </tr>
-  </table>
-  <table border="0" style="width: 100%; height: 100% ; background-color: #ffffff" cellspacing='0' cellpadding="0">
-    <tr>
-      <td><%= link_to image_tag('attendence.png', size: '100x100'),'#',title: 'Attendence' %></td>
-      <td><%= link_to image_tag('examination.png', size: '100x100'),'#',title: 'Examination' %></td>
-      <td><%= link_to image_tag('timetable.png', size:'100x100' ), '/users/new' ,title: 'Time Table' %></td>
-      <td><%= link_to image_tag('finance.png', size: '100x100'),'#',title: 'Finance' %></td>
-      <td><%= link_to image_tag('settings.png', size: '100x100'),'#',title: 'Setting' %></td>
-      <td><%= link_to image_tag('human-resource.png', size: '100x100'),'#',title: 'Complaint' %></td>
-    </tr>
-    <tr>
-      <td><h6>Attendence</h6></td>
-      <td><h6>Examination</h6></td>
-      <td><h6>Time Table</h6></td>
-      <td><h6>Finance</h6></td>
-      <td><h6>Setting</h6></td>
-      <td><h6>Complaint</h6></td>
-    </tr>
-  </table>
+
+<div class="row offset2">
+  <ul class="ca-menu">
+    <li>
+      <a href="/student/admission1" title="Admission">
+        <span class="ca-icon"><img alt="Admission" height="100" src="/assets/admission.jpg" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Admission</h2>
+          <h3 class="ca-sub">Admission</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Student Details">
+        <span class="ca-icon"><img alt="Student-details" height="100" src="/assets/student-details.jpg" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Student details</h2>
+          <h3 class="ca-sub">Student details</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/users#index" title="Manage Users">
+        <span class="ca-icon"><img alt="Manage-users" height="100" src="/assets/manage-users.jpg" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Manage users</h2>
+          <h3 class="ca-sub">Manage users</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="/articles#index" title="Manage News">
+        <span class="ca-icon"><img alt="Manage-news" height="100" src="/assets/manage-news.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Manage news</h2>
+          <h3 class="ca-sub">Manage news</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Reminder">
+        <span class="ca-icon"><img alt="Reminder" height="100" src="/assets/reminder.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Reminder</h2>
+          <h3 class="ca-sub">Reminder</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Human Resources">
+        <span class="ca-icon"><img alt="Human-resource" height="100" src="/assets/human-resource.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Human Resource</h2>
+          <h3 class="ca-sub">Human Resource</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Attendance">
+        <span class="ca-icon"><img alt="Attendance" height="100" src="/assets/attendance.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Attendance</h2>
+          <h3 class="ca-sub">Attendance</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Examination">
+        <span class="ca-icon"><img alt="Examination" height="100" src="/assets/examination.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Examination</h2>
+          <h3 class="ca-sub">Examination</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Time Table">
+        <span class="ca-icon"><img alt="Timetable" height="100" src="/assets/timetable.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Time table</h2>
+          <h3 class="ca-sub">Time table</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Finance">
+        <span class="ca-icon"><img alt="Finance" height="100" src="/assets/finance.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Finance</h2>
+          <h3 class="ca-sub">Finance</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Setting">
+        <span class="ca-icon"><img alt="Settings" height="100" src="/assets/settings.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Setting</h2>
+          <h3 class="ca-sub">Setting</h3>
+        </div>
+      </a>
+    </li>
+    <li>
+      <a href="#" title="Complaint">
+        <span class="ca-icon"><img alt="Complaint" height="100" src="/assets/human-resource.png" width="100" /></span>
+        <div class="ca-content">
+          <h2 class="ca-main">Complaint</h2>
+          <h3 class="ca-sub">Complaint</h3>
+        </div>
+      </a>
+    </li>
+  </ul>
 </div>

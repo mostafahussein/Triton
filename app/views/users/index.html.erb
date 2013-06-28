@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 
@@ -10,14 +10,14 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Phoenix</a>
+      <a class="brand" href="#">Triton</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <ul class="nav">
           <li class="active">
-            <%= link_to 'Dashboard' , '/user/dashboard' %>
+            <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
           </li>
         </ul>
         <form class="navbar-search pull-left" style="text-align: center">
@@ -25,8 +25,17 @@
         </form>
         <ul class="nav pull-right">
           <% if current_user %>
-              <li><h4 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h4> </li>
-              <li> <%= link_to "Log out", session_path("current"), method: "delete" %> </li>
+              <div class="btn-group">
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.user_name %></a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
+                  <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+                  <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/sessions/current" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
+                </ul>
+              </div>
           <% end %>
         </ul>
       </div>
@@ -36,25 +45,18 @@
 </div>
 <h1>Listing users</h1>
 <div class="container">
-<table border="2" style="width: 100%">
-  <tr>
-    <th>Username</th>
-    <th>Real Name</th>
-    <th>Email</th>
-    <th>Role</th>
-    <th>Action</th>
-  </tr>
-
-  <% @users.each do |user| %>
-      <tr>
-        <td><center><%= user.user_name %></center></td>
-        <td><center><%= user.first_name %> <%= user.last_name %></center></td>
-        <td><center><%= user.email %></center></td>
-        <td><center></center></td>
-        <td><center><%= link_to 'View Profile', '#' %><% if !current_user %>/<%= link_to 'Delete user', user, method: 'delete',confirm: 'Are you sure about ?' %> <% end %></center></td>
-      </tr>
-  <% end %>
-</table>
-
-<%= link_to 'Add new user', '/users/new' %>
+  <%= grid(@users_grid, show_filters: :when_filtered) do |g|
+    g.column name:  'ID', attribute: 'id', filter: false
+    g.column name:  'Username', attribute: 'user_name'
+    g.column name:  'First Name', attribute: 'first_name'
+    g.column name:  'Last Name', attribute: 'last_name'
+    g.column name:  'E-mail', attribute: 'email'
+    g.column name: 'Profile'  do |user|
+      link_to('View', user_path(user))
+    end
+    g.column  do |user|
+      link_to('Delete', method: :delete)
+    end
+  end -%>
+  <%= link_to 'Add new user', '/users/new' %>
 </div>

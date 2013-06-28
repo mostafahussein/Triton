@@ -11,7 +11,11 @@ gem 'bootswatch-rails'
 gem 'therubyracer'
 gem 'bootstrap_form'
 gem 'simple_form'
-
+gem 'tabletastic'
+gem 'table-for'
+gem 'wice_grid', '3.2.1'
+gem 'jquery-ui-rails'
+gem 'coffee-script-source'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -27,6 +31,8 @@ group :assets do
   gem 'uglifier', '1.2.3'
   gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+
+
 end
 
 group :test do

@@ -1,31 +1,31 @@
-Phoenix::Application.routes.draw do
+Triton::Application.routes.draw do
 
-  get "student_previous_data/index"
+  get 'previous_details/index'
 
-  get "student_previous_data/show"
+  get 'previous_details/show'
 
-  get "student_previous_data/new"
+  get 'previous_details/new'
 
-  get "student_previous_data/edit"
+  get 'previous_details/edit'
 
-  get "guardians/index"
+  get 'guardians/index'
 
-  get "guardians/show"
+  get 'guardians/show'
 
-  get "guardians/edit"
+  get 'guardians/edit'
 
-  get "students/index"
+  get 'students/index'
 
-  get "students/show"
+  get 'students/show'
 
-  get "students/edit"
+  get 'students/edit'
 
   resources :articles do
     resources :comments
   end
   resources :users
   resources :students do
-    resources :student_previous_data
+    resources :previous_details
     resources :guardians
   end
   resources :sessions

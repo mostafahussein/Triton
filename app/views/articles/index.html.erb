@@ -1,4 +1,4 @@
-<div class="navbar">
+<div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
 
@@ -10,14 +10,14 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Phoenix</a>
+      <a class="brand" href="#">Triton</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <ul class="nav">
           <li class="active">
-            <%= link_to 'Dashboard' , '/user/dashboard' %>
+            <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
           </li>
         </ul>
         <form class="navbar-search pull-left" style="text-align: center">
@@ -25,8 +25,17 @@
         </form>
         <ul class="nav pull-right">
           <% if current_user %>
-              <li><h4 style="color: #ffffff">Logged in as <%= current_user.user_name %> </h4> </li>
-              <li> <%= link_to "Log out", session_path("current"), method: "delete" %> </li>
+              <div class="btn-group">
+                <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.user_name %></a>
+                <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
+                  <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
+                  <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/sessions/current" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
+                </ul>
+              </div>
           <% end %>
         </ul>
       </div>
@@ -36,25 +45,20 @@
 </div>
 <h1>Articles</h1>
 <div class="container">
-  <table border="2" style="width: 100%">
-    <tr>
-      <th>Article Name</th>
-      <th>Publish Date</th>
-      <th>Posted By</th>
-      <th>Last Comment</th>
-      <th>Total Comments</th>
-    </tr>
-
-    <% @articles.each do |article| %>
-        <tr>
-          <td><center><%= link_to article.name, article %></center></td>
-          <td><center><%= time_ago_in_words(article.created_at) %></center></td>
-          <td><center><%= article.user.user_name %></center></td>
-          <td><center>by <%= article.comments.last.user.user_name %> <%= time_ago_in_words(article.comments.last.created_at) %></center></td>
-          <td><center><%= article.comments.count %></center></td>
-        </tr>
-    <% end %>
-  </table>
+  <%= grid(@articles_grid, show_filters: :when_filtered) do |g|
+    g.column name:  'Name', attribute: 'name', :auto_reload => true
+    g.column name:  'Publish Date' do |article|
+      time_ago_in_words(article.created_at)
+    end
+    g.column name:  'Posted by', attribute: 'user_name', model: 'User', auto_reload: true do |article|
+      article.user.user_name if article.user
+      end
+    g.column name: 'Total comments' do |article|
+      article.comments.count
+    end
+    g.column do |article|
+      link_to('Read this thread', article_path(article))
+    end
+  end -%>
+  <p><%= link_to 'New Article', new_article_path %></p>
 </div>
-
-<p><%= link_to "New Article", new_article_path %></p>
