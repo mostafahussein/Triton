@@ -1,5 +1,10 @@
 Triton::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
+  devise_for :users, path_names: {sign_up: 'new'},:controllers => { :registrations => 'registrations' }
+  resources :users, only: [:index, :show, :destroy, :edit, :update]
+
   get 'previous_details/index'
 
   get 'previous_details/show'
@@ -23,17 +28,17 @@ Triton::Application.routes.draw do
   resources :articles do
     resources :comments
   end
-  resources :users
   resources :students do
     resources :previous_details
     resources :guardians
   end
-  resources :sessions
-  get '/user/dashboard', to: 'static_pages#home'
+  get '/dashboard', to: 'static_pages#home'
   get '/student/admission1' , to: 'students#new'
   get '/student/admission2' , to: 'guardians#new'
 
-  root to: 'sessions#new'
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

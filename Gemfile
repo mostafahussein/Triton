@@ -16,6 +16,15 @@ gem 'table-for'
 gem 'wice_grid', '3.2.1'
 gem 'jquery-ui-rails'
 gem 'coffee-script-source'
+gem 'spinjs-rails'
+gem 'faye'
+gem 'private_pub'
+gem 'thin'
+gem 'paul_revere'
+gem 'announcements'
+gem 'ckeditor'
+gem 'paperclip'
+gem 'breadcrumbs_on_rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -31,7 +40,9 @@ group :assets do
   gem 'uglifier', '1.2.3'
   gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
-
+  gem 'devise'
+  gem 'bootstrap_flash_messages'
+  gem 'cancan'
 
 end
 

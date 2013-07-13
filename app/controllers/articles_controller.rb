@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
     @articles = Article.all
     @articles_grid = initialize_grid(Article,
                                      :include => [:user])
+    @pending = Article.pending.size
   end
 
   def show
@@ -19,6 +20,7 @@ class ArticlesController < ApplicationController
     @article.user_id = current_user.id
     if @article.save
       redirect_to articles_url, notice: 'Created article.'
+
     else
       render :new
     end
@@ -36,4 +38,5 @@ class ArticlesController < ApplicationController
       render :edit
     end
   end
+
 end

@@ -17,7 +17,7 @@ class StudentsController < ApplicationController
       flash[:success] = ' Student Record Saved Successfully. Please fill the Parent Details.'
       redirect_to new_student_guardian_path(@student.id)
     else
-      flash.now[:error] = 'An error occurred please try again!'
+      flash[:error] = 'An error occurred please try again!'
       render 'new'
     end
   end

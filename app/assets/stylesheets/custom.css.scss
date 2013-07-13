@@ -16,10 +16,12 @@ body { padding-top: 60px; }
 @import "bootswatch/spruce/bootswatch";
 
 
+
+
 .ca-menu{
   padding:0;
   margin:20px auto;
-  width: 1000px;
+  width: 1020px;
 }
 .ca-menu li{
   width: 230px;
@@ -121,4 +123,30 @@ body { padding-top: 60px; }
 }
 .ca-menu li:hover .ca-sub{
   opacity: 0.8;
+}
+
+
+
+div.alert {width: 200px;
+           appearance:button;
+           -moz-appearance:button; /* Firefox */
+           -webkit-appearance:button; /* Safari and Chrome */}
+
+
+.info {
+  background: #D5EDF8;
+  color: #205791;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 2px solid #92CAE4;
+}
+
+.hide_announcement {
+  cursor: pointer;
+  float: right;
+}
+
+.breadcrumb {
+  color:#ffffff;
+  font-size: 20px;
 }

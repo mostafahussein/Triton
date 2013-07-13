@@ -1,39 +1,33 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      flash[:success] = "User account created!"
-      render 'update'
-    else
-      flash.now[:error] = "An error occured please try again!"
-      render 'new'
-    end
+  def index
+    @users = User.all
+    @users_grid = initialize_grid(User,
+                                  :include => [:assignments, :roles])
   end
 
   def show
+    @user = User.find(params[:id])
+
+  end
+
+  def edit
     @user = User.find(params[:id])
   end
 
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-      flash[:success] = "User account updated successfully!"
-      redirect_to @user
+      sign_in @user
+      flash[:success] = 'Profile updated'
+      redirect_to users_path
     else
-      flash.now[:error] = "An error occured please try again!"
-      render 'update'
+      render 'edit'
     end
   end
 
-  def index
-    @users = User.all
-    @users_grid = initialize_grid(User)
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = 'User deleted'
+    redirect_to users_path
   end
-
-
 end
-

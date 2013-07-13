@@ -1,58 +1,51 @@
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
+<%= render 'shared/navbar' %>
+<%= announce Article.newest, {:format => 'bootstrap'} %>
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 
-      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Discussion forum - rules for users</h3>
+  </div>
+  <div class="modal-body">
+    <b><i><h4>Messages must not contain inappropriate or offensive material.
+      The Deakin University Central Alumni Office reserves the right to
+      remove any notices which it considers inappropriate and suspend
+      indefinitely the Alumni membership or usage rights of any offending person.</h4></i></b><br>
+      <b><i><h5>It is inappropriate to post messages that:</h5></i></b>
 
-      <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Triton</a>
-
-      <!-- Everything you want hidden at 940px or less, place within here -->
-      <div class="nav-collapse collapse">
-        <!-- .nav, .navbar-search, .navbar-form, etc -->
-        <ul class="nav">
-          <li class="active">
-          <a href="/user/dashboard"><i class="icon-home icon-white"></i> Dashboard</a>
-          </li>
-
-        </ul>
-        <form class="navbar-search pull-left" style="text-align: center">
-          <input type="text" class="search-query" placeholder="Search">
-        </form>
-
-
-
-        <ul class="nav pull-right">
-          <% if current_user %>
-          <div class="btn-group">
-            <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> <%= current_user.user_name %></a>
-            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
-              <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
-              <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
-              <li class="divider"></li>
-              <li><a href="/sessions/current" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
-            </ul>
-          </div>
-          <% end %>
-        </ul>
-      </div>
-
-    </div>
+      <b><i><ul>1- Contain, promote, or link to sexually explicit or violent material</ul>
+      <ul>2- Promote, depict, or link to material that promotes or depicts discrimination based on race, gender, religion, national origin, physical or mental disability, sexual orientation, or age</ul>
+      <ul>3- Post content that advertisers or promotes a private business</ul>
+      <ul>4- Contain unlawful material, including but not limited to materials that may violate another's intellectual property rights, or links to a site that contains such material</ul>
+      <ul>5- Contain information regarding or promoting illegal activity, or linking to a site that provides such information</ul>
+      <ul>6- Contains spam, pyramid schemes, or other unrelated advertising material</ul>
+      <ul>7- Are obscene, excessively violent, threatening, harassing or otherwise objectionable</ul>
+      <ul>8- Are deemed by the Central Alumni Office to be unsuitable for any other reason</ul>
+      <ul>9- Denigrate Deakin University, its staff or other Alumni members</ul></i></b>
+    <b><i><h5>Disclaimer and safety precautions:</h5></i></b>
+    <b><i><ul>This discussion forum can be viewed by all registered Alumni members.</ul>
+    <ul>It is recommended that members do not give out personal information or
+    post any information you would not want others to see, including potential employers or colleagues.</ul>
+    <ul>Messages express the views of the author of the message and not the views of
+    Deakin University or any entity associated with the University.</ul>
+    <ul>Individual users take full responsibility for postings and use
+    the information posted by members at their own risk.</ul>
+    <ul>There is no guarantee that you will receive a response to your message.</ul></i></b>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Continue</button>
   </div>
 </div>
 
-<div class="row offset2">
+<div class="row">
   <ul class="ca-menu">
     <li>
       <a href="/student/admission1" title="Admission">
-        <span class="ca-icon"><img alt="Admission" height="100" src="/assets/admission.jpg" width="100" /></span>
+        <center><br><img alt="Admission" height="100" src="/assets/admission.jpg" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Admission</h2>
           <h3 class="ca-sub">Admission</h3>
@@ -61,7 +54,7 @@
     </li>
     <li>
       <a href="#" title="Student Details">
-        <span class="ca-icon"><img alt="Student-details" height="100" src="/assets/student-details.jpg" width="100" /></span>
+        <center><br><img alt="Student-details" height="100" src="/assets/student-details.jpg" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Student details</h2>
           <h3 class="ca-sub">Student details</h3>
@@ -69,8 +62,8 @@
       </a>
     </li>
     <li>
-      <a href="/users#index" title="Manage Users">
-        <span class="ca-icon"><img alt="Manage-users" height="100" src="/assets/manage-users.jpg" width="100" /></span>
+      <a href="/users" title="Manage Users">
+        <center><br><img alt="Manage-users" height="100" src="/assets/manage-users.jpg" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Manage users</h2>
           <h3 class="ca-sub">Manage users</h3>
@@ -78,8 +71,8 @@
       </a>
     </li>
     <li>
-      <a href="/articles#index" title="Manage News">
-        <span class="ca-icon"><img alt="Manage-news" height="100" src="/assets/manage-news.png" width="100" /></span>
+      <a href="/articles" title="Manage News">
+        <center><br><img alt="Manage-news" height="100" src="/assets/manage-news.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Manage news</h2>
           <h3 class="ca-sub">Manage news</h3>
@@ -88,7 +81,7 @@
     </li>
     <li>
       <a href="#" title="Reminder">
-        <span class="ca-icon"><img alt="Reminder" height="100" src="/assets/reminder.png" width="100" /></span>
+        <center><br><img alt="Reminder" height="100" src="/assets/reminder.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Reminder</h2>
           <h3 class="ca-sub">Reminder</h3>
@@ -97,7 +90,7 @@
     </li>
     <li>
       <a href="#" title="Human Resources">
-        <span class="ca-icon"><img alt="Human-resource" height="100" src="/assets/human-resource.png" width="100" /></span>
+        <center><br><img alt="Human-resource" height="100" src="/assets/human-resource.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Human Resource</h2>
           <h3 class="ca-sub">Human Resource</h3>
@@ -106,7 +99,7 @@
     </li>
     <li>
       <a href="#" title="Attendance">
-        <span class="ca-icon"><img alt="Attendance" height="100" src="/assets/attendance.png" width="100" /></span>
+        <center><br><img alt="Attendance" height="100" src="/assets/attendance.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Attendance</h2>
           <h3 class="ca-sub">Attendance</h3>
@@ -115,7 +108,7 @@
     </li>
     <li>
       <a href="#" title="Examination">
-        <span class="ca-icon"><img alt="Examination" height="100" src="/assets/examination.png" width="100" /></span>
+        <center><br><img alt="Examination" height="100" src="/assets/examination.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Examination</h2>
           <h3 class="ca-sub">Examination</h3>
@@ -124,7 +117,7 @@
     </li>
     <li>
       <a href="#" title="Time Table">
-        <span class="ca-icon"><img alt="Timetable" height="100" src="/assets/timetable.png" width="100" /></span>
+        <center><br><img alt="Timetable" height="100" src="/assets/timetable.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Time table</h2>
           <h3 class="ca-sub">Time table</h3>
@@ -133,7 +126,7 @@
     </li>
     <li>
       <a href="#" title="Finance">
-        <span class="ca-icon"><img alt="Finance" height="100" src="/assets/finance.png" width="100" /></span>
+        <center><br><img alt="Finance" height="100" src="/assets/finance.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Finance</h2>
           <h3 class="ca-sub">Finance</h3>
@@ -142,7 +135,7 @@
     </li>
     <li>
       <a href="#" title="Setting">
-        <span class="ca-icon"><img alt="Settings" height="100" src="/assets/settings.png" width="100" /></span>
+        <center><br><img alt="Settings" height="100" src="/assets/settings.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Setting</h2>
           <h3 class="ca-sub">Setting</h3>
@@ -151,7 +144,7 @@
     </li>
     <li>
       <a href="#" title="Complaint">
-        <span class="ca-icon"><img alt="Complaint" height="100" src="/assets/human-resource.png" width="100" /></span>
+        <center><br><img alt="Complaint" height="100" src="/assets/human-resource.png" width="100" /></center>
         <div class="ca-content">
           <h2 class="ca-main">Complaint</h2>
           <h3 class="ca-sub">Complaint</h3>

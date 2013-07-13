@@ -4,9 +4,21 @@
   <title>Triton</title>
   <%= stylesheet_link_tag    'application', :media => 'all' %>
   <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'ckeditor/ckeditor' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
+
+<% flash.each do |name, msg| %>
+    <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name == :notice ? 'success' : 'error' %>">
+          <a class="close" data-dismiss="alert">&#215;</a>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
+    <% end %>
+<% end %>
+
 
 <%= yield %>
 
