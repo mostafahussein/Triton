@@ -15,7 +15,6 @@
 //= require bootstrap
 //= require jquery.ui.all
 //= require announcements
-//= require private_pub
 //= require wice_grid
 //= require ckeditor/init
 //= require bootstrap-datepicker
