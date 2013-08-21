@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '1.9.3'
-gem 'rails'
+gem 'rails', '3.2.12'
 gem 'jquery-rails'
 gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '3.0.1'
@@ -25,6 +25,7 @@ gem 'paperclip'
 gem 'breadcrumbs_on_rails'
 gem 'devise'
 gem 'cancan'
+gem 'thin'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

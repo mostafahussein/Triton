@@ -4,8 +4,8 @@ class Ability
   def initialize(user)
     if user.has_role? :admin
       can :manage, :all
-      can :destroy, User, :user_id != user.id
-      can [:update , :destroy], [Article, Comment]
+      can [:update , :destroy], [Article, Comment, User]
+      cannot :destroy, User, id: user.id
     else
       can :read, :all
     end
