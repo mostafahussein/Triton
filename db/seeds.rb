@@ -5,26 +5,25 @@
 # Account roles
 # Managers who can do every thing.
 Role.create(:role_name => 'Administrator')       #role_ids: 1
-Role.create(:role_name => 'Admission_Manager')   #role_ids: 2
-Role.create(:role_name => 'News_Manager')        #role_ids: 3
-Role.create(:role_name => 'Attendance_Manager')  #role_ids: 4
-Role.create(:role_name => 'Examination_Manager') #role_ids: 5
-Role.create(:role_name => 'Time_Table_Manager')  #role_ids: 6
-Role.create(:role_name => 'Finance_Manager')     #role_ids: 7
-Role.create(:role_name => 'Settings_Manager')    #role_ids: 8
-Role.create(:role_name => 'Support_Manager')     #role_ids: 9
+Role.create(:role_name => 'Admission_manager')   #role_ids: 2
+Role.create(:role_name => 'News_manager')        #role_ids: 3
+Role.create(:role_name => 'Attendance_manager')  #role_ids: 4
+Role.create(:role_name => 'Examination_manager') #role_ids: 5
+Role.create(:role_name => 'Time_Table_manager')  #role_ids: 6
+Role.create(:role_name => 'Finance_manager')     #role_ids: 7
+Role.create(:role_name => 'Settings_manager')    #role_ids: 8
+Role.create(:role_name => 'Ticket_manager')     #role_ids: 9
 # Viewers who can view only
-Role.create(:role_name => 'Student_Viewer')      #role_ids: 10
-Role.create(:role_name => 'News_Viewer')         #role_ids: 11
-Role.create(:role_name => 'Attendance_Viewer')   #role_ids: 12
-Role.create(:role_name => 'Examination_Viewer')  #role_ids: 13
-Role.create(:role_name => 'Time_Table_Viewer')   #role_ids: 14
-Role.create(:role_name => 'Support_Client')      #role_ids: 15
+Role.create(:role_name => 'Student_viewer')      #role_ids: 10
+Role.create(:role_name => 'News_viewer')         #role_ids: 11
+Role.create(:role_name => 'Attendance_viewer')   #role_ids: 12
+Role.create(:role_name => 'Examination_viewer')  #role_ids: 13
+Role.create(:role_name => 'Time_Table_viewer')   #role_ids: 14
+Role.create(:role_name => 'Ticket_viewer')      #role_ids: 15
 
 ###################################################################################################
 
-Employee.create(employee_number: '9864', first_name: 'Rudolf', middle_name: 'Michael', last_name: 'Luciano',
-  gender: 'M', employee_department_id: 1, marital_status: 'single', email: 'rudolf@email.com')
+
 ###################################################################################################
 
 # States Model
@@ -100,14 +99,15 @@ Batch.create(:name => 'Business Administration (Accounting) (Arabic) - Fourth ye
 
 # Accounts
 User.create(email: "admin@triton.com" , password: "123456" , password_confirmation: "123456",
-			first_name: "Mostafa" , last_name: "Hussein", user_name: "Dexter" , role_ids: 1, user_type: "Admin")
+			first_name: "Mostafa" , last_name: "Hussein", user_name: "Dexter" , role_ids: 1, user_type: "admin")
 #User.create(email: "employee@triton.com", password: "123456", password_confirmation: "12345",
 #			first_name: "Jann", last_name: "Schier", user_name: "Jann", user_type: "Employee")
 #User.create(email: "student@triton.com", password: "123456", password_confirmation: "12345",
 #			first_name: "Melissa", last_name: "Gade", user_name: "Melissa", user_type: "Student")
 #User.create(email: "parent@triton.com", password: "123456", password_confirmation: "12345",
 #			first_name: "Phil", last_name: "Masi", user_name: "Phil", user_type: "Parent")
-
+Employee.create(employee_number: '9864', first_name: 'Rudolf', middle_name: 'Michael', last_name: 'Luciano',
+  gender: 'M', employee_department_id: 1, marital_status: 'single', email: 'rudolf@email.com')
 ###################################################################################################
 
 # Country / Nationality name
