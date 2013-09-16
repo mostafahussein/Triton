@@ -1,0 +1,7 @@
+<%= @user.permissions.build %>
+<%= simple_fields_for :permissions do |p| %>
+<%= p.input :subject_class, collection: Permission.model_list %>
+<%= p.input :actions, collection: Permission.action_list, as: :check_boxes %>
+<% end %>
+<%= f.submit %>
+<% end %>

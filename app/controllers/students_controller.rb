@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
+  load_and_authorize_resource
   def index
-    @student = Student.all
+    @students = Student.all
   end
 
   def show
@@ -14,7 +15,7 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(params[:student])
     if @student.save
-      flash[:success] = ' Student Record Saved Successfully. Please fill the Parent Details.'
+      flash[:notice] = ' Student Record Saved Successfully. Please fill the Parent Details.'
       redirect_to new_student_guardian_path(@student.id)
     else
       flash[:error] = 'An error occurred please try again!'

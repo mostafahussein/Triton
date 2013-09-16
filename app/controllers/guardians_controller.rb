@@ -1,4 +1,5 @@
 class GuardiansController < ApplicationController
+  load_and_authorize_resource
   before_filter :set_student, only: [:new, :create]
   def index
     @guardian = Guardian.all
@@ -15,7 +16,7 @@ class GuardiansController < ApplicationController
   def create
     @guardian = Guardian.new(params[:guardian])
     if @guardian.save
-      flash[:success] = ' Parent Record Saved Successfully. Please fill the Additional Details.'
+      flash[:notice] = ' Parent Record Saved Successfully. Please fill the Additional Details.'
       redirect_to new_student_previous_detail_path(@student)
     else
       flash.now[:error] = 'An error occurred please try again!'
@@ -28,7 +29,7 @@ class GuardiansController < ApplicationController
 
   private
   def set_student
-    @student = Student.find params[:student_id]
+    @student = Student.find(params[:student_id])
   end
 
 end

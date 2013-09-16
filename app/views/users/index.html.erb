@@ -1,28 +1,42 @@
 <%= render 'shared/navbar' %>
-<h1>Listing users</h1>
-<div class="container">
-  <%= grid(@users_grid, show_filters: :when_filtered) do |g|
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Users-icon.png" alt="image" />
+        <h2>Listing users</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+
+      <div class="offset1 span9">
+      <%= grid(@users_grid, show_filters: :when_filtered) do |g|
     g.column name:  'ID', attribute: 'id', filter: false
     g.column name:  'Username', attribute: 'user_name'
     g.column name:  'First Name', attribute: 'first_name'
     g.column name:  'Last Name', attribute: 'last_name'
     g.column name:  'E-mail', attribute: 'email'
-    g.column name:  'Role', attribute: 'name', model: 'Role' do |user|
-      user.roles.collect{|role| role.name}.to_sentence
+    g.column name:  'Role', attribute: 'user_type'
+    g.column name: 'Profile', html: {style: 'text-align: center'}  do |user|
+      link_to('View', user_path(user), :class => "btn btn-info")
     end
-    g.column name: 'Profile'  do |user|
-      link_to('View', user_path(user))
+    g.column name: 'Details Modifying', html: {style: 'text-align: center'} do |user|
+      link_to('Edit', edit_user_path(user), :class => "btn btn-warning")
     end
-    g.column name: 'Edit' do |user|
-      link_to('Update', edit_user_path(user))
+    g.column  html: {style: 'text-align: center'} do |user|
+      unless current_user == user
+       link_to('Delete', user, method: :delete, data: { confirm: 'You sure?' }, :class => "btn btn-danger")
+     end
     end
-    g.column  do |user|
-      if can? :destroy, user
-       link_to('Delete', user, method: :delete, data: { confirm: 'You sure?' })
-    end
-  end
   end -%>
-  <% if can? :create, @user %>
-  <%= link_to 'Add new user', '/users/new' %>
-  <% end %>
-</div>
+  <button class="btn btn-success" type="submit" onclick="location.href='/users/new';">Add new user</button>
+  </div>
+          </div>
+        </div>
+      </div>

@@ -2,6 +2,7 @@ class Article < ActiveRecord::Base
   attr_accessible :content, :body, :user_id
   has_many :comments
   belongs_to :user
+  has_many :permissions, :as => :subject
 
   validates_presence_of :body
 

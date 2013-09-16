@@ -1,0 +1,8 @@
+<strong>New comment</strong>
+<%= form_for [@ticket, @reply] do |f| %>
+  <%= f.error_messages %>
+  <p>
+  <%= f.text_area :text, :rows => 5, :class => "input-xxlarge" %>
+  </p>
+     <button class="btn btn-inverse" type="submit">Reply</button>
+<% end %>

@@ -1,0 +1,50 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Preppy-icon.png" alt="image" />
+        <h2>Employee Admission</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <!-- page content goes here -->
+<%= simple_form_for @employee, url: wizard_path, method: :put do |f| %>
+<h4>Personal Details</h4>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
+      <%= f.input :marital_status, collection: ['Single', 'Married', 'Divorced'], include_blank: false %>
+      <hr style="width: 1100px; ">
+      <%= f.input :father_name %>
+      <hr style="width: 1100px; ">
+      <%= f.input :mother_name %>
+      <hr style="width: 1100px; ">
+      <%= f.input :blood_group, prompt: 'Unknown', collection: ['A+','A-','B+','B-','O+', 'O-', 'AB+', 'AB-'] %>
+      <hr style="width: 1100px; ">
+      <%= f.association :nationality, as: :select, include_blank: false %>
+      <hr style="width: 1100px; ">
+<h4>Home Address</h4>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
+      <%= f.input :home_address_line1 %>
+      <hr style="width: 1100px; ">
+      <%= f.input :home_address_line2 %>
+      <hr style="width: 1100px; ">
+      <%= f.input :home_city %>
+      <hr style="width: 1100px; ">
+      <%= f.input :home_country_id, as: :select do %>
+      <%= f.select :home_country_id, Country.all.map{ |c| [c.name , c.id] } %>
+      <% end %>
+      <hr style="width: 1100px; ">
+      <%= f.input :home_pin_code %>
+      <hr style="width: 1100px; ">
+
+      <%= f.submit 'Next', :class => "btn btn-success" %>
+<% end %>
+    </div>
+  </div>
+</div>

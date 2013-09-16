@@ -1,97 +1,45 @@
 <%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
 
-<h1>Admission</h1>
-<h4>Step 2 - Parent details</h4>
-
-<div class="row-fluid">
-  <div class="span5 offset1 hero-unit">
-    <%= bootstrap_form_for(@guardian, :url => student_guardians_path(@student), html: { class: 'form-horizontal' },
-                           method: :post) do |f| %>
-        <% if @guardian.errors.any? %>
-            <div id="error_explanation">
-              <div class="alert alert-error">
-                The form contains <%= pluralize(@guardian.errors.count, 'error') %>
-              </div>
-              <ul>
-                <% @guardian.errors.full_messages.each do |msg| %>
-                    <li>* <%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <fieldset>
-        <div class="field">
-          <%= f.text_field :admission_no, value: @student.admission_no, disabled: true, label: 'Student Admission number' %>
-          <%= f.hidden_field :student_id, value: @student.id %>
-
-        </div>
-
-        <h4>Parent - Personal Details</h4>
-        <div class="field">
-          <%= f.text_field :first_name, label: 'First name'%>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :last_name, label: 'Last name' %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :relation, label: 'Relation' %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :dob , class: 'birth', label: 'Date of Birth' %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :education, label: 'Education' %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :occupation, label: 'Occupation' %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :income, label: 'Income' %>
-        </div>
-
-        <h4>Parent - Contact Details</h4>
-
-        <div class="field">
-          <%= f.text_field :email %>
-        </div>
-
-        <div class="field">
-          <%= f.text_field :office_address_line1 %>
-        </div>
-
-          <div class="field">
-            <%= f.text_field :office_address_line2 %>
-          </div>
-
-          <div class="field">
-            <%= f.text_field :city %>
-          </div>
-
-          <div class="field">
-            <%= f.collection_select :country_id, Country.all ,:id , :name  %>
-          </div>
-
-          <div class="field">
-            <%= f.text_field :office_phone1 %>
-          </div>
-
-          <div class="field">
-            <%= f.text_field :office_phone2 %>
-          </div>
-
-          <div class="field">
-            <%= f.text_field :mobile_phone %>
-          </div>
-
-        <div class="actions"><%= f.submit 'Save & Proceed', class: 'btn btn-mini btn-primary' %></div>
-        </fieldset>
-    <% end %>
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/korganizer-icon.png" alt="image" />
+        <h2>Admission</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <h4>Step 2 - Parent details</h4>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
+      <%= simple_form_for(@guardian, :url => student_guardians_path(@student),
+      method: :post) do |f| %>
+      <%= f.error_messages %>
+      <%= f.input :admission_no, as: :hidden , value: @student.admission_no, disabled: true, label: 'Student Admission Number' %>
+      <%= f.input :student_id, as: :hidden, value: @student.id %>
+      <h4>Parent - Personal Details</h4>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :relation %>
+      <%= f.input :dob, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
+      <%= f.input :education %>
+      <%= f.input :occupation %>
+      <%= f.input :income %>
+      <h4>Parent - Contact Details</h4>
+      <%= f.input :email %>
+      <%= f.input :office_address_line1 %>
+      <%= f.input :office_address_line2 %>
+      <%= f.input :city %>
+      <%= f.association :country , as: :select %>
+      <%= f.input :office_phone1 %>
+      <%= f.input :office_phone2 %>
+      <%= f.input :mobile_phone %>
+      <%= f.submit 'Save & Proceed', class: 'btn btn-mini btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>

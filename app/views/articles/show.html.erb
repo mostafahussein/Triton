@@ -1,16 +1,47 @@
 <%= render 'shared/navbar' %>
-<h1><%= @article.body %></h1>
-
-<div class='span5 hero-unit'><center><h3><%= simple_format @article.content %></h3></center></div>
-  <br><br><br><br><br><br><div class="span4 container">
-  <h2>Comments</h2>
-
-  <div id="comments">
-    <%= render @article.comments %>
-  </div>
-
-  <h3>New Comment</h3>
-
-  <%= render 'comments/form' %>
-
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span2">
+			<div class="sidebar-nav">
+				<div class="well" style="width:200px; padding: 8px 0;">
+					<ul class="nav nav-list">
+						<li class="nav-header">Control Panel</li>
+						<li><a href="#"><i class="icon-home"></i> Dashboard</a></li>
+						<li><a href="#"><i class="icon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+						<li><a href="#"><i class="icon-comment"></i> Comments <span class="badge badge-info">10</span></a></li>
+						<li><a href="#"><i class="icon-user"></i> Members</a></li>
+						<li class="divider"></li>
+						<li><a href="#"><i class="icon-comment"></i> Settings</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="span10">
+			<h2><%= @article.body %></h2>
+			<span  class="badge badge-warn">blank</span>
+			<blockquote>
+				<p>"<%= simple_format @article.content %>"</p>
+				<small><cite title="Source Title">blank</cite></small>
+			</blockquote>
+			<div>
+				<span class="badge badge-success">blank</span><div class="pull-right"><span class="badge badge-info">blank</span></div>
+			</div>
+			<hr><br>
+			<div class="header">
+				<img src="/assets/Comment-icon.png" alt="reply" />
+				<h4>Replies</h4>
+			</div><br>
+			<% if @article.comments.exists? %>
+			<p><%= render @article.comments %>
+				<hr>
+				<% else %>
+				'There are no comments for this ticket.'
+				<hr>
+				<% end %>
+			</p>
+			<h3>New Comment</h3>
+			<%= render 'comments/form' %>
+			<hr>
+		</div>
+	</div>
 </div>

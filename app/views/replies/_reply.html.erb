@@ -1,0 +1,9 @@
+<%= div_for(reply) do %>
+<blockquote>
+  <%= simple_format(reply.text) %>
+  </blockquote>
+  <div class="pull-right">
+<span class="badge badge-success">Posted&nbsp;<%= reply.created_at %></span>
+<span class="badge badge-warn">By:&nbsp;&nbsp;<%= reply.user.first_name %>&nbsp;&nbsp;<%= reply.user.last_name %></span>
+</div><br>
+<% end %>

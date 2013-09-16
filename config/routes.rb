@@ -2,28 +2,21 @@ Triton::Application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
 
-  devise_for :users, path_names: {sign_up: 'new'},:controllers => { :registrations => 'registrations' }
-  resources :users, only: [:index, :show, :destroy, :edit, :update]
+  devise_for :users, :controllers => { :registrations => "users" }
+  resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update]
+  
+  resources :tickets do
+    resources :replies
+  end
 
-  get 'previous_details/index'
+  resources :states
 
-  get 'previous_details/show'
-
-  get 'previous_details/new'
-
-  get 'previous_details/edit'
-
-  get 'guardians/index'
-
-  get 'guardians/show'
-
-  get 'guardians/edit'
-
-  get 'students/index'
-
-  get 'students/show'
-
-  get 'students/edit'
+  resources :employee_departments 
+    resources :employees
+  
+  scope 'employees/:employee_id' do
+    resources :employee_admission_steps
+  end
 
   resources :articles do
     resources :comments
@@ -33,9 +26,13 @@ Triton::Application.routes.draw do
     resources :guardians
   end
   get '/dashboard', to: 'static_pages#home'
+  get '/support', to: 'static_pages#support_center'
+  get '/thank_you', to: 'static_pages#thanks'
   get '/student/admission1' , to: 'students#new'
   get '/student/admission2' , to: 'guardians#new'
-
+  get '/employee/human_resources' , to: 'static_pages#hr_board'
+  get '/employee/employee_management', to: 'static_pages#employee_management'
+  get '/employee/admission1', to: 'employees#new'
   devise_scope :user do
     root to: 'devise/sessions#new'
   end

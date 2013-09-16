@@ -14,9 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.ui.all
+//= require raphael
+//= require morris
+//= require highcharts/highcharts                                                           
+//= require highcharts/highcharts-more                                                         
+//= require highcharts/highstock
+//= require demo1
+//=require polyfills
 //= require announcements
 //= require wice_grid
 //= require ckeditor/init
 //= require bootstrap-datepicker
-//= require spin
 //= require_tree .

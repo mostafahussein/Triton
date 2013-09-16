@@ -1,0 +1,60 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Preppy-icon.png" alt="image" />
+        <h2>Employee Admission</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <!-- page content goes here -->
+      <%= simple_form_for(@employee) do |f| %>
+      <%= f.error_messages %>
+      <h4>General Details</h4>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
+      <%= f.input :employee_number %>
+      <hr style="width: 1100px; ">
+      <%= f.input :joining_date %>
+      <hr style="width: 1100px; ">
+      <%= f.input :first_name %>
+      <hr style="width: 1100px; ">
+      <%= f.input :middle_name %>
+      <hr style="width: 1100px; ">
+      <%= f.input :last_name %>
+      <hr style="width: 1100px; ">
+      <%= f.input :email %>
+      <hr style="width: 1100px; ">
+      <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @employee.gender, item_wrapper_class: 'inline'%>
+      <hr style="width: 1100px; ">
+      <%= f.input :date_of_birth %>
+      <hr style="width: 1100px; ">
+      <%= f.association :employee_department, as: :select %>
+      <hr style="width: 1100px; ">
+      <%= f.association :employee_category , as: :select %>
+      <hr style="width: 1100px; ">
+      <%= f.association :employee_position, as: :select %>
+      <hr style="width: 1100px; ">
+      <%= f.association :employee_grade, as: :select %>
+      <hr style="width: 1100px; ">
+      <%= f.input :job_title %>
+      <hr style="width: 1100px; ">
+      <%= f.input :qualification %>
+      <hr style="width: 1100px; ">
+      <%= f.input :experience_detail, as: :text, :input_html => { :rows => 5 } %>
+      <hr style="width: 1100px; ">
+      <%= f.input :experience_month, collection: 1..11, label: 'Total experience', prompt: 'Month(s)' %>
+      <%= f.input :experience_year, collection: 0..20, label: false, prompt: 'Year(s)' %>
+      <hr style="width: 1100px; ">
+
+      <%= f.submit 'Next', :class => "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

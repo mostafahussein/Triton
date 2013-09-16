@@ -1,28 +1,25 @@
-<% render 'shared/navbar' %>
-<h2>Edit user</h2>
-
-<%= simple_form_for @user do |f| %>
+<%= render 'shared/navbar' %>
+<h4>Edit user</h4>
+<h5>[*] is a required fields</h5>
+<div class="offset3">
+<%= simple_form_for(@user , html: { class: 'form-horizontal' }) do |f| %>
     <%= f.error_notification %>
 
     <div class="inputs">
-      <%= f.input :email, :required => true, :autofocus => true %>
-      <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
+      <%= f.input :email, disabled: true %>
+      <%= f.input :first_name , disabled: true %>
+      <%= f.input :last_name , disabled: true %>
+      <%= f.input :user_name , required: true ,autofocus: true %>
+      <%= f.input :password, :autocomplete => "off",
+       :hint => "leave it blank if you don't want to change it", :required => false %>
       <%= f.input :password_confirmation, :required => false %>
-      <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
-      <% for role in Role.all %>
-          <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) %>
-          <%=h role.name %>
-      <% end %>
-      <%= hidden_field_tag 'user[role_ids][]', '' %>
-    </div>
+      <%= f.input :current_password,
+       :hint => "we need your current password to confirm your changes", :required => true %><br>
+      <%= f.input :user_type, collection: ['Admin','Employee','Student','Parent'], include_blank: false %>
+    </div><br>
 
-    <div class="actions">
-      <%= f.button :submit, 'Update' %>
+    <div class="offset1 actions">
+      <button class="btn btn-success" type="submit">Update</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn btn-success" type="submit" onclick="location.href='/users';">Back</button>
     </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to 'Cancel my account',  user_path, :confirm => 'Are you sure?', :method => :delete %>.</p>
-
-<%= link_to 'Back', :back %>

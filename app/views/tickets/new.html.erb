@@ -1,0 +1,20 @@
+<%= render 'shared/navbar' %>
+<h4>Open a New Ticket</h4>
+<h5>Please fill in the form below to open a new ticket.</h5>
+<div class="row">
+
+  <div class="offset4 span4">
+
+	<%= bootstrap_form_for @ticket do |f| %>
+	<%= f.hidden_field :user_id, value: current_user.id %>
+	<%= f.hidden_field :first_name ,value: current_user.first_name %>
+	<%= f.hidden_field :last_name ,value: current_user.last_name %>
+	<%= f.hidden_field :email , value: current_user.email %>
+	<%= f.collection_select :employee_department_id, EmployeeDepartment.all, :id , :name, label: 'To Which Department ?' %>
+	<%= f.text_field :title %>
+	<h6>Please provide as much detail as possible so we can best assist you. * </h6>
+	<%= f.text_area :description, :rows => "10"  %>
+	<button class="btn btn-success" type="submit">Create ticket</button>
+	<% end %>
+ </div>
+</div>

@@ -1,1 +1,35 @@
-<% render 'shared/navbar' %>
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+	<div class="row-fluid">
+
+		<div class="offset1 span11">
+			<!--Side content-->
+			<div class="hr">
+				<img src="/assets/Users-icon.png" alt="image" />
+				<h2><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %>'s Profile</h2>
+			</div>
+			<div id="app-back-button" class="span10">
+				<a onclick="history.back(); return false;" href="#" id= "bk">
+					<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+				</a>
+			</div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+			<!-- page content goes here -->
+			<div class="span2">
+				<img src="http://thetransformedmale.files.wordpress.com/2011/06/bruce-wayne-armani.jpg"  alt="" class="img-rounded">
+			</div>
+			<div class="span4">
+				<blockquote>
+					<p>Bruce Wayne</p>
+					<small><cite title="Source Title">Gotham, United Kingdom  <i class="icon-map-marker"></i></cite></small>
+				</blockquote>
+				<p>
+					<i class="icon-envelope"></i> masterwayne@batman.com <br>
+					<i class="icon-globe"></i> www.bootsnipp.com <br>
+					<i class="icon-gift"></i> January 30, 1974
+				</p>
+			</div>
+			<%= render 'shared/set_privileges' %>
+		</div>
+	</div>
+</div>

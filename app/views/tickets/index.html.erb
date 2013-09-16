@@ -1,0 +1,71 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
+        <h2>Complaints and Suggestions</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <h4>All Tickets</h4>
+      <div class="span6">
+            <%= grid(@tickets_grid) do |g|
+              g.column name:  'Ticket title', html: {style: 'text-align: center'}, attribute: 'title', :auto_reload => true
+              g.column name:  'Publish Date' do |ticket|
+                time_ago_in_words(ticket.created_at)
+              end
+
+              g.column name:  'Sender role', html: {style: 'text-align: center'}, attribute: 'user_type', model: 'User', auto_reload: true do |ticket|
+                ticket.user.user_type if ticket.user
+              end
+              g.column name:  'Assigned Department', html: {style: 'text-align: center'}, attribute: 'name', model: 'EmployeeDepartment', auto_reload: true do |ticket|
+                ticket.employee_department.name if ticket.employee_department
+              end
+
+              g.column name: 'Priority', attribute: 'name', model: 'State', auto_reload: true do |ticket|
+                if ticket.state
+                  if ticket.state.name == 'Emergency'
+                    [ticket.state.name, {style: 'background-color:  rgb(255, 0, 0); text-align: center;'}]
+
+                  elsif ticket.state.name == 'High'
+                    [ticket.state.name, {style: 'background-color:  rgb(255, 165, 0); text-align: center;'}]
+
+                  elsif ticket.state.name == 'Normal'
+                    [ticket.state.name, {style: 'background-color:  rgb(255, 255, 0); text-align: center;'}]
+                  end
+               end
+             end
+
+             g.column name: 'Current State', html: {style: 'text-align: center'}, attribute: 'ticket_state', auto_reload: true do |ticket_state|
+              if ticket_state.blank?
+                'Not Defined'
+              elsif !ticket_state.blank?
+                ticket_state.ticket_state
+              end
+            end
+
+            g.column name: 'Assign State', html: {style: 'text-align: center'}, attribute: 'assign_state', auto_reload: true
+
+            g.column name: 'Assigned To', html: {style: 'text-align: center'}, attribute: 'first_name', model: 'Employee', auto_reload: true do |ticket|
+              if ticket.employee
+                ticket.employee.first_name + " " + ticket.employee.last_name
+              else
+                'no one assigned here'
+              end
+            end
+             g.column html: {style: 'text-align: center'} do |ticket|
+              link_to('Read this thread', ticket_path(ticket))
+            end
+            end -%></div>
+          
+
+    </div>
+  </div>
+</div>

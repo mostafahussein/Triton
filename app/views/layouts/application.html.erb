@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Triton</title>
+  <title>Educational ERP</title>
   <%= favicon_link_tag %>
   <%= stylesheet_link_tag    'application', :media => 'all' %>
+  <style>
+    <% for state in @states %>
+    #state_<%= state.name.parameterize %> {
+      background: <%= state.background %>;
+      color: <%= state.color %>;
+    }
+    <% end %>
+  </style>
   <%= javascript_include_tag 'application' %>
-  <%= yield :javascript_includes %>
   <%= javascript_include_tag 'ckeditor/ckeditor' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 
-<% flash.each do |name, msg| %>
-    <% if msg.is_a?(String) %>
-        <div class="alert alert-<%= name == :notice ? 'success' : 'error' %>">
-          <a class="close" data-dismiss="alert">&#215;</a>
-          <%= content_tag :div, msg, :id => "flash_#{name}" %>
-        </div>
-    <% end %>
-<% end %>
-
-
-<%= yield %>
-
+  <% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+  <div class="alert alert-<%= name == :notice ? 'success' : 'error' %>">
+    <a class="close" data-dismiss="alert">&#215;</a>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  </div>
+  <% end %>
+  <% end %>
+  <%= yield %>
+  <%= render 'shared/footer' %>
 </body>
 </html>

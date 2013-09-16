@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
 
-<h2>Sign up</h2>
+<h3>Add a new user</h3>
 <div class="row">
   <div class="span6 offset6">
 
@@ -13,18 +13,30 @@
     <%= f.input :email, :required => true%>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+    <%= f.association :user_type, as: :radio, label: 'Role' %>
+    
+  </div><br>
+  <%= link_to "Set Privileges", "#my-modal", :class => "btn btn-danger", "data-toggle" => "modal" %>
+<div class="modal hide fade" id="my-modal">
+  <div class="modal-header">
+    <h3 id="myModalLabel">Set Privileges</h3>
+  </div>
+  <div class="modal-body">
     <% for role in Role.all %>
-          <%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) %>
-          <%=h role.name %>
+          <label id='ability'><%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) %>
+           &nbsp;&nbsp;<%=h role.role_name.humanize  %></label>
+          
     <% end %>
     <%= hidden_field_tag 'user[role_ids][]', '' %>
   </div>
+  <div class="modal-footer">
+    <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Done</button>
+  </div>
+</div>
 
   <div class="actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Accept", :class => "btn btn-inverse" %>
   </div>
 <% end %>
     </div>
   </div>
-
-<%= render "links" %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813195714) do
+ActiveRecord::Schema.define(:version => 20130916203721) do
 
   create_table "articles", :force => true do |t|
     t.string   "body"
@@ -71,6 +71,94 @@ ActiveRecord::Schema.define(:version => 20130813195714) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "employee_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "prefix"
+    t.boolean  "status"
+    t.integer  "school_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "employee_departments", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "employee_grades", :force => true do |t|
+    t.string   "name"
+    t.integer  "priority"
+    t.boolean  "status"
+    t.integer  "max_hours_day"
+    t.integer  "max_hours_week"
+    t.integer  "school_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "employee_positions", :force => true do |t|
+    t.string   "name"
+    t.integer  "employee_category_id"
+    t.boolean  "status"
+    t.integer  "school_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  create_table "employees", :force => true do |t|
+    t.string   "employee_number"
+    t.date     "joining_date"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.boolean  "gender"
+    t.string   "job_title"
+    t.integer  "employee_department_id"
+    t.string   "qualification"
+    t.text     "experience_detail"
+    t.integer  "experience_year"
+    t.integer  "experience_month"
+    t.string   "status_description"
+    t.date     "date_of_birth"
+    t.string   "marital_status"
+    t.integer  "children_count"
+    t.string   "father_name"
+    t.string   "mother_name"
+    t.string   "husband_name"
+    t.string   "blood_group"
+    t.integer  "nationality_id"
+    t.string   "home_address_line1"
+    t.string   "home_address_line2"
+    t.string   "home_city"
+    t.string   "home_state"
+    t.string   "home_pin_code"
+    t.string   "office_address_line1"
+    t.string   "office_address_line2"
+    t.string   "office_city"
+    t.string   "office_state"
+    t.string   "office_pin_code"
+    t.string   "office_phone1"
+    t.string   "office_phone2"
+    t.string   "mobile_phone"
+    t.string   "home_phone"
+    t.string   "email"
+    t.string   "fax"
+    t.integer  "user_id"
+    t.integer  "school_id"
+    t.integer  "employee_category_id"
+    t.integer  "employee_position_id"
+    t.integer  "reporting_manager_id"
+    t.integer  "employee_grade_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "office_country_id"
+    t.integer  "home_country_id"
+  end
+
+  add_index "employees", ["employee_number"], :name => "index_employees_on_employee_number"
+
   create_table "guardians", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -105,15 +193,34 @@ ActiveRecord::Schema.define(:version => 20130813195714) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "replies", :force => true do |t|
+    t.string   "text"
+    t.integer  "ticket_id"
+    t.integer  "user_id"
+    t.integer  "state_id"
+    t.integer  "previous_state_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "roles", :force => true do |t|
-    t.string   "name"
+    t.string   "role_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "role_type"
   end
 
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.string   "background"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -159,6 +266,40 @@ ActiveRecord::Schema.define(:version => 20130813195714) do
     t.integer  "batch_id"
   end
 
+  create_table "ticket_comments", :force => true do |t|
+    t.string   "text"
+    t.integer  "ticket_id"
+    t.integer  "user_id"
+    t.integer  "state_id"
+    t.integer  "previous_state_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  create_table "tickets", :force => true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.integer  "user_id"
+    t.integer  "employee_department_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "state_id"
+    t.integer  "employee_id"
+    t.string   "ticket_state"
+    t.string   "assign_state"
+  end
+
+  add_index "tickets", ["state_id"], :name => "index_tickets_on_state_id"
+
+  create_table "user_types", :force => true do |t|
+    t.string   "type_of_user"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -178,6 +319,8 @@ ActiveRecord::Schema.define(:version => 20130813195714) do
     t.string   "user_name"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "user_type_id"
+    t.string   "user_type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

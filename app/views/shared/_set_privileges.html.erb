@@ -1,0 +1,20 @@
+<%= link_to "Set Privileges", "#my-modal", :class => "btn btn-danger", "data-toggle" => "modal" %>
+    <div class="modal hide fade" id="my-modal">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Set Privileges</h3>
+      </div>
+      <div class="modal-body">
+      <%= simple_form_for(@user) do |f| %>
+        <% for role in Role.all %>
+        <label id='ability'><%= check_box_tag 'user[role_ids][]', role.id, @user.roles.include?(role) %>
+         &nbsp;&nbsp;<%=h role.role_name.humanize  %></label>
+         
+         <% end %>
+         <%= hidden_field_tag 'user[role_ids][]', '' %>
+       </div>
+       <div class="modal-footer">
+       <%= f.button :submit, "Accept", :class => "btn btn-inverse" %>
+       <% end %>
+        <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Done</button>
+      </div>
+    </div>

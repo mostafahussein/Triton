@@ -1,7 +1,6 @@
 <%= render 'shared/navbar' %>
 <h1>Articles</h1>
 <div class="container">
-  <%= @pending %>
 
   <%= grid(@articles_grid, show_filters: :when_filtered) do |g|
     g.column name:  'Name', attribute: 'body', :auto_reload => true
@@ -10,13 +9,13 @@
     end
     g.column name:  'Posted by', attribute: 'user_name', model: 'User', auto_reload: true do |article|
       article.user.user_name if article.user
-      end
+    end
     g.column name: 'Total comments' do |article|
       article.comments.count
     end
     g.column do |article|
       link_to('Read this thread', article_path(article))
     end
-  end -%>
-  <p><%= link_to 'New Article', new_article_path %></p>
-</div>
+    end -%>
+    <button class="btn btn-success" type="submit" onclick="location.href='/articles/new';">New Article</button>
+  </div>

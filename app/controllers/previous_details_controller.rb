@@ -1,4 +1,5 @@
 class PreviousDetailsController < ApplicationController
+  load_and_authorize_resource
   before_filter :set_student, only: [:new, :create]
   def index
     @previous_detail = PreviousDetail.all
@@ -15,8 +16,8 @@ class PreviousDetailsController < ApplicationController
   def create
     @previous_detail = PreviousDetail.new(params[:previous_detail])
     if @previous_detail.save
-      flash[:success] = 'Record Saved Successfully.'
-      redirect_to '/user/dashboard'
+      flash[:notice] = 'Record Saved Successfully.'
+      redirect_to user_path(@student.user_id)
     else
       flash.now[:error] = 'An error occurred please try again!'
       redirect_to '/student/admission1'
@@ -29,6 +30,6 @@ class PreviousDetailsController < ApplicationController
 
   private
   def set_student
-    @student = Student.find params[:student_id]
+    @student = Student.find(params[:student_id])
   end
 end

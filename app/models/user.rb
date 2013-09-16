@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :user_name, :first_name, :last_name, :password, :password_confirmation, :remember_me,
-                  :role_ids, :current_password
+                  :role_ids, :current_password, :user_type
   attr_accessor :current_password
   # attr_accessible :title, :body
 
@@ -16,8 +16,14 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :students
   has_many :guardians
+  has_many :employees
+  has_many :tickets
+  has_many :permissions
+  accepts_nested_attributes_for :tickets
+
+
 
   def has_role?(role_sym)
-    roles.any? { |r| r.name.underscore.to_sym == role_sym }
+    roles.any? { |r| r.role_name.underscore.to_sym == role_sym }
   end
 end

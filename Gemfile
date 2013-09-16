@@ -26,6 +26,8 @@ gem 'breadcrumbs_on_rails'
 gem 'devise'
 gem 'cancan'
 gem 'thin'
+gem 'lazy_high_charts'
+gem 'wicked'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
@@ -43,6 +45,7 @@ group :assets do
                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
   
   gem 'bootstrap_flash_messages'
+  gem 'dynamic_form'
   
 
 end

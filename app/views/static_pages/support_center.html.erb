@@ -1,0 +1,54 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
+        <h2>Complaints and Suggestions</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="offset1 span9">
+            <div class="tabbable"> <!-- Only required for left/right tabs -->
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">New Ticket</a></li>
+                <% if can? :manage, Ticket %>
+                <div class="pull-right"><button class="btn btn-danger" type="submit" onclick="location.href='/tickets';">Admin Section</button></div><% end %>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+
+                  <div class="well" align="center">
+                    <h3>Welcome to support center!</h3>
+                    <table border="0" cellpadding="40">
+                      <tr>
+                        <th>
+                          <h4>Create a new ticket</h4>
+                          <button class="btn btn-success" type="submit" onclick="location.href='/tickets/new'">create a new ticket</button>
+
+                        </th>
+                        <th>
+                          <h4>Check ticket state</h4>
+                          <button class="btn btn-info" type="submit" onclick="location.href='#'">check ticket state</button>
+
+                        </th>
+                      </tr>
+                    </table>  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

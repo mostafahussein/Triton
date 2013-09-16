@@ -1,1 +1,3 @@
-<% if Article.newest.present? %> <%= announce Articles.newest , {:format => 'bootstrap'} %> <% end %>
+<% if Article.newest.present? %> 
+<%= announce Article.newest , {:format => 'bootstrap'} %> 
+<% end %>

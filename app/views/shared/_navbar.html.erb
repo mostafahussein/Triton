@@ -10,14 +10,14 @@
       </a>
 
       <!-- Be sure to leave the brand out there if you want it shown -->
-      <a class="brand" href="#">Triton</a>
+      <a class="brand" href="#">Educational ERP</a>
 
       <!-- Everything you want hidden at 940px or less, place within here -->
       <div class="nav-collapse collapse">
         <!-- .nav, .navbar-search, .navbar-form, etc -->
         <ul class="nav">
           <li class="active">
-            <a href='/dashboard'><i class="icon-home icon-white"></i> Dashboard</a>
+            <a href='/dashboard'><i class="icon-home icon-black"></i> Dashboard</a>
           </li>
 
         </ul>
@@ -31,14 +31,17 @@
 
           <div class="btn-group">
             <a class="btn btn-primary" href="#">
-              <i class="icon-user icon-white"></i> <% if user_signed_in? %><%= current_user.email %><% end %></a>
+              <i class="icon-user icon-black"></i>
+              <% if user_signed_in? %><%= current_user.user_name %>
+              (<%= current_user.user_type %>)
+              <% end %></a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#"><i class="icon-pencil icon-white"></i> Edit</a></li>
-              <li><a href="#"><i class="icon-trash icon-white"></i> Delete</a></li>
-              <li><a href="#"><i class="icon-ban-circle icon-white"></i> Ban</a></li>
+              <li><a href="#"><i class="icon-pencil icon-black"></i> Edit</a></li>
+              <li><a href="#"><i class="icon-trash icon-black"></i> Delete</a></li>
+              <li><a href="#"><i class="icon-ban-circle icon-black"></i> Ban</a></li>
               <li class="divider"></li>
-              <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-white"></i> Logout</a></li>
+              <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-black"></i> Logout</a></li>
             </ul>
           </div>
 

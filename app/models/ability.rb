@@ -2,13 +2,38 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.has_role? :admin
+    @user = user || User.new
+  
+    if user.has_role? :administrator
       can :manage, :all
-      can [:update , :destroy], [Article, Comment, User]
-      cannot :destroy, User, id: user.id
-    else
-      can :read, :all
     end
+
+    if  user.has_role? :admission_manager
+      can :manage, Student
+    end
+    
+    if user.has_role? :news_manager
+      can :manage, Article
+    end
+    
+    if user.has_role? :ticket_manager
+      can :manage, Ticket
+    end
+    
+    if user.has_role? :student_viewer
+      can :read, Student
+    end
+
+    if user.has_role? :news_viewer
+      can :read, Article
+    end
+
+    if user.has_role? :ticket_viewer #he should be able to create tickets and see what he has created.
+        can :create, Ticket
+        can :read, Ticket
+    end
+  end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)
@@ -35,5 +60,4 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-  end
 end
