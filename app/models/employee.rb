@@ -31,7 +31,7 @@ class Employee < ActiveRecord::Base
     new_user.email = self.email
     new_user.password = "123456"
     new_user.password_confirmation = "123456"
-    new_user.user_type_id = 2
+    new_user.user_type = 'employee'
     new_user.save
     t = Employee.find(self.id)
     t.user_id = new_user.id

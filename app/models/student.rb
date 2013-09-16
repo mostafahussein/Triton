@@ -24,7 +24,7 @@ class Student < ActiveRecord::Base
     new_user.email = self.email
     new_user.password = "123456"
     new_user.password_confirmation = "123456"
-    new_user.user_type_id = 3
+    new_user.user_type = 'student'
     self.user_id = new_user.id
     new_user.save
     t = Student.find(self.id)

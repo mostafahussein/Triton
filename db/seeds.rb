@@ -23,7 +23,8 @@ Role.create(:role_name => 'Support_Client')      #role_ids: 15
 
 ###################################################################################################
 
-
+Employee.create(employee_number: '9864', first_name: 'Rudolf', middle_name: 'Michael', last_name: 'Luciano',
+  gender: 'M', employee_department_id: 1, marital_status: 'single', email: 'rudolf@email.com')
 ###################################################################################################
 
 # States Model
@@ -100,12 +101,12 @@ Batch.create(:name => 'Business Administration (Accounting) (Arabic) - Fourth ye
 # Accounts
 User.create(email: "admin@triton.com" , password: "123456" , password_confirmation: "123456",
 			first_name: "Mostafa" , last_name: "Hussein", user_name: "Dexter" , role_ids: 1, user_type: "Admin")
-User.create(email: "employee@triton.com", password: "123456", password_confirmation: "12345",
-			first_name: "Jann", last_name: "Schier", user_name: "Jann", user_type: "Employee")
-User.create(email: "student@triton.com", password: "123456", password_confirmation: "12345",
-			first_name: "Melissa", last_name: "Gade", user_name: "Melissa", user_type: "Student")
-User.create(email: "parent@triton.com", password: "123456", password_confirmation: "12345",
-			first_name: "Phil", last_name: "Masi", user_name: "Phil", user_type: "Parent")
+#User.create(email: "employee@triton.com", password: "123456", password_confirmation: "12345",
+#			first_name: "Jann", last_name: "Schier", user_name: "Jann", user_type: "Employee")
+#User.create(email: "student@triton.com", password: "123456", password_confirmation: "12345",
+#			first_name: "Melissa", last_name: "Gade", user_name: "Melissa", user_type: "Student")
+#User.create(email: "parent@triton.com", password: "123456", password_confirmation: "12345",
+#			first_name: "Phil", last_name: "Masi", user_name: "Phil", user_type: "Parent")
 
 ###################################################################################################
 
