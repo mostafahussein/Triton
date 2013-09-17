@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :assignments
   has_many :articles
   has_many :comments
-  has_one :students
-  has_one :guardians
+  has_one :student
+  has_one :guardian
   has_one :employee
   has_many :tickets
   has_many :permissions
