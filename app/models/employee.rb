@@ -19,7 +19,7 @@ class Employee < ActiveRecord::Base
   belongs_to :nationality, class_name: 'Country'
   belongs_to :reporting_manager, class_name: "Employee"
   belongs_to :school
-  has_one :user
+  belongs_to :user
 
   has_many :tickets
 

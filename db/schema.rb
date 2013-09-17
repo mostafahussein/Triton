@@ -266,16 +266,6 @@ ActiveRecord::Schema.define(:version => 20130916203721) do
     t.integer  "batch_id"
   end
 
-  create_table "ticket_comments", :force => true do |t|
-    t.string   "text"
-    t.integer  "ticket_id"
-    t.integer  "user_id"
-    t.integer  "state_id"
-    t.integer  "previous_state_id"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
-  end
-
   create_table "tickets", :force => true do |t|
     t.string   "title"
     t.text     "description"
@@ -293,12 +283,6 @@ ActiveRecord::Schema.define(:version => 20130916203721) do
   end
 
   add_index "tickets", ["state_id"], :name => "index_tickets_on_state_id"
-
-  create_table "user_types", :force => true do |t|
-    t.string   "type_of_user"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -319,7 +303,6 @@ ActiveRecord::Schema.define(:version => 20130916203721) do
     t.string   "user_name"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "user_type_id"
     t.string   "user_type"
   end
 
