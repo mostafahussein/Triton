@@ -15,6 +15,7 @@
       </div>
       <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
       <h4>All Tickets</h4>
+      <% if can? :read, Ticket %>
       <div class="span6">
             <%= grid(@tickets_grid) do |g|
               g.column name:  'Ticket title', html: {style: 'text-align: center'}, attribute: 'title', :auto_reload => true
@@ -64,6 +65,7 @@
               link_to('Read this thread', ticket_path(ticket))
             end
             end -%></div>
+            <% end %>
           
 
     </div>

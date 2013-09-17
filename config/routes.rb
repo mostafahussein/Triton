@@ -12,7 +12,7 @@ Triton::Application.routes.draw do
   resources :states
 
   resources :employee_departments 
-    resources :employees
+  resources :employees
   
   scope 'employees/:employee_id' do
     resources :employee_admission_steps

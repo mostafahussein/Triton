@@ -10,11 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = exception.message
-    redirect_to root_path
-  end
-
   private
   def stored_location_for(resource_or_scope)
     nil

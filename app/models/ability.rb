@@ -17,7 +17,7 @@ class Ability
     end
     
     if user.has_role? :ticket_manager
-      can :manage, Ticket
+      can :manage, Ticket, :employee_id => #how to match the employee id
     end
     
     if user.has_role? :student_viewer
@@ -30,7 +30,7 @@ class Ability
 
     if user.has_role? :ticket_viewer #he should be able to create tickets and see what he has created.
         can :create, Ticket
-        can :read, Ticket
+        can :read, Ticket, :user_id => user.id        
     end
   end
 
