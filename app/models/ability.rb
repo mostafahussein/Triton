@@ -17,7 +17,7 @@ class Ability
     end
     
     if user.has_role? :ticket_manager
-      can :manage, Ticket, :employee_id => #how to match the employee id
+      can :manage, Ticket , :employee_id => user.employee.id
     end
     
     if user.has_role? :student_viewer

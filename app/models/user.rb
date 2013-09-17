@@ -14,9 +14,9 @@ class User < ActiveRecord::Base
   has_many :roles, :through => :assignments
   has_many :articles
   has_many :comments
-  has_many :students
-  has_many :guardians
-  has_many :employees
+  has_one :students
+  has_one :guardians
+  has_one :employee
   has_many :tickets
   has_many :permissions
   accepts_nested_attributes_for :tickets
