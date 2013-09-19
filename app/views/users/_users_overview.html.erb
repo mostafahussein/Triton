@@ -1,0 +1,12 @@
+<%= link_to "Overview", "#my-modal", :class => "btn btn-danger", "data-toggle" => "modal" %>
+    <div class="modal hide fade" id="my-modal">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Total of users by their role</h3>
+      </div>
+      <div class="modal-body">
+      <%= bar_chart User.group(:user_type).count %>
+       </div>
+       <div class="modal-footer">
+        <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Done</button>
+      </div>
+    </div>

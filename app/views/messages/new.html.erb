@@ -1,0 +1,42 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Inbox-icon.png" alt="image" />
+        <h2>New Message</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+<%= form_for @message, :url => user_messages_path(@user) do |f| %>
+  <% if @message.recepient_id.nil? %>
+    <p>
+      To:<br />
+      <%= f.text_field :recepient_id %>
+    </p>
+  <% else %>
+    <p>
+      To:<br />
+      <%= f.text_field :recepient_id, :value=>@message.recepient_id,:readonly => true %>
+    </p>
+  <% end %>
+      <p>
+        Subject:<br />
+        <%= f.text_field :subject %>
+      </p>
+      <p>
+        Message<br />
+        <%= f.text_area :body %>
+      </p>
+
+      <%= submit_tag "Send"%>
+<% end %>
+</div>
+</div>
+</div>

@@ -1,0 +1,25 @@
+<%= link_to "Message", "#message", :class => "btn btn-danger", "data-toggle" => "modal" %>
+    <div class="modal hide fade" id="message">
+      <div class="modal-header">
+        <h3 id="myModalLabel">New Message</h3>
+      </div>
+      <div class="modal-body">
+      <%= form_for(:message, :url => user_messages_path(@user)) do |f| %>
+      <%= f.hidden_field :recepient_id, :value=>@user.id,:readonly => true %>
+    </p>
+      <p>
+        Subject:<br />
+        <%= f.text_field :subject %>
+      </p>
+      <p>
+        Message<br />
+        <%= f.text_area :body %>
+      </p>
+
+       </div>
+       <div class="modal-footer">
+       <%= submit_tag "Send" , :class => "btn btn-info" %>
+        <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Done</button>
+        <% end %>
+      </div>
+    </div>
