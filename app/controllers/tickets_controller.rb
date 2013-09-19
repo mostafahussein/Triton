@@ -1,9 +1,7 @@
 class TicketsController < ApplicationController
 	load_and_authorize_resource
 	def index
-		#@tickets = Ticket.all
-		@tickets_grid = initialize_grid(Ticket,
-			:include => [:user, :employee_department, :state])
+		@tickets = Ticket.accessible_by(current_ability)
 	
 	end
 

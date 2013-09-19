@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   def index
     @users = User.all
-    @users_grid = initialize_grid(User)
+    @users_grid = initialize_grid(User,
+      :per_page => 5)
   end
 
   def show

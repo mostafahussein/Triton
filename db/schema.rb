@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916203721) do
+ActiveRecord::Schema.define(:version => 20130918121009) do
 
   create_table "articles", :force => true do |t|
     t.string   "body"
@@ -182,6 +182,19 @@ ActiveRecord::Schema.define(:version => 20130916203721) do
     t.integer  "student_id"
   end
 
+  create_table "messages", :force => true do |t|
+    t.string   "sender_id",                              :null => false
+    t.string   "recepient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recepient_deleted", :default => false
+    t.string   "subject",                                :null => false
+    t.text     "body"
+    t.datetime "read_at"
+    t.string   "container",         :default => "draft"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
   create_table "previous_details", :force => true do |t|
     t.integer  "student_id"
     t.string   "institution"
@@ -304,6 +317,7 @@ ActiveRecord::Schema.define(:version => 20130916203721) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "user_type"
+    t.string   "contact_id",                             :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

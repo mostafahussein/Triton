@@ -6,6 +6,8 @@ class Ticket < ActiveRecord::Base
 
   before_create :assign_state
 
+  after_create :send_message_to_user
+
 
 
   attr_accessible :description, :title, :employee_department_id, :user_id, :first_name,
@@ -43,10 +45,26 @@ class Ticket < ActiveRecord::Base
 
 def assign_state
   if self.employee_id.nil?
-    self.assign_state = "un-assigned"
+    self.assign_state = "unassigned"
   else 
     self.assign_state = "assigned"
   end 
+end
+
+def send_message_to_user
+  if self.save
+    user = self.user
+    message = Message.new
+    message.sender_id = 1
+    message.recepient_id = user.id
+    message.subject = "Support Center Team"
+    message.body = "Hello, #{user.first_name} #{user.last_name}
+                    Thank you for contacting us.
+                    A support ticket request has been created and a representative will be getting back to you shortly if necessary.
+
+                    Support Center Team "
+    message.save
+  end
 end
 
   Ticket.all.each do |ticket|

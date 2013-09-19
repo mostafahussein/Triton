@@ -16,58 +16,31 @@
       <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
       <h4>All Tickets</h4>
       <% if can? :read, Ticket %>
-      <div class="span6">
-            <%= grid(@tickets_grid) do |g|
-              g.column name:  'Ticket title', html: {style: 'text-align: center'}, attribute: 'title', :auto_reload => true
-              g.column name:  'Publish Date' do |ticket|
-                time_ago_in_words(ticket.created_at)
-              end
-
-              g.column name:  'Sender role', html: {style: 'text-align: center'}, attribute: 'user_type', model: 'User', auto_reload: true do |ticket|
-                ticket.user.user_type if ticket.user
-              end
-              g.column name:  'Assigned Department', html: {style: 'text-align: center'}, attribute: 'name', model: 'EmployeeDepartment', auto_reload: true do |ticket|
-                ticket.employee_department.name if ticket.employee_department
-              end
-
-              g.column name: 'Priority', attribute: 'name', model: 'State', auto_reload: true do |ticket|
-                if ticket.state
-                  if ticket.state.name == 'Emergency'
-                    [ticket.state.name, {style: 'background-color:  rgb(255, 0, 0); text-align: center;'}]
-
-                  elsif ticket.state.name == 'High'
-                    [ticket.state.name, {style: 'background-color:  rgb(255, 165, 0); text-align: center;'}]
-
-                  elsif ticket.state.name == 'Normal'
-                    [ticket.state.name, {style: 'background-color:  rgb(255, 255, 0); text-align: center;'}]
-                  end
-               end
-             end
-
-             g.column name: 'Current State', html: {style: 'text-align: center'}, attribute: 'ticket_state', auto_reload: true do |ticket_state|
-              if ticket_state.blank?
-                'Not Defined'
-              elsif !ticket_state.blank?
-                ticket_state.ticket_state
-              end
-            end
-
-            g.column name: 'Assign State', html: {style: 'text-align: center'}, attribute: 'assign_state', auto_reload: true
-
-            g.column name: 'Assigned To', html: {style: 'text-align: center'}, attribute: 'first_name', model: 'Employee', auto_reload: true do |ticket|
-              if ticket.employee
-                ticket.employee.first_name + " " + ticket.employee.last_name
-              else
-                'no one assigned here'
-              end
-            end
-             g.column html: {style: 'text-align: center'} do |ticket|
-              link_to('Read this thread', ticket_path(ticket))
-            end
-            end -%></div>
-            <% end %>
-          
-
+      <div style="width:1100px">
+        <%= render 'tickets_overview' %>
+        <table class="table table-bordered table-hover" >
+          <tr>
+            <th>Ticket Serial</th>
+            <th>Sender Role</th>
+            <th>Assigned Department</th>
+            <th>Priority</th>
+            <th>Current State</th>
+            <th>Assigned State</th>
+            <th>Assigned To</th>
+          </tr>
+          <% @tickets.each do |ticket| %>
+          <tr>
+            <td><%= link_to ticket.id , ticket %></td>
+            <td><%= ticket.user.user_type %></td>
+            <td><%= ticket.employee_department.name %></td>
+            <td id="state_<%= ticket.state.name.parameterize %>"><%= ticket.state.name %></td>
+            <td><%= ticket.ticket_state %></td>
+            <td><%= ticket.assign_state %></td>
+            <td><%= ticket.employee.full_name if ticket.employee %></td>
+          </tr>
+          <% end %>
+        </table>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>

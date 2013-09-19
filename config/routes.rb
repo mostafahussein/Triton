@@ -3,7 +3,13 @@ Triton::Application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users, :controllers => { :registrations => "users" }
-  resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update]
+  resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do |user|
+    resources :messages do
+      collection do
+        post 'delete_multiple'
+      end
+    end
+  end
   
   resources :tickets do
     resources :replies

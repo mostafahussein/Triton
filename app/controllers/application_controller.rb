@@ -3,7 +3,11 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :find_states
 
-  
+
+   rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_path
+  end  
 
   def find_states
     @states = State.all

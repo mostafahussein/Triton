@@ -15,7 +15,7 @@
       </div>
       <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
 
-      <div class="offset1 span9">
+      <div style="width:1100px">
       <%= grid(@users_grid, show_filters: :when_filtered) do |g|
     g.column name:  'ID', attribute: 'id', filter: false
     g.column name:  'Username', attribute: 'user_name'
@@ -36,6 +36,7 @@
     end
   end -%>
   <button class="btn btn-success" type="submit" onclick="location.href='/users/new';">Add new user</button>
+  <%= render 'users_overview' %>
   </div>
           </div>
         </div>

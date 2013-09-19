@@ -29,6 +29,8 @@
 
         <ul class="nav pull-right">
 
+        
+
           <div class="btn-group">
             <a class="btn btn-primary" href="#">
               <i class="icon-user icon-black"></i>
@@ -37,6 +39,7 @@
               <% end %></a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
+            <li><a href="#"><i class="icon-user icon-black"></i> Profile</a></li>
               <li><a href="#"><i class="icon-pencil icon-black"></i> Edit</a></li>
               <li><a href="#"><i class="icon-trash icon-black"></i> Delete</a></li>
               <li><a href="#"><i class="icon-ban-circle icon-black"></i> Ban</a></li>
@@ -44,6 +47,10 @@
               <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-black"></i> Logout</a></li>
             </ul>
           </div>
+          <a class="btn btn-primary" href="<%= user_messages_path(current_user, :mailbox=>:inbox) %>">
+              <i class="icon-envelope icon-black"></i>
+              Messages (<%= current_user.unread_messages.count %>)
+              </a>
 
         </ul>
       </div>
