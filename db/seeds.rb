@@ -27,9 +27,9 @@ Role.create(:role_name => 'Ticket_viewer')      #role_ids: 15
 ###################################################################################################
 
 # States Model
-State.create(:name => 'Emergency', :background => '#FF0000', :color => 'white')
-State.create(:name => 'High', :background => '#FFA500', :color => 'white')
-State.create(:name => 'Normal', :background => '#FFFF00', :color => 'white')
+State.create(:name => 'Emergency', :background => '#FF0000', :color => 'black')
+State.create(:name => 'High', :background => '#FFA500', :color => 'black')
+State.create(:name => 'Normal', :background => '#FFFF00', :color => 'black')
 
 ###################################################################################################
 
