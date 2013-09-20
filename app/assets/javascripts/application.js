@@ -12,10 +12,10 @@
 //
 //= require jquery_ujs
 //= require jquery
-//= require bootstrap
 //= require jquery.ui.all
+//= require bootstrap
 //= require demo1
-//=require polyfills
+//= require polyfills
 //= require announcements
 //= require wice_grid
 //= require ckeditor/init
