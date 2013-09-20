@@ -1,10 +1,10 @@
 <%= link_to "Overview", "#my-modal", :class => "btn btn-danger", "data-toggle" => "modal" %>
     <div class="modal hide fade" id="my-modal">
       <div class="modal-header">
-        <h3 id="myModalLabel">Total of tickets by Priority</h3>
+        <h3 id="myModalLabel">Total of tickets by Department</h3>
       </div>
       <div class="modal-body">
-      <%= column_chart Ticket.joins(:state).group("states.name").count %>
+      <%=  pie_chart EmployeeDepartment.joins(:states).group("employee_departments.name").count %>
        </div>
        <div class="modal-footer">
         <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Done</button>
