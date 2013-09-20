@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130919232004) do
+ActiveRecord::Schema.define(:version => 20130920011322) do
 
   create_table "articles", :force => true do |t|
     t.string   "body"
@@ -183,16 +183,16 @@ ActiveRecord::Schema.define(:version => 20130919232004) do
   end
 
   create_table "messages", :force => true do |t|
-    t.integer  "sender_id",         :limit => 255,                      :null => false
-    t.integer  "recepient_id",      :limit => 255
-    t.boolean  "sender_deleted",                   :default => false
-    t.boolean  "recepient_deleted",                :default => false
-    t.string   "subject",                                               :null => false
+    t.integer  "sender_id",                              :null => false
+    t.integer  "recepient_id"
+    t.boolean  "sender_deleted",    :default => false
+    t.boolean  "recepient_deleted", :default => false
+    t.string   "subject",                                :null => false
     t.text     "body"
     t.datetime "read_at"
-    t.string   "container",                        :default => "draft"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.string   "container",         :default => "draft"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "previous_details", :force => true do |t|
