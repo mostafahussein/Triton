@@ -1,3 +1,19 @@
+<%= render 'shared/navbar' %>
+<div class="container-fluid">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Inbox-icon.png" alt="image" />
+        <h2>Read Message</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr> 
 <p>
 <strong>From:</strong>
 <%= @message.sender == @user ? "You" : "#{@message.sender.first_name} #{@message.sender.last_name}" %>
@@ -22,3 +38,6 @@
 <% end %>
 <%= link_to "Inbox", user_messages_path(current_user, :mailbox=>:inbox)%>
 </p>
+</div>
+</div>
+</div>

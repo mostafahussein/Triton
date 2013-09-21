@@ -39,8 +39,8 @@
               <% end %></a>
             <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><a href="#"><i class="icon-user icon-black"></i> Profile</a></li>
-              <li><a href="#"><i class="icon-pencil icon-black"></i> Edit</a></li>
+            <li><a href="<%= user_path(current_user) %>"><i class="icon-picture icon-black"></i> Profile</a></li>
+              <li><a href="<%= edit_user_path(current_user) %>"><i class="icon-pencil icon-black"></i> Edit</a></li>
               <li><a href="#"><i class="icon-trash icon-black"></i> Delete</a></li>
               <li><a href="#"><i class="icon-ban-circle icon-black"></i> Ban</a></li>
               <li class="divider"></li>
