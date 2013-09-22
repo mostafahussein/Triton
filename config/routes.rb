@@ -39,6 +39,7 @@ Triton::Application.routes.draw do
   get '/employee/human_resources' , to: 'static_pages#hr_board'
   get '/employee/employee_management', to: 'static_pages#employee_management'
   get '/employee/admission1', to: 'employees#new'
+  get '/my_profile' , to:'static_pages#profile_page'
   devise_scope :user do
     root to: 'devise/sessions#new'
   end

@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
  
   end
 
-  def thanks
+  def my_profile
   	
   end
 
