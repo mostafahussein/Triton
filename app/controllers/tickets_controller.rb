@@ -1,12 +1,29 @@
 class TicketsController < ApplicationController
-	load_and_authorize_resource
+load_and_authorize_resource
 	def index
+
 		@tickets = Ticket.accessible_by(current_ability)
-	
+
+		if params[:assign_state]
+			@tickets = @tickets.where(:assign_state => (params[:assign_state] == "1"))
+		end
+
+	    if params[:ticket_state] == "open"
+	     	@tickets = Ticket.where({ticket_state: "open"})
+    	end
+
+    	if params[:ticket_state] == "solved"
+	     	@tickets = Ticket.where({ticket_state: "closed (solved)"})
+    	end
+
+    	if params[:ticket_state] == "canceled"
+	     	@tickets = Ticket.where({ticket_state: "closed (canceled)"})
+    	end
+
 	end
 
 	def show
-		#@ticket = Ticket.find(params[:id])
+	#	@ticket = Ticket.find(params[:id])
 		@reply = @ticket.replies.build # this for comments on ticket
 		@state = State.all # this for a model called State which describe the priority of the ticket (Emergency / High / Normal )
 	end
@@ -16,7 +33,7 @@ class TicketsController < ApplicationController
 	end
 
 	def create
-		@ticket = Ticket.new(params[:ticket])
+		#@ticket = Ticket.new(params[:ticket])
 		if @ticket.save
 			flash[:notice] = 'Support ticket request created.'
 			redirect_to @ticket
@@ -27,11 +44,11 @@ class TicketsController < ApplicationController
 	end
 
 	def edit
-		#@ticket = Ticket.find(params[:id])
+	#	@ticket = Ticket.find(params[:id])
 	end
 
 	def update
-		#@ticket = Ticket.find(params[:id])
+	#	@ticket = Ticket.find(params[:id])
 		if @ticket.update_attributes(params[:ticket])
 			flash[:notice] = 'Successfuly updated.'
 			redirect_to tickets_path

@@ -16,6 +16,6 @@ class EmployeeAdmissionStepsController < ApplicationController
 	private
 
 	def redirect_to_finish_wizard(options = nil)
-    	redirect_to users_path , notice: "A new employee has been created successfully."
+    	redirect_to user_path(@employee.user_id) , notice: "A new employee has been created successfully."
   	end
 end

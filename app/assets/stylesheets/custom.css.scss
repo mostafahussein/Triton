@@ -18,11 +18,11 @@ body { padding-top: 60px; }
 // iconic dashboard
 // original bg https://dl.dropboxusercontent.com/u/65958930/OLR/dust.png
 // second bg http://morgangregory.linnbentongraphics.com/wp-content/uploads/2013/05/ws_Multicolor_Textures_2560x1600.jpg
-
+// ivory http://www.photos-public-domain.com/wp-content/uploads/2012/05/ivory-off-white-paper-texture.jpg
+html { background: transparent; }
 body {
   font-size: 13px;
   line-height: 20px;
-  background: url('http://3.bp.blogspot.com/_jFM-Fd8NDFE/TCj2U97EmgI/AAAAAAAAHD8/GA1VLn1gbYI/s1600/GrungeTexture-1.jpg') center center;
   text-align: enter;
 }
 
@@ -39,18 +39,16 @@ body {
 // footer
  
 #footer {
-    position:fixed;
+   position:fixed;
    left:0px;
    bottom:0px;
    width:100%;
    padding-bottom:-70px;
+   background-color:#049cdb;
 }
 
 // attributes color
 
-form#new_employee.simple_form {
-  color:#0000FF;
-}
 
 // back button
 
@@ -112,7 +110,7 @@ form#new_employee.simple_form {
   float: left;
   margin-left: 10px;
   margin-right: 10px;
-  width: 220px;
+  width: 180px;
 }
 
 .grid_9 {
@@ -124,9 +122,9 @@ form#new_employee.simple_form {
 }
 
 .fmcircle_out {
-  width: 200px;
-  height: 200px;
-  background: rgba(221,221,221,0.3) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAO0lEQVQYV2NkIAIwElKze/fu/3gVgRS4uroyEjQJZBNWRTATYE7BUISuAKdJ6J6Bm4TNBBTr8CkAKQQA02QXOj4w/E8AAAAASUVORK5CYII=);
+  width: 100px;
+  height: 175px;
+  background: rgba(255,255,255,0.3);
   text-align: center;
   display: block;
   margin-left: 10px;
@@ -156,8 +154,8 @@ form#new_employee.simple_form {
   
   .fmcircle_out:hover .fmcircle_in img {
     margin: 30px 25px 25px 25px;
-    width: 120px;
-    height: 120px;
+    width: 128px;
+    height: 128px;
     
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
@@ -184,8 +182,8 @@ form#new_employee.simple_form {
 .fmcircle_in img {
   border: none;
   margin: 53px;
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
     
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
@@ -200,8 +198,8 @@ form#new_employee.simple_form {
   border: 0;
   vertical-align: baseline;
   width: 160px;
-  background: #fff;
-  color: #666666;
+  background: #049cdb;
+  color: #FFFFFF;
   padding: 5px;
   margin: 70px 0 0 0;
   height: 20px;

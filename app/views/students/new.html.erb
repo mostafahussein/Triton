@@ -23,17 +23,16 @@
      <%= simple_form_for(@student) do |f| %>
      <%= f.error_messages %>
     <%= f.input :admission_no %>
-    <%= f.input :admission_date , class: 'admission' %>
+    <%= f.input :admission_date, :as => :string, :input_html => { class: 'admission'}, label: 'Admission Date' %>
     <h4>Student - Personal Details</h4>
     <%= f.input :first_name %>
     <%= f.input :middle_name %>
     <%= f.input :last_name %>
-    <%= f.input :date_of_birth, class: 'birth' %>
+    <%= f.input :date_of_birth, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
      <%= f.association :batch, as: :select, label: 'Course & Batch' %>
       <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @student.gender, item_wrapper_class: 'inline'%>
     <%= f.input :blood_group, prompt: 'Unknown', collection: ['A+','A-','B+','B-','O+', 'O-', 'AB+', 'AB-'] %>
      <%= f.input :birth_place %>
-     <%= f.label 'Nationality' %>
      <%= f.association :nationality, as: :select, include_blank: false %>
      <%= f.input :language, label: 'Mother tongue' %>
  </div>
@@ -45,7 +44,7 @@
    <%= f.input :address_line2, label: 'Address Line 2' %>
    <%= f.input :city %>
    <%= f.input :post_code %>
-   <%= f.association :country, as: :select, label: 'Country' %>
+   <%= f.association :country, as: :select, label: 'Country', include_blank: false %>
    <%= f.input :phone1, label: 'Phone' %>
    <%= f.input :phone2, label: 'Mobile' %>
    <%= f.input :email %>

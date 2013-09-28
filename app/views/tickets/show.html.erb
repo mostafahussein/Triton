@@ -66,21 +66,39 @@
 				</div>
 
 				<div class="pull-right">
-					<b>Assigned Department:</b>&nbsp;&nbsp;<span class="badge badge-info"><%= @ticket.employee_department.name %></span>
+					<b>Current Department:</b>&nbsp;&nbsp;<span class="badge badge-info"><%= @ticket.employee_department.name %></span>
+					<%= link_to "Department Transfer", "#assign-department", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+					<div class="modal hide fade" id="assign-department">
+						<div class="modal-header">
+							<h3 id="myModalLabel">Department Transfer</h3>
+						</div>
+						<div class="modal-body">
+						<h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
+							<%= simple_form_for(@ticket) do |f| %>
+							<label id='assing-department'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-success" type="submit">Ok</button>
+							<% end %>
+							<button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+						</div>
+					</div>
 					<br>
 					<br>
+					<% if current_user.has_role? :ticket_manager %>
 					<% if @ticket.employee %>
 					<b>Assigned Employee:</b>&nbsp;
 					<span class="badge"><%= @ticket.employee.full_name %></span>
 					<% else %>
 					<b>Assigned Employee:</b>&nbsp;<span class="badge">No employee has been assigned yet.</span>
 					<% end %>
-					<%= link_to "Assign", "#assign", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+					<%= link_to "Assign Employee", "#assign", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
 					<div class="modal hide fade" id="assign">
 						<div class="modal-header">
 							<h3 id="myModalLabel">Assign An Employee</h3>
 						</div>
 						<div class="modal-body">
+						<h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
 							<%= simple_form_for(@ticket) do |f| %>
 							<label id='assing'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
 							<label id='assing'><%= f.association :employee, as: :select, label: 'Select Employee' %></label>
@@ -92,7 +110,9 @@
 						</div>
 					</div>
 				</div>
-			</div><br><br>
+			</div>
+			<% end %>
+			<br><br>
 			<hr><br>
 			<div class="header">
 				<img src="/assets/Comment-icon.png" alt="reply" />

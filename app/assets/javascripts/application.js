@@ -11,8 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery_ujs
-//= require bootstrap
 //= require jquery
+//= require bootstrap
 //= require jquery.ui.all
 //= require demo1
 //= require polyfills

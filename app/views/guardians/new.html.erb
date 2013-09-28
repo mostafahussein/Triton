@@ -19,11 +19,11 @@
       <%= simple_form_for(@guardian, :url => student_guardians_path(@student),
       method: :post) do |f| %>
       <%= f.error_messages %>
-      <%= f.input :admission_no, as: :hidden , value: @student.admission_no, disabled: true, label: 'Student Admission Number' %>
-      <%= f.input :student_id, as: :hidden, value: @student.id %>
+      <%= f.input :admission_no, as: :hidden , :input_html => { value: @student.admission_no }, readonly: true, label: 'Student Admission Number' %>
+      <%= f.input :student_id, as: :hidden, :input_html => { value: @student.id } %>
       <h4>Parent - Personal Details</h4>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
+      <%= f.input :first_name, :input_html => { value: @student.middle_name }, readonly: true %>
+      <%= f.input :last_name, :input_html => { value: @student.last_name }, readonly: true %>
       <%= f.input :relation %>
       <%= f.input :dob, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
       <%= f.input :education %>
@@ -38,7 +38,7 @@
       <%= f.input :office_phone1 %>
       <%= f.input :office_phone2 %>
       <%= f.input :mobile_phone %>
-      <%= f.submit 'Save & Proceed', class: 'btn btn-mini btn-primary' %>
+      <%= f.submit 'Save & Proceed', class: 'btn btn-large btn-success' %>
       <% end %>
     </div>
   </div>

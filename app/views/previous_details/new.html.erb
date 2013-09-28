@@ -1,46 +1,32 @@
-<%= render 'shared/navbar' %>
+  <%= render 'shared/navbar' %>
+  <div class="container-fluid">
+    <div class="row-fluid">
 
-<h1>Admission</h1>
-<h4>Step 3 - Previous details</h4>
+      <div class="offset1 span11">
+        <!--Body content-->
+        <div class="hr">
+          <img src="/assets/korganizer-icon.png" alt="image" />
+          <h2>Admission</h2>
+        </div>
+        <div id="app-back-button" class="span10">
+          <a onclick="history.back(); return false;" href="#" id= "bk">
+            <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+          </a>
+        </div>
+        <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+        <h4>Step 3 - Previous details</h4>
+        <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
+        <%= simple_form_for(@previous_detail, :url => student_previous_details_path(@student), method: :post) do |f| %>
+        <%= f.error_messages %>
 
-<div class="row-fluid">
-  <div class="span5 offset1 hero-unit">
-    <%= bootstrap_form_for(@previous_detail, :url => student_previous_details_path(@student),
-                           html: { class: 'form-horizontal' }, method: :post) do |f| %>
-        <% if @previous_detail.errors.any? %>
-            <div id="error_explanation">
-              <div class="alert alert-error">
-                The form contains <%= pluralize(@previous_detail.errors.count, 'error') %>
-              </div>
-              <ul>
-                <% @previous_detail.errors.full_messages.each do |msg| %>
-                    <li>* <%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
+        <%= f.input :student_id, as: :hidden, :input_html => { value: @student.id } %>
+        <h4>Previous Educational Details</h4>
+        <%= f.input :institution, label: 'Institution Name'%>
+        <%= f.input :course, label: 'Course'%>
+        <%= f.input :year, :as => :string, :input_html => { class: 'year' }, label: 'Year' %>
+        <%= f.input :total_mark, label: 'Total Mark'%>
+        <%= f.submit 'Save & Proceed', class: 'btn btn-large btn-primary' %>
         <% end %>
-
-        <fieldset>
-          <div class="field">
-            <%= f.hidden_field :student_id, value: @student.id %>
-
-          </div>
-
-          <h4>Previous Educational Details</h4>
-          <div class="field">
-            <%= f.text_field :institution, label: 'Institution Name'%>
-          </div>
-          <div class="field">
-            <%= f.text_field :course, label: 'Course'%>
-          </div>
-          <div class="field">
-            <%= f.text_field :year , class: 'year', label: 'Year' %>
-          </div>
-          <div class="field">
-            <%= f.text_field :total_mark, label: 'Total Mark'%>
-          </div>
-          <div class="actions"><%= f.submit 'Save & Proceed', class: 'btn btn-mini btn-primary' %></div>
-        </fieldset>
-    <% end %>
+      </div>
+    </div>
   </div>
-</div>

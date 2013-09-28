@@ -1,6 +1,6 @@
 class Addassigncol < ActiveRecord::Migration
   def up
-  	add_column :tickets, :assign_state, :string
+  	add_column :tickets, :assign_state, :boolean, default: false
   end
 
   def down

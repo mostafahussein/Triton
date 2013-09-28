@@ -4,7 +4,8 @@ class Ticket < ActiveRecord::Base
   after_commit :close_solved
   after_commit :close_canceled
 
-  before_create :assign_state
+  after_create :assign_state
+  before_save :default_state
 
   after_create :send_message_to_user
 
@@ -23,6 +24,10 @@ class Ticket < ActiveRecord::Base
 
   def default_values
     self.state_id = 3 if self.state_id.nil?
+  end
+
+  def default_state
+    self.ticket_state = 'open' if self.ticket_state.nil?
   end
 
   def to_label
@@ -45,9 +50,9 @@ class Ticket < ActiveRecord::Base
 
 def assign_state
   if self.employee_id.nil?
-    self.assign_state = "unassigned"
-  else 
-    self.assign_state = "assigned"
+    self.assign_state = false
+  else
+    self.assign_state = true
   end 
 end
 
@@ -66,12 +71,5 @@ def send_message_to_user
     message.save
   end
 end
-
-  Ticket.all.each do |ticket|
-    if ticket.ticket_state.blank?
-      ticket.ticket_state = 'open'
-    end
-    ticket.save
-  end
 
 end

@@ -13,13 +13,14 @@ Role.create(:role_name => 'Time_Table_manager')  #role_ids: 6
 Role.create(:role_name => 'Finance_manager')     #role_ids: 7
 Role.create(:role_name => 'Settings_manager')    #role_ids: 8
 Role.create(:role_name => 'Ticket_manager')     #role_ids: 9
+Role.create(:role_name => 'Ticket_assigner')    #role_ids: 10
 # Viewers who can view only
-Role.create(:role_name => 'Student_viewer')      #role_ids: 10
-Role.create(:role_name => 'News_viewer')         #role_ids: 11
-Role.create(:role_name => 'Attendance_viewer')   #role_ids: 12
-Role.create(:role_name => 'Examination_viewer')  #role_ids: 13
-Role.create(:role_name => 'Time_Table_viewer')   #role_ids: 14
-Role.create(:role_name => 'Ticket_viewer')      #role_ids: 15
+Role.create(:role_name => 'Student_viewer')      #role_ids: 11
+Role.create(:role_name => 'News_viewer')         #role_ids: 12
+Role.create(:role_name => 'Attendance_viewer')   #role_ids: 13
+Role.create(:role_name => 'Examination_viewer')  #role_ids: 14
+Role.create(:role_name => 'Time_Table_viewer')   #role_ids: 15
+Role.create(:role_name => 'Ticket_viewer')      #role_ids: 16
 
 ###################################################################################################
 

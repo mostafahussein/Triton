@@ -282,8 +282,8 @@ ActiveRecord::Schema.define(:version => 20130920011322) do
   create_table "tickets", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
     t.integer  "user_id"
     t.integer  "employee_department_id"
     t.string   "first_name"
@@ -292,7 +292,7 @@ ActiveRecord::Schema.define(:version => 20130920011322) do
     t.integer  "state_id"
     t.integer  "employee_id"
     t.string   "ticket_state"
-    t.string   "assign_state"
+    t.boolean  "assign_state",           :default => false
   end
 
   add_index "tickets", ["state_id"], :name => "index_tickets_on_state_id"
