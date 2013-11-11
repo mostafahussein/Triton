@@ -1,0 +1,67 @@
+<div class="navbar navbar-fixed-top" data-spy="affix">
+  <div class="navbar-inner">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <!-- Be sure to leave the brand out there if you want it shown -->
+      <div>
+      <a class="brand" href="/dashboard" style="margin-left: 3px">
+      Modern Academy
+      <small style="position:absolute; bottom:20px; left:40px; font-size:12px; color: #FFFFFF;"><b><i>transforming education with technology</i></b></small>
+      </a>
+      </div>
+
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <!-- MENU START -->
+<div id="menu" style="margin-left: 70px">
+  <ul class="group" id="menu_group_main">
+    <% if (current_user.has_role? :administrator) || (current_user.has_role? :admission_manager) %>
+    <li class="item middle" id="two"><a href="/students?student=student_status" class="main"><span class="outer"><span class="inner student">Students</span></span></a></li>
+    <% end %>
+   <% if current_user.has_role? :administrator %>
+    <li class="item middle" id="three"><a href="/employees?employee=employee_status" class="main"><span class="outer"><span class="inner hr png">Employees</span></span></a></li>
+    <% end %>
+  <% if current_user.has_role? :administrator %>
+    <li class="item middle" id="four"><a href="/users/new" class="main"><span class="outer"><span class="inner users">Users</span></span></a></li>
+    <% end %>
+   <% if (current_user.has_role? :administrator) || (current_user.has_role? :academic_support) || (current_user.has_role? :complaint_manager) || ( current_user.has_role? :complaint_staff) %>
+    <li class="item middle" id="five"><a href="/tickets?ticket=activity" class="main"><span class="outer"><span class="inner support">Support</span></span></a></li>
+    <% elsif (current_user.has_role? :complainer) %>
+    <li class="item middle" id="five"><a href="/tickets/new" class="main"><span class="outer"><span class="inner support">Support</span></span></a></li>
+    <% end %>
+    <% if current_user.has_role? :administrator %>      
+    <li class="item middle" id="six"><a href="/academic_counselor" class="main"><span class="outer"><span class="inner counselor">Counselor</span></span></a></li>        
+    <% end %>
+    <% if current_user.has_role? :administrator %>
+    <li class="item middle" id="seven"><a href="/student_leadership" class="main"><span class="outer"><span class="inner leadership">Leadership</span></span></a></li>
+    <% end %>
+   <% if current_user.has_role? :administrator %>        
+    <li class="item last" id="eight"><a href="/settings" class="main"><span class="outer"><span class=" settings">Settings</span></span></a></li>     
+    <% end %>
+    </ul>
+</div>
+<!-- MENU END -->
+<ul class="pull-right" style="margin-right:10px">
+          <div class="btn-group" style="float: left;">
+            <a class="btn btn-primary" href="#">
+              <i class="icon-user icon-white"></i>
+              <% if user_signed_in? %><%= current_user.user_name %>
+              (<%= current_user.user_type %>)
+              <% end %></a>
+              <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="<%= user_path(current_user) %>"><i class="icon-picture icon-black"></i> Profile</a></li>
+                <li><a href="<%= edit_user_path(current_user) %>"><i class="icon-pencil icon-black"></i> Edit</a></li>
+                <li class="divider"></li>
+                <li><a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-black"></i> Logout</a></li>
+              </ul>
+            </div>
+            <div style="clear: left;">
+            <a class="btn btn-primary" href="<%= user_messages_path(current_user, :mailbox=>:inbox) %>">
+              <i class="icon-envelope icon-white"></i>
+              Messages <% if current_user.unread_messages.count > 0 %><span class="badge badge-important"><%= current_user.unread_messages.count %></span><% end %>
+            </a>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </div>
+  

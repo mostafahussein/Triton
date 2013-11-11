@@ -1,19 +1,16 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
+<%= render 'messages/messages_sidebar' %>
+<div class="span9">
       <!--Body content-->
       <div class="hr">
         <img src="/assets/Inbox-icon.png" alt="image" />
         <h2>All Messages</h2>
       </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr> 
+      <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+    <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
       <% if params[:mailbox] == "sent" %>
       <%= render :partial => "sent" %>
       <% elsif params[:mailbox] == "inbox" %>
@@ -21,6 +18,3 @@
       <% elsif params[:mailbox] == "archieved" %>
       <%= render :partial => "inbox" %>
       <% end %>
-    </div>
-  </div>
-</div>

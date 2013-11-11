@@ -10,14 +10,26 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery_ujs
 //= require jquery
+//= require jquery_ujs
 //= require bootstrap
 //= require jquery.ui.all
+//= require amcharts
+//= require serial
+//= require pie
 //= require demo1
+//= require jquery.validate.min
+//= require additional-methods.min
+//= require jquery.bootstrap.wizard.min
+//= require chosen.jquery.min
+//= require select2.min
+//= require app
+//= require form-wizard
+//= require twitter-bootstrap-hover-dropdown.min
 //= require polyfills
 //= require announcements
 //= require wice_grid
 //= require ckeditor/init
 //= require bootstrap-datepicker
+//= require bootstrap-timepicker
 //= require_tree .

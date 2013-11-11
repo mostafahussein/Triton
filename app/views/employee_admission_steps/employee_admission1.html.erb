@@ -1,5 +1,5 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
   <div class="row-fluid">
 
     <div class="offset1 span11">
@@ -20,7 +20,7 @@
       <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
       <%= f.input :marital_status, collection: ['Single', 'Married', 'Divorced'], include_blank: false %>
       <hr style="width: 1100px; ">
-      <%= f.input :father_name %>
+      <%= f.input :father_name, :input_html => { value: @employee.middle_name }, readonly: true %>
       <hr style="width: 1100px; ">
       <%= f.input :mother_name %>
       <hr style="width: 1100px; ">

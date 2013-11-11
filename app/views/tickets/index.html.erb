@@ -1,100 +1,22 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
-      <!--Body content-->
-      <div class="hr">
-        <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
-        <h2>Complaints and Suggestions</h2>
-      </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-      <h4>All Tickets</h4>
-      <% if can? :read, Ticket %>
-      <div style="width:1100px">
-
-        <div class="tabbable"> <!-- Only required for left/right tabs -->
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab1" data-toggle="tab">All tickets</a></li>
-            <li><a href="#tab2" data-toggle="tab">Overview 1</a></li>
-            <li><a href="#tab3" data-toggle="tab">Overview 2</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Knowlegebase<b class="caret"></b></a>
-            <ul class="dropdown-menu">
-            <li><a href="#tab4" data-toggle="tab">FAQs</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="tab-content">
-          <div class="tab-pane active" id="tab1">
-            <p> <center>    <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets';">All Tickets</button>
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets?assign_state=1';">Assigned Tickets (0)</button>
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets?assign_state=0';">Not Assigned Tickets</button>
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets?ticket_state=open';">Open Tickets</button>
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets?ticket_state=canceled';">Canceled Tickets</button>
-              <button type="button" class="btn btn-primary" onclick="location.href='/tickets?ticket_state=solved';">Solved Tickets</button>
-            </div></center>
-
-            <br>
-            <table class="table table-bordered table-hover" >
-              <tr>
-                <th>Ticket Serial</th>
-                <th>Sender Role</th>
-                <th>Assigned Department</th>
-                <th>Priority</th>
-                <th>Current State</th>
-                <th>Assigned State</th>
-                <th>Assigned To</th>
-              </tr>
-              <% @tickets.each do |ticket| %>
-              <tr>
-                <td><%= link_to ticket.id , ticket %></td>
-                <td><%= ticket.user.user_type %></td>
-                <td><%= ticket.employee_department.name %></td>
-                <td id="state_<%= ticket.state.name.parameterize %>"><%= ticket.state.name %></td>
-                <td><%= ticket.ticket_state %></td>
-                <% if ticket.assign_state == true %>
-                <td>assigned</td>
-                <% else %>
-                <td>not assigned</td>
-                <% end %>
-                <% if ticket.employee %>
-                <td><%= ticket.employee.full_name %></td>
-                <% else %>
-                <% if current_user.has_role? :ticket_assigner %>
-                <td><button class="btn btn-small btn-primary" type="button">Request Assign</button></td>
-                <% else %>
-                <td>no employee has assigned</td>
-                <% end %>
-                <% end %>
-                </tr>
-                <% end %>
-              </table>
-              <% end %></p>
-            </div>
-            <div class="tab-pane" id="tab2">
-              <h3>Total of tickets by Department</h3>
-              <center>
-              <%=  pie_chart EmployeeDepartment.joins(:states).group("employee_departments.name").count %>
-              </center>
-            </div>
-            <div class="tab-pane" id="tab3">
-              <h3>Total of tickets by Department</h3>
-              <center>
-              <%=  column_chart EmployeeDepartment.joins(:states).group("employee_departments.name").count %>
-              </center>
-            </div>
-          </div>
-        </div>
-
-
-       
-      </div>
-    </div>
+<%= render 'tickets/ticket_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
+    <h3>Academic Support</h3>
   </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
   </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <% if params[:ticket] == "activity" %>
+    <%= render 'tickets/ticket_activity' %>
+  <% elsif params[:ticket] == "staff" %>
+    <%= render 'tickets/ticket_staff' %>
+  <% elsif params[:ticket] == "tickets" %>
+   <%= render 'tickets/all_tickets' %>
+  <% elsif params[:ticket] == "new" %>
+   <%= render 'tickets/new_ticket_staff' %>
+  <% end %>

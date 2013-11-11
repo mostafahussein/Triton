@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!
   before_filter :find_states
 
 
@@ -20,9 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    '/dashboard'
+    return user_messages_path(current_user, :mailbox=>:inbox)
   end
-
-
-
 end

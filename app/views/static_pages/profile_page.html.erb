@@ -1,5 +1,5 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
 	<div class="row-fluid">
 
 		<div class="offset1 span11">
@@ -20,7 +20,7 @@
 			</div>
 			<div class="span4">
 				<blockquote>
-					<p>Bruce Wayne</p>
+					<p><%= current_user.first_name.capitalize %> <%= current_user.last_name.capitalize %></p>
 					<small><cite title="Source Title">Gotham, United Kingdom  <i class="icon-map-marker"></i></cite></small>
 				</blockquote>
 				<p>

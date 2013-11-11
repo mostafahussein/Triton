@@ -1,0 +1,2 @@
+class GuidanceAdvisorsController < ApplicationController
+end

@@ -1,0 +1,36 @@
+<div>
+  <div style="float:left;">
+  <h4>Staff Members</h4>
+  </div>
+  <ul class="nav pull-right">
+    <%= form_tag tickets_path, method: :get do %>
+    <div style="float:left; padding-right:10px;">
+      <%= text_field_tag :search , params[:search] %>
+      </div>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+      <div style="clear:left;">
+      <%= link_to 'Advanced Search', '#' %>
+      </div>
+    <% end %>
+  </ul>
+  <div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th bgcolor="#B7B7B7">Name</th>
+      <th bgcolor="#B7B7B7">Department</th>
+      <th bgcolor="#B7B7B7">Email</th>
+      <th bgcolor="#B7B7B7">Phone Number</th>
+      <th bgcolor="#B7B7B7">Mobile Number</th>
+    </tr>
+    <% @complaint_staff.each do |staff| %>
+    <tr>
+      <td><%= staff.full_name %></td>
+      <td><%= staff.employee_department.name %></td>
+      <td><%= staff.email %></td>
+      <td>#</td>
+      <td>#</td>
+    </tr>
+    <% end %>
+  </table>
+  </div>
+</div>

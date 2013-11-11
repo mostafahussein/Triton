@@ -16,31 +16,33 @@ class Ability
       can :read, Student
     end
 #############################################
-    if user.has_role? :news_manager
-      can :manage, Article
+
+#############################################
+    if user.has_role? :academic_support
+        can :manage, Ticket
     end
 
-    if user.has_role? :news_viewer
-      can :read, Article
-    end
-#############################################
-    if user.has_role? :ticket_manager
+
+    if user.has_role? :complaint_manager
       can :manage, Ticket , :employee_department_id => user.employee.employee_department_id
     end
 
-    if user.has_role? :ticket_staff
-        can :manage, Ticket, :employee_id => user.employee_id
+    if user.has_role? :complaint_staff
+        can :manage, Ticket, :employee_id => user.employee.id
     end
 
-    if user.has_role? :ticket_assigner
+    if user.has_role? :complaint_assigner
         can :manage, Ticket, :employee_id => nil
     end
 
-    if user.has_role? :ticket_viewer #he should be able to create tickets and see what he has created.
+    if user.has_role? :complainer
         can :create, Ticket
         can :read, Ticket, :user_id => user.id        
     end
 ############################################
+    if user.has_role? :academic_advisor
+        can :manage, GuidanceAdvisor, :employee_id => user.employee.id
+    end
   end
 
     # Define abilities for the passed in user here. For example:

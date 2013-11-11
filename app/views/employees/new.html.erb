@@ -1,60 +1,153 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
-      <!--Body content-->
-      <div class="hr">
-        <img src="/assets/Preppy-icon.png" alt="image" />
-        <h2>Employee Admission</h2>
-      </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-      <!-- page content goes here -->
-      <%= simple_form_for(@employee) do |f| %>
-      <%= f.error_messages %>
-      <h4>General Details</h4>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 3px; width: 1100px; "></hr>
-      <%= f.input :employee_number %>
-      <hr style="width: 1100px; ">
-      <%= f.input :joining_date %>
-      <hr style="width: 1100px; ">
-      <%= f.input :first_name %>
-      <hr style="width: 1100px; ">
-      <%= f.input :middle_name %>
-      <hr style="width: 1100px; ">
-      <%= f.input :last_name %>
-      <hr style="width: 1100px; ">
-      <%= f.input :email %>
-      <hr style="width: 1100px; ">
-      <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @employee.gender, item_wrapper_class: 'inline'%>
-      <hr style="width: 1100px; ">
-      <%= f.input :date_of_birth %>
-      <hr style="width: 1100px; ">
-      <%= f.association :employee_department, as: :select %>
-      <hr style="width: 1100px; ">
-      <%= f.association :employee_category , as: :select %>
-      <hr style="width: 1100px; ">
-      <%= f.association :employee_position, as: :select %>
-      <hr style="width: 1100px; ">
-      <%= f.association :employee_grade, as: :select %>
-      <hr style="width: 1100px; ">
-      <%= f.input :job_title %>
-      <hr style="width: 1100px; ">
-      <%= f.input :qualification %>
-      <hr style="width: 1100px; ">
-      <%= f.input :experience_detail, as: :text, :input_html => { :rows => 5 } %>
-      <hr style="width: 1100px; ">
-      <%= f.input :experience_month, collection: 1..11, label: 'Total experience', prompt: 'Month(s)' %>
-      <%= f.input :experience_year, collection: 0..20, label: false, prompt: 'Year(s)' %>
-      <hr style="width: 1100px; ">
-
-      <%= f.submit 'Next', :class => "btn btn-success" %>
-      <% end %>
-    </div>
+<%= render 'employees/employee_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Preppy-icon.png" alt="image" />
+    <h3 class="page-title">Human Resources Management</h3>
   </div>
-</div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width:  975px;"></hr>
+  <h4>Employee Admission</h4>
+  <!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Employee - <span class="step-title">Step 1 of 3</span>
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form action="/employees" class="form-horizontal" id="submit_form" method="POST">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> General Details</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Employee Details</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab3" data-toggle="tab" class="step active">
+                    <span class="number">3</span>
+                    <span class="desc"><i class="icon-ok"></i> Contact Details</span>   
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+            <div class="tab-pane active" id="tab1">
+              <%= simple_form_for(@employee) do |f| %>
+              <%= f.error_messages %>
+              <h4 class="block">General details</h4>
+              <div style="float: left;">
+              <%= f.input :employee_number %>
+              </div>
+              <div style="float: left;">
+              <%= f.input :joining_date, :as => :string, :input_html => { class: 'admission'} %>
+              </div>
+              <div style="float: left;">
+              <%= f.input :first_name %>
+              </div>
+              <div style="float: left;">
+              <%= f.input :middle_name %>
+              </div>
+              <%= f.input :last_name %>
+              <%= f.input :email %>
+              <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @employee.gender, item_wrapper_class: 'inline'%>
+              <%= f.input :date_of_birth, :as => :string, :input_html => { class: 'admission'} %>
+              <%= f.association :employee_department, as: :select %>
+              <div style="clear: left;">
+              <%= f.input :job_title %>
+              </div>
+              <div style="float: left;">
+              <%= f.input :qualification %>
+              </div>
+              <div style="float: left;">
+              <%= f.input :experience_detail, as: :text, :input_html => { :rows => 5 } %>
+              </div>
+              <div style="float: left; padding-right:10px;clear: left">
+              <%= f.input :experience_month, collection: 1..11, label: 'Total experience', prompt: 'Month(s)' %>
+              </div>
+              <%= f.input :experience_year, collection: 0..20, label: false, prompt: 'Year(s)' %>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <h4 class="block">Employee's personal details</h4>
+              <%= f.input :marital_status, collection: ['Single', 'Married', 'Divorced'], include_blank: false %>
+              <%= f.input :father_name, :input_html => { value: @employee.middle_name }, readonly: true %>
+              <%= f.input :mother_name %>
+              <%= f.input :blood_group, prompt: 'Unknown', collection: ['A+','A-','B+','B-','O+', 'O-', 'AB+', 'AB-'] %>
+              <%= f.association :nationality, as: :select, include_blank: false %>
+              <h4>Employee's home address</h4>
+              <%= f.input :home_address_line1 %>
+              <%= f.input :home_address_line2 %>
+              <%= f.input :home_city %>
+              <%= f.input :home_country_id, as: :select do %>
+              <%= f.select :home_country_id, Country.all.map{ |c| [c.name , c.id] } %>
+              <% end %>
+              <%= f.input :home_pin_code %>
+            </div>
+            <div class="tab-pane" id="tab3">
+              <h4 class="block">Employee's office address</h4>
+              <%= f.input :office_address_line1 %>
+              <%= f.input :office_address_line2 %>
+              <%= f.input :office_city %>
+              <%= f.input :office_country_id, as: :select do %>
+              <%= f.select :office_country_id, Country.all.map{ |c| [c.name , c.id] } %>
+              <% end %>
+              <%= f.input :office_pin_code %>
+              <h4>Employee's contact details</h4>
+              <%= f.input :office_phone1 %>
+              <%= f.input :office_phone2 %>
+              <%= f.input :mobile_phone %>
+              <%= f.input :home_phone %>
+              <%= f.input :fax %>
+            </div>
+          </div>
+          <div class="form-actions clearfix">
+            <a href="javascript:;" class="btn button-previous">
+              <i class="m-icon-swapleft"></i> Back 
+            </a>
+            <a href="javascript:;" class="btn blue button-next">
+              Continue <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+            <a href="javascript:;" class="btn green button-submit">
+              Submit <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% end %>
+  </div>
+  <!--End Wizard-->
+
+  <script>
+    jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+  </script>

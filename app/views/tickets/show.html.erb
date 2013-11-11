@@ -1,136 +1,179 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
+<%= render 'tickets/ticket_sidebar' %>
+<div class="span9">
       <!--Body content-->
       <div class="hr">
         <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
-        <h2>Complaints and Suggestions</h2>
+        <h3>Complaint Details</h3>
       </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
+      <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+<!--------------------------------------------Complaint Details------------------------------------------------------------>
+
+      <span>Compliant Number:&nbsp;&nbsp;<%= @ticket.id %></span><br>
+      <h4>Complaint Details</h4>
+      <span>Sender Name:&nbsp;&nbsp;<%= @ticket.first_name %>&nbsp;&nbsp;<%= @ticket.last_name %></span>
+      <br>
+      <hr style="height: 5px; width: 975px; "></hr>
+      <span>Compliant Number:&nbsp;&nbsp;<%= @ticket.id %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>Date Recorded:&nbsp;&nbsp;<%= @ticket.created_at.strftime("%d %b. %Y") %></span>
+      <br>
+      <hr style="height: 5px; width: 975px; "></hr>
+      <span>Periority:&nbsp;&nbsp;<% if @ticket.state %><%= @ticket.state.name %><% else %> Not set<% end %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>Solve Period:&nbsp;&nbsp;<% if @ticket.due_date %><%= @ticket.due_date.strftime("%d %b. %Y") %><% else %>N/A<% end %></span>
+      <br>
+      <hr style="height: 5px; width: 975px; "></hr>
+      <span>Employee Department:&nbsp;&nbsp;<%= @ticket.employee_department.name if @ticket.employee_department %></span>
+      <br>
+      <hr style="height: 5px; width: 975px; "></hr>
+      <span>Complaint Title:&nbsp;&nbsp;<%= @ticket.title %></span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>Complaint Subject:&nbsp;&nbsp;<%= @ticket.description %></span>
+      <br>
+     
+<!-----------------------------------------------Department Transfer---------------------------------------------------------->
+  <% if (current_user.has_role? :complaint_manager) || (current_user.has_role? :administrator )%>
+   <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+
+      <h4>Assign / Transfer</h4>
+      <span>Current Department:&nbsp;&nbsp;<% if @ticket.employee_department %><%= @ticket.employee_department.name %><% else %>Not Assigned to any departments<% end %></span>
+      <%= link_to "Department Transfer", "#assign-department", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+      <div class="modal hide fade" id="assign-department">
+        <div class="modal-header">
+          <h3 id="myModalLabel">Department Transfer</h3>
+        </div>
+        <div class="modal-body">
+          <h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
+          <%= simple_form_for(@ticket) do |f| %>
+          <label id='assing-department'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Ok</button>
+          <% end %>
+          <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+        </div>
       </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-			<h4><%= @ticket.title %></h4>
-			<div class="span10">
-			<span  class="badge badge-warn">Sender:&nbsp;&nbsp;<%= @ticket.first_name %>&nbsp;&nbsp;<%= @ticket.last_name %></span>
-			<div class="pull-right">
-				<% if @ticket.state %>
-				<b>Current Priority:</b>&nbsp;
-				<span id="state_<%= @ticket.state.name.parameterize %>" class="badge badge-warn"><%= @ticket.state.name %></span>
-				<% else %>
-				<b>Current Priority:</b>&nbsp;<span class="badge badge-warn">Not defined yet.</span>
-				<% end %>
-				<%= link_to "Change", "#priority", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
-				<div class="modal hide fade" id="priority">
-					<div class="modal-header">
-						<h3 id="myModalLabel">Set/Change Priority</h3>
-					</div>
-					<div class="modal-body">
-						<%= simple_form_for(@ticket) do |f| %>
-						<label id='priority'><%= f.association :state, as: :radio_buttons, label: 'Available Priorities' %></label>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-success" type="submit">Ok</button>
-						<% end %>
-						<button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
-					</div>
-				</div>
-			</div>
-			<blockquote>
-				<p>"<%= @ticket.description %>"</p>
-				<small><cite title="Source Title"><%= @ticket.first_name %>&nbsp;&nbsp;<%= @ticket.last_name %></cite></small>
-			</blockquote>
-			<div><br>
-				<span class="badge badge-success">Sent Date:&nbsp;&nbsp;<%= @ticket.created_at %></span><br><br>
-				<span class="badge badge-success">Ticket State:&nbsp;&nbsp;<%= @ticket.ticket_state %></span>
+      <% end %>
+     
+      <!----------------------------------------------------Assign Employee---------------------------------------------------->
+      
+  <% if (current_user.has_role? :complaint_manager) || (current_user.has_role? :administrator )%>
+   <hr style="height: 5px; width: 975px; "></hr>
+      <span>Current Employee:&nbsp;&nbsp;<% if @ticket.employee %><%= @ticket.employee.full_name %><% else %>Not Assigned to any employees<% end %></span>
+      <%= link_to "Assign Employee", "#assign", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+      <div class="modal hide fade" id="assign">
+        <div class="modal-header">
+          <h3 id="myModalLabel">Assign An Employee</h3>
+        </div>
+        <div class="modal-body">
+          <h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
+          <%= simple_form_for(@ticket) do |f| %>
+          <label id='assing'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
+          <label id='assing'><%= f.association :employee, as: :select, label: 'Select Employee' %></label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Ok</button>
+          <% end %>
+          <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+        </div>
+      </div>
 
-				<%= link_to "Change", "#state", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
-				<div class="modal hide fade" id="state">
-					<div class="modal-header">
-						<h3 id="myModalLabel">Set/Change State</h3>
-					</div>
-					<div class="modal-body">
-						<%= simple_form_for(@ticket) do |f| %>
-						<label id='state'><%= f.select :ticket_state , ([%w(open open), %w(solved solved),
-						 %w(canceled canceled)]) %></label>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-success" type="submit">Ok</button>
-						<% end %>
-						<button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
-					</div>
-				</div>
+      <% end %>
+    
+      <!------------------------------------------------------Change Status and Priority-------------------------------------------------->
+        <% if (current_user.has_role? :complaint_staff) || (current_user.has_role? :administrator) %>
+          <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
 
-				<div class="pull-right">
-					<b>Current Department:</b>&nbsp;&nbsp;<span class="badge badge-info"><%= @ticket.employee_department.name %></span>
-					<%= link_to "Department Transfer", "#assign-department", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
-					<div class="modal hide fade" id="assign-department">
-						<div class="modal-header">
-							<h3 id="myModalLabel">Department Transfer</h3>
-						</div>
-						<div class="modal-body">
-						<h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
-							<%= simple_form_for(@ticket) do |f| %>
-							<label id='assing-department'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-success" type="submit">Ok</button>
-							<% end %>
-							<button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
-						</div>
-					</div>
-					<br>
-					<br>
-					<% if current_user.has_role? :ticket_manager %>
-					<% if @ticket.employee %>
-					<b>Assigned Employee:</b>&nbsp;
-					<span class="badge"><%= @ticket.employee.full_name %></span>
-					<% else %>
-					<b>Assigned Employee:</b>&nbsp;<span class="badge">No employee has been assigned yet.</span>
-					<% end %>
-					<%= link_to "Assign Employee", "#assign", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
-					<div class="modal hide fade" id="assign">
-						<div class="modal-header">
-							<h3 id="myModalLabel">Assign An Employee</h3>
-						</div>
-						<div class="modal-body">
-						<h6>This ticket is currently assigned to <%= @ticket.employee_department.name %></h6>
-							<%= simple_form_for(@ticket) do |f| %>
-							<label id='assing'><%= f.association :employee_department, as: :select, label: 'Select Department' %></label>
-							<label id='assing'><%= f.association :employee, as: :select, label: 'Select Employee' %></label>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-success" type="submit">Ok</button>
-							<% end %>
-							<button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<% end %>
-			<br><br>
-			<hr><br>
-			<div class="header">
-				<img src="/assets/Comment-icon.png" alt="reply" />
-				<h4>Replies</h4>
-			</div><br>
-			<% if @ticket.replies.exists? %>
-			<p><%= render @ticket.replies.select(&:persisted?) %>
-				<hr>
-				<% else %>
-				<b>There are no comments for this ticket.</b>
-				<hr>
-				<% end %>
-			</p>
-			<% if @ticket.ticket_state == "open" %>
-			<center><%= render "replies/form" %></center>
-			<hr>
-			<% end %>
-			</div>
-		</div>
-	</div>
-</div>
+      <h4>Status & Priority</h4>
+      <span>Ticket State:&nbsp;&nbsp;<%= @ticket.ticket_state if @ticket.ticket_state %></span>
+
+      <%= link_to "Change", "#state", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+      <div class="modal hide fade" id="state">
+        <div class="modal-header">
+          <h3 id="myModalLabel">Set/Change State</h3>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@ticket) do |f| %>
+          <label id='state'><%= f.select :ticket_state , ([%w(open open), %w(solved solved),
+           %w(canceled canceled)]) %></label>
+         </div>
+         <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Ok</button>
+          <% end %>
+          <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+        </div>
+      </div>
+       <hr style="height: 5px; width: 975px; "></hr>
+      <% end %>
+     
+      <!-------------------------------------------------------------------------------------------------------->
+
+        <% if (current_user.has_role? :complaint_staff) || (current_user.has_role? :administrator) %>
+      <% if @ticket.state %>
+      <b>Current Priority:</b>&nbsp;
+      <span id="state_<%= @ticket.state.name.parameterize %>"><%= @ticket.state.name %></span>
+      <% else %>
+      <span>Current Priority:&nbsp;Not defined yet.</span>
+      <% end %>
+      <%= link_to "Change", "#priority", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+      <div class="modal hide fade" id="priority">
+        <div class="modal-header">
+          <h3 id="myModalLabel">Set/Change Priority</h3>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@ticket) do |f| %>
+          <label id='priority'><%= f.association :state, as: :radio_buttons, label: 'Available Priorities' %></label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Ok</button>
+          <% end %>
+          <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+        </div>
+      </div>
+   
+      <br><br>
+         <% end %>
+
+      <!------------------------------------------------Set Due Date-------------------------------------------------------->
+    
+      <% if current_user.has_role? :complaint_manager %>
+      <span>Due Date:&nbsp;&nbsp;<%= @ticket.due_date.strftime("%d %b. %Y") if @ticket.due_date %></span>
+      <%= link_to "Due Date", "#due", :class => "btn btn-mini btn-inverse", "data-toggle" => "modal" %>
+      <div class="modal hide fade" id="due">
+        <div class="modal-header">
+          <h3 id="myModalLabel">Set Due Date</h3>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for(@ticket) do |f| %>
+          <label id='priority'><%= f.input :due_date, as: :string,:input_html => { class: 'admission'}, label: 'Due Date' %></label>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" type="submit">Ok</button>
+          <% end %>
+          <button aria-hidden="true" class="btn btn-info" data-dismiss="modal">Back</button>
+        </div>
+      </div>
+      <% end %>
+     <!-------------------------------------------------------------------------------------------------------->
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+      <div class="header">
+        <img src="/assets/Comment-icon.png" alt="reply" />
+        <h4>Follow up</h4>
+      </div><br>
+      <% if @ticket.replies.exists? %>
+      <p><%= render @ticket.replies.select(&:persisted?) %>
+        <hr>
+        <% else %>
+        <b>There are no comments for this ticket.</b>
+        <hr>
+        <% end %>
+      </p>
+      <% if @ticket.ticket_state == "open" %>
+        <center><%= render "replies/form" %></center>
+        <hr>
+      <% end %>

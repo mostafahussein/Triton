@@ -1,0 +1,36 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+	<div class="row-fluid">
+
+		<div class="offset1 span11">
+			<!--Body content-->
+			<div class="hr">
+				<img src="/assets/student-activity.png" alt="image" />
+				<h2>Events</h2>
+			</div>
+			<div id="app-back-button" class="span10">
+				<a onclick="history.back(); return false;" href="#" id= "bk">
+					<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+				</a>
+			</div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+			<div style="width:1100px">
+
+			<%= form_for(@event) do |f| %>
+							<%= f.error_messages %>
+							<%= f.label 'Event name' %>
+							<%= f.text_field :event_name %>
+							<%= f.label 'Event date' %>
+							<%= f.date_select :event_date %>
+							<%= f.label 'Event place' %>
+							<%= f.text_field :event_place %>
+							<%= f.label 'Event description' %>
+							<%= f.text_area :event_description, input_html: {:rows => 5, :class => "input-large" } %>
+
+							<%= f.submit 'Publish', class: 'btn btn-primary' %>
+						<% end %>
+
+
+			</div>
+		</div>
+	</div>

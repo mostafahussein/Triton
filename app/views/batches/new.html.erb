@@ -1,0 +1,169 @@
+<%= render 'batches/batch_sidebar' %>
+<div class="span9">
+		<!--Body content-->
+		<div class="hr">
+			<img src="/assets/Blue-Book-icon.png" alt="image" />
+			<h3 class="page-title">Batches & Courses</h3>
+		</div>
+
+		<div id="app-back-button" style="padding-right: 50px;">
+		<a onclick="history.back(); return false;" href="#" id= "bk">
+			<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+		</a>
+	</div>
+
+		<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+		<!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Batch - <span class="step-title">Step 1 of 2</span>
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form action="/batches" class="form-horizontal" id="submit_form" method="POST">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> Create Batch</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Add Sections</span>   
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+            <div class="tab-pane active" id="tab1">
+              <%= simple_form_for @batch do |f| %>
+              <%= f.error_messages %>
+              <h4 class="block">Batch details</h4>
+              <%= f.input :name, collection: ['Business Administration', 'Management Information System'] , input_html: {onchange: 'showHide()'} ,label: 'Name:'%>
+
+			<%= f.input :language , as: :select,collection: ['Arabic' , 'English'] ,label: 'Language:' ,input_html: {class: 'selectpicker'} %>
+
+			<div style="float: left;">
+			<%= f.input :school_year , collection: ['First Year' , 'Second Year' , 'Third Year' , 'Fourth Year'] , label: 'Academic Year:', input_html: {onchange: 'showHide()'} %>
+			</div>
+
+			<div style="float: left;">
+			<%= f.input :major , collection: ['Accounting', 'Bussiness Administration', 'Economics'] , input_html: { id: 'hidden_selection' ,  style: 'display:none'} ,label_html: {style:'display:none' , id: 'hidden_label'}, label: 'Major:'   %>
+			</div>
+            </div>
+            <div class="tab-pane" id="tab2">
+              <h4 class="block">Select Sections:</h4>
+              <%= f.simple_fields_for :student_classes do |s| %> 
+              <%= s.input :name, label: false do %>
+
+              <div style="margin-top: -30px;">
+              	<div style="float: left;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 1' %> Section 1
+               	</div>
+               	<div style="float: left; padding-left: 20px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 2' %> Section 2
+               	</div>
+               	<div style="float: left; padding-left: 20px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 3' %> Section 3
+              	</div>
+
+              	<div style="float: left; clear: left;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 4' %> Section 4
+               	</div>
+               	<div style="float: left;padding-left: 20px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 5' %> Section 5
+               	</div>
+               	<div style="float: left;padding-left: 20px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 6' %> Section 6
+               	</div>
+
+               	<div style="float: left; clear: left;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 7' %> Section 7
+               	</div>
+               	<div style="float: left;padding-left: 20px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 8' %> Section 8
+               	</div>
+               	<div style="float: left;padding-left: 20px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 9' %> Section 9
+               	</div>
+ 
+               	<div style="float: left; clear: left;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 10' %> Section 10
+               	</div>
+               	<div style="float: left;padding-left: 13px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 11' %> Section 11
+               	</div>
+               	<div style="float: left;padding-left: 13px;margin-top: 10px;">
+               		<%= check_box_tag 'batch[student_classes_attributes][][name]', 'section 12' %> Section 12
+               	</div>
+              </div>
+
+              <% end %>
+              <% end %>
+            </div>
+            <div class="tab-pane" id="tab3">
+
+            </div>
+          </div>
+          <div class="form-actions clearfix">
+            <a href="javascript:;" class="btn button-previous">
+              <i class="m-icon-swapleft"></i> Back 
+            </a>
+            <a href="javascript:;" class="btn blue button-next">
+              Continue <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+            <a href="javascript:;" class="btn green button-submit">
+              Submit <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% end %>
+  </div>
+  <!--End Wizard-->
+
+  <script>
+    jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+  </script>
+
+  <script>
+	function showHide()
+	{
+		var batch_name=document.getElementById("batch_name");
+		var batch_school_year=document.getElementById("batch_school_year");
+		if((batch_school_year.options[batch_school_year.selectedIndex].text === "Third Year" || batch_school_year.options[batch_school_year.selectedIndex].text === "Fourth Year") && 
+			(batch_name.options[batch_name.selectedIndex].text === "Business Administration" ) )
+		{
+			document.getElementById("hidden_label").style.display = "";
+			document.getElementById("hidden_selection").style.display = "";
+		}
+		else
+		{
+			document.getElementById("hidden_label").style.display = "none";
+			document.getElementById("hidden_selection").style.display = "none";
+		}
+	}
+</script>

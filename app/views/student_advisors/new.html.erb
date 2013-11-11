@@ -1,0 +1,110 @@
+<%= render 'guidance_supervisors/councelor_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/flow-chart-icon.png" alt="image" />
+    <h3 class="page-title">Assign Batch Advisors</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width:  975px;"></hr>
+  <!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Batch Advisor - <span class="step-title">Step 1 of 4</span>
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form action="/student_advisors" class="form-horizontal" id="submit_form" method="POST">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> Choose Batch</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Select Supervisor</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab3" data-toggle="tab" class="step active">
+                    <span class="number">3</span>
+                    <span class="desc"><i class="icon-ok"></i> Add Advisors</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab4" data-toggle="tab" class="step">
+                    <span class="number">4</span>
+                    <span class="desc"><i class="icon-ok"></i> Confirm</span>   
+                  </a> 
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+            <div class="tab-pane active" id="tab1">
+              <%= simple_form_for(@studentadvisor) do |f| %>
+              <%= f.error_messages %>
+              <%= f.association :batch, as: :select %>
+            
+            </div>
+            <div class="tab-pane" id="tab2">
+              <%= f.association :employee_department, as: :select %>
+              <%= f.input :counselor_supervisor_id , collection: EmployeeDepartment.all, as: :grouped_select, group_method: :counselor_supervisors %>
+           
+            </div>
+            <div class="tab-pane" id="tab3">
+            <%= f.input :student_class_id , collection: @batches, as: :grouped_select, group_method: :student_classes %>
+              
+             
+            </div>
+            <div class="tab-pane" id="tab4">
+
+            </div>
+          </div>
+          <div class="form-actions clearfix">
+            <a href="javascript:;" class="btn button-previous">
+              <i class="m-icon-swapleft"></i> Back 
+            </a>
+            <a href="javascript:;" class="btn blue button-next">
+              Continue <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+            <a href="javascript:;" class="btn green button-submit">
+              Submit <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% end %>
+  </div>
+  <!--End Wizard-->
+
+  <script>
+    jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+  </script>

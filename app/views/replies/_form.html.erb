@@ -1,8 +1,26 @@
 <strong>New comment</strong>
 <%= form_for [@ticket, @reply] do |f| %>
   <%= f.error_messages %>
-  <p>
+  <div style="float:center;">
   <%= f.text_area :text, :rows => 5, :class => "input-xxlarge" %>
+  </div>
+  <div style="clear: left;">
+    <select id="dropdown">
+<option value=""></option>
+<option value="contactnumber1">This is a canned response</option>
+<option value="contactnumber2">Have you tried turning it off and on again?</option>
+<option value="contactnumber3">sample answer #3</option>
+<option value="contactnumber4">sample answer #4</option>
+</select>
+</div>
+<script type="text/javascript">
+var mytextbox = document.getElementById('reply_text');
+var mydropdown = document.getElementById('dropdown');
+
+mydropdown.onchange = function () {
+mytextbox.value = mydropdown.options[this.selectedIndex].text;
+};
+</script>
   </p>
-     <button class="btn btn-inverse" type="submit">Reply</button>
+     <button class="btn btn-inverse" type="submit">Follow up</button>
 <% end %>

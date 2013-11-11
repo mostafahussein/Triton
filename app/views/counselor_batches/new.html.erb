@@ -1,0 +1,32 @@
+<%= render 'batch_counselor_supervisors/counselor_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Blue-Book-icon.png" alt="image" />
+    <h3 class="page-title">Add Batch</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width:  975px;"></hr>
+  <div class="portlet box blue">
+    <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>Add New Batch</div></div>
+      <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="/counselor_batches" class="form-horizontal" method="POST">
+          <%= simple_form_for(@counselor_batch) do |f| %>
+          <%= f.error_messages %>
+          <%= f.association :batch, as: :select %>
+
+          <div class="form-actions">
+            <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>
+            <button type="button" class="btn">Cancel</button>
+          </div>
+        </form>
+        <% end %>
+        <!-- END FORM--> 
+      </div>
+    </div>

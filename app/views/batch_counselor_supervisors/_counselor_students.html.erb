@@ -1,0 +1,22 @@
+<div>
+  <h4>Students List</h4>
+  <div>
+  <table class="table table-bordered table-hover">
+        <thead bgcolor="#B7B7B7"><th>Section</th><th>Student</th></thead>
+        <tbody>
+          <% @batch_counselors.each do |bc| %>
+          <% bc.batch.student_classes.each do |bs| %>
+           <% bs.students.each do |ss| %>
+          
+          <tr>
+            <td><%= bs.name %></td>
+            <td><%= ss.full_name %></td>
+          </tr>
+          <% end %>
+          <% end %>
+          <% end %>
+          <tfoot bgcolor="#B7B7B7"><td></td><td></td></tfoot>
+        </tbody>
+      </table>
+  </div>
+</div>

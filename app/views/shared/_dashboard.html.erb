@@ -1,231 +1,114 @@
-<div class="container-fluid">
+<div class="container-fluid" style="width:820px; margin-top: 40px;">
 	<div class="row-fluid">
-		<div class="span8" align="center">
-			<!--Body content-->
-			<% if can? :manage, Student %>
-			<div class="gridcontainer clearfix">
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/student/admission1">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Student Admission</span><img src="assets/korganizer-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
+   <div class="offset3">
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= image_tag("banner.jpg") %>
+        </div>
+        <div class="item">
+          <%= image_tag ("banner1.jpg") %>
+        </div>
+        <div class="item">
+          <%= image_tag ("banner2.jpg") %>
+        </div>
+        <div class="item">
+          <%= image_tag ("banner3.jpg") %>
+        </div>
+        <div class="item">
+          <%= image_tag ("banner4.jpg") %>
+        </div>
+      </div>
+    </div>
+    <h4>
+     Welcome to Educational ERP - COLLEGE MANAGEMENT SOFTWARE
+   </h4>
+   <p>
+     We would like to introduce Educational ERP as the Online Based Educational Solution on cutting edge technology of modern era. Educational ERP as its name suggest is not only software to but also a planning tool that will suggest you the best way to do the same task in a better way. An integrated solution for complete computerization for College and institutions build on the most futuristic and highly sophisticated Ruby on Rails.
+   </p>
+    <div class="bs-example bs-example-tabs">
+      <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Software Highlights</a></li>
+        <li><a href="#profile" data-toggle="tab">Software Features</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+        <ul style="list-style: none;">
+          <li>[A] Fully compatible for integration with Biometric Devices, Barcodes, RFID's & Smartcards.</li>
+          <hr>
+          <li>[B] Data security is maintained on a departmental level. High degree of security and safety according to international standards.</li>
+          <hr>
+          <li>[C] Manual effort is reduced and speedy and accurate reports are generated.</li>
+          <hr>
+          <li>[D] High degree of transparency of the institution through the Web.</li>
+          <hr>
+          <li>[E] Better co-ordination between departments.</li>
+          <hr>
+          <li>[F] Student conveniences extended beyond the classroom.</li>
+          <hr>
+          <li>[G] Overall reduction of operating costs; and savings on time and efforts.</li>
+          <hr>
+          <li>[H] Easy to learn, use and implement.</li>
+          <hr>
+          <li>[I] Highly streamlined and effective workflow of administration and academia.</li>
+          <hr>
+          <li>[J] Ensures greater efficiency.</li>
+          <hr>
+          <li>[K] Unlimited number of users.</li>
+          <hr>
+          <li>[L] Easy to customize.</li>
+        </ul>
+        </div>
+        <div class="tab-pane fade" id="profile">
+        <ul style="list-style: none;">
+              <li>[A] Educational ERP Online Suite is server based college based management software. Provides Password facility for different users to ensure high level of security.</li>
+              <hr>
+    <li>[B] Has inbuilt database back up facility for safety and reliability.</li>
+    <hr>
+    <li>[C] Single database management system.</li>
+    <hr>
+    <li>[D] It is multi user, multi session and multi board suite package.</li>
+    <hr>
+    <li>[E] Better co-ordination between departments.</li>
+    <hr>
+    <li>[F] It is completely user friendly college management software.</li>
+    <hr>
+    <li>[G] Full fledged Library Management System.</li>
+    <hr>
+    <li>[H] Generates different types of reports.</li>
+    <hr>
+    <li>[I] Developed using optimized designing and coding to maintain proper speed.</li>
+    <hr>
+    <li>[J] Proper and systematic training to different departments.</li>
+    <hr>
+    <li>[K] Ultimately maintains efficient management.</li>
+    <hr>
+    <li>[L] Unlimited number of users.</li>
+    <hr>
+    <li>[L] Educational ERP gives a web enabled interface to the users ie. Students, Faculty, Administrators and Parents.</li>
+    </ul>
 
-				<% if can? :read, Student %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/students">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Student details</span><img src="assets/Teacher-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "student" || current_user.user_type == "employee" || current_user.user_type == "parent" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/my_profile">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>My Profile</span><img src="assets/Student-id-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if can? :manage, Users %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/users">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Manage users</span><img src="assets/Users-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if (can? :manage, Article) || (can? :read, Article) %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/articles">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Manage news</span><img src="assets/news-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="<%= user_messages_path(current_user, :mailbox=>:inbox) %>">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Inbox</span><img src="assets/Inbox-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-
-				<% if can? :read, Employee %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/employee/human_resources">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Human resources</span><img src="assets/Preppy-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Attendance</span><img src="assets/checklist-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Examination</span><img src="assets/study-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Time table</span><img src="assets/Actions-view-calendar-timeline-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Finance</span><img src="assets/vault-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "student" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/support">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Support Center</span><img src="assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if (current_user.user_type == "admin") || (current_user.has_role? :ticket_manager) || (current_user.has_role? :ticket_assigner) %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="/tickets">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Support Center</span><img src="assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Student leader</span><img src="assets/boss-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Academic Guide</span><img src="assets/Manager-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-				<% if current_user.user_type == "admin" %>
-				<div class="grid_3">
-					<div class="fmcircle_out">
-						<a href="#software">
-							<div class="fmcircle_border">
-								<div class="fmcircle_in">
-									<span>Settings</span><img src="assets/Settings-icon.png" alt="" />
-								</div>
-							</div>
-						</a>
-					</div>
-				</div>
-				<% end %>
-
-			</div>
-		</div>
-	</div>
+        </div>
+      </div>
+    </div><!-- /example -->
+ </div>
 </div>
+</div>
+ <script type='text/javascript'>
+
+    $(document).ready(function() {
+        $('.carousel').carousel({
+  interval: 2000
+  })
+
+  });
+
+ </script>
+
+
+     <script type="text/javascript">
+$('#myTab a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+</script>

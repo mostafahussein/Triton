@@ -1,20 +1,45 @@
-<%= render 'shared/navbar' %>
-<h4>Open a New Ticket</h4>
-<h5>Please fill in the form below to open a new ticket.</h5>
-<div class="row">
-
-  <div class="offset4 span4">
-
-	<%= bootstrap_form_for @ticket do |f| %>
-	<%= f.hidden_field :user_id, value: current_user.id %>
-	<%= f.hidden_field :first_name ,value: current_user.first_name %>
-	<%= f.hidden_field :last_name ,value: current_user.last_name %>
-	<%= f.hidden_field :email , value: current_user.email %>
-	<%= f.collection_select :employee_department_id, EmployeeDepartment.all, :id , :name, label: 'To Which Department ?' %>
-	<%= f.text_field :title %>
+<%= render 'tickets/ticket_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Occupations-Technical-Support-Representative-Male-Light-icon.png" alt="image" />
+    <h3>Academic Support</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <div class="portlet box blue">
+    <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>Open a New Ticket</div></div>
+      <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="/tickets" class="form-horizontal" method="POST">
+			<h5>Please fill in the form below to open a new ticket.</h5>
+			<%= simple_form_for(@ticket) do |f| %>
+			<%= f.error_messages %>
+			<%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+			<%= f.input :first_name ,as: :hidden, input_html: {value: current_user.first_name} %>
+			<%= f.input :last_name ,as: :hidden, input_html: {value: current_user.last_name} %>
+			<%= f.input :email ,as: :hidden ,input_html: {value: current_user.email} %>
+			<%= f.input :batch_id , as: :hidden, input_html: {value: current_user.student.batch.id } if current_user.user_type == "student"%>
+			<%= f.input :student_class_id , as: :hidden, input_html: { value: current_user.student.student_class.id }  if current_user.user_type == "student" %>
+			<%= f.input :employee_department_id , as: :hidden, input_html: { value: 6 } %>
+			<%= f.association :course, as: :select if current_user.user_type == "student" %>
+	<!--<%= f.input :complained_category, prompt: '--select category--', collection: ['Teaching Staff','Non-Teaching Staff'], label: 'Which Category of Employees ?' %>
+	<%= f.input :complained_position, prompt: '--select position--', collection: ['Professor','Teaching Assistant'], label: 'What is his/her position ?' %>-->
+	<%= f.input :title %>
 	<h6>Please provide as much detail as possible so we can best assist you. * </h6>
-	<%= f.text_area :description, :rows => "10"  %>
-	<button class="btn btn-success" type="submit">Create ticket</button>
-	<% end %>
- </div>
-</div>
+	<h6>We have the right to reject complaints that use abusive or foul language.</h6>
+	<%= f.input :description, input_html: {class: "input-xxlarge", rows: "10"}  %>
+          <div class="form-actions">
+            <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>
+            <button type="button" class="btn">Cancel</button>
+          </div>
+        </form>
+        <% end %>
+        <!-- END FORM--> 
+      </div>
+    </div>

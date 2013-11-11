@@ -25,10 +25,14 @@ gem 'chartkick'
 gem 'coffee-rails', '3.2.2'
 gem 'bootstrap_form'
 
+
 group :development, :test do
   gem 'sqlite3', '1.3.5'
   gem 'rspec-rails', '2.9.0'
   gem 'guard-rspec', '0.5.5'
+  gem 'better_errors'
+  gem 'meta_request'
+  gem 'binding_of_caller'
 end
 
 # Gems used only for assets and not required
@@ -38,6 +42,8 @@ group :assets do
   gem 'uglifier', '1.2.3'
   gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+  gem 'bootstrap-timepicker-rails'
+
   
   gem 'bootstrap_flash_messages'
   gem 'dynamic_form'

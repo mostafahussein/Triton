@@ -4,6 +4,9 @@ Triton::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "users" }
   resources :users, only: [:index, :new, :create, :show, :destroy, :edit, :update] do |user|
+    collection do
+      get 'checkname'
+    end
     resources :messages do
       collection do
         post 'delete_multiple'
@@ -24,22 +27,53 @@ Triton::Application.routes.draw do
     resources :employee_admission_steps
   end
 
-  resources :articles do
-    resources :comments
+  resources :batches do
+    resources :student_classes
   end
+
+  
   resources :students do
     resources :previous_details
     resources :guardians
   end
+resources :guidance_supervisors
+  resources :guidance_advisors
+
+resources :counselor_supervisors
+resources :counselor_advisors
+resources :counselor_batches do
+  resources :student_classes
+end
+resources :batch_counselor_supervisors
+resources :batch_counselor_advisors
+
+resources :leadership_supervisors
+resources :leadership_leaders
+resources :leadership_batches
+resources :batch_leadership_supervisors
+resources :batch_leadership_advisors
+
+resources :events
+
+
   get '/dashboard', to: 'static_pages#home'
+  #get '/home', to: 'static_pages#homepage'
   get '/support', to: 'static_pages#support_center'
-  get '/thank_you', to: 'static_pages#thanks'
-  get '/student/admission1' , to: 'students#new'
+  #get '/student/admission1' , to: 'students#new'
   get '/student/admission2' , to: 'guardians#new'
   get '/employee/human_resources' , to: 'static_pages#hr_board'
+  get '/guidance_management' , to: 'static_pages#guidance'
   get '/employee/employee_management', to: 'static_pages#employee_management'
-  get '/employee/admission1', to: 'employees#new'
+  #get '/employee/admission1', to: 'employees#new'
   get '/my_profile' , to:'static_pages#profile_page'
+  get '/student_union', to: 'static_pages#student_union_board'
+  get '/student_union/activities', to: 'static_pages#student_union_activities'
+  #get '/academic_counselor', to: 'guidance_supervisors#academic_counselor'
+  get '/student_complaint', to: 'static_pages#student_complaint'
+  get '/settings' , to: 'static_pages#settings'
+  get '/academic_counselor', to: 'batch_counselor_supervisors#academic_counselor'
+  get '/student_leadership', to: 'batch_leadership_supervisors#student_leadership'
+  
   devise_scope :user do
     root to: 'devise/sessions#new'
   end

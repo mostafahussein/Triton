@@ -1,0 +1,45 @@
+			<!--Body content-->
+			<div class="hr">
+				<img src="/assets/engineer-icon.png" alt="image" />
+				<h3>Academic Counselor</h3>
+			</div>
+			<div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+			<ul class="nav pull-right">
+			<%= form_tag guidance_supervisors_path, method: :get do %>
+			<div style="float:left; padding-right:10px;">
+				<%= text_field_tag :search , params[:search] %>
+				</div>
+				<%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+				 <div style="clear:left;">
+				<%= link_to 'Advanced Search', '#' %>
+				</div>
+			<% end %>
+			</ul>
+			<table class="table table-bordered table-hover">
+				<thead bgcolor="#B7B7B7"><th>Guidance Supervisor</th><th>Guidance Advisor</th><th>Batch</th><th>Student Class</th></thead>
+				<tbody>
+					<% @supervisors.each do |c| %>
+					<% first_row = true %>
+					<% c.guidance_advisors.each do |b| %>
+					<tr>
+						<% if first_row == true %>
+						<td> <%= c.employee.full_name if c.employee %> </td>
+						<% first_row = false %>
+						<% else %>
+						<td></td>
+						<% end %>
+						<td> <%= b.employee.full_name %> </td>
+						<td> <%= b.batch.batch_language %> </td>
+						<td> <%= b.student_class.name %> </td>
+					</tr>
+					<% end %>
+					<tr bgcolor="#B7B7B7"><td></td><td></td><td></td><td></td></tr>
+					
+					<% end %>
+				</tbody>
+			</table>

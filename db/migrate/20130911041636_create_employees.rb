@@ -44,7 +44,9 @@ class CreateEmployees < ActiveRecord::Migration
 	    t.integer  :employee_category_id
 	    t.integer  :employee_position_id
 	    t.integer :reporting_manager_id
-	    t.integer  :employee_grade_id
+	    t.integer :office_country_id
+	    t.integer :home_country_id
+	    t.string :employee_category
 
       t.timestamps
     end

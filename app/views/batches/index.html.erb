@@ -1,0 +1,44 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/Preppy-icon.png" alt="image" />
+        <h2>All Batches </h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+
+
+
+
+
+      <div style="width:1100px">
+	<table class="table table-bordered table-hover">
+		<thead bgcolor="#B7B7B7">
+		<th>Name</th>
+		<th>Language</th>
+		<th>School Year</th>
+		<th>Major</th>
+		<th>Acadmic leader </th>
+		</thead>
+			<tbody>
+			<% @batches.each do |c| %>
+			<tr>	
+				<td> <%= c.name %> </td>
+				<td> <%= c.language %></td>
+				<td> <%= c.school_year  %></td>
+				<td> <%= c.major %></td>
+				<td><%= link_to "Add", new_batch_batch_leader_path(c.id) ,  class: 'btn mini purple'%></td>
+			</tr>
+			<% end %>
+			<tr bgcolor="#B7B7B7"><td></td><td></td><td></td><td></td><td></td></tr>
+		</tbody>
+	</table>
+</div>

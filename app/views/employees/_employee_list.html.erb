@@ -1,0 +1,24 @@
+<h4>Employees List</h4>
+  <div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th bgcolor="#B7B7B7">Employee id</th>
+      <th bgcolor="#B7B7B7">Full Name</th>
+      <th bgcolor="#B7B7B7">Department</th>
+      <th bgcolor="#B7B7B7">Category</th>
+      <th bgcolor="#B7B7B7">Position</th>
+      <th bgcolor="#B7B7B7">Modify privileges</th>
+
+    </tr>
+    <% @employees.each do |employee| %>
+    <tr>
+      <td><%= employee.employee_number %></td>
+      <td><%= employee.full_name %></td>
+      <td><%= employee.employee_department.name %></td>
+      <td><%= employee.employee_category %></td>
+      <td><%= employee.employee_position.employee_position %></td>
+      <td><%= link_to 'Edit Privileges', user_path(employee.user_id) %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>

@@ -1,5 +1,5 @@
 class GuardiansController < ApplicationController
-  load_and_authorize_resource
+  load_resource
   before_filter :set_student, only: [:new, :create]
   def index
     @guardian = Guardian.all

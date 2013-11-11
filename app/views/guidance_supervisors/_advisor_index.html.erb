@@ -1,0 +1,39 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+	<div class="row-fluid">
+
+		<div class="offset1 span11">
+			<!--Body content-->
+			<div class="hr">
+				<img src="/assets/engineer-icon.png" alt="image" />
+				<h2>Academic Counselor</h2>
+			</div>
+			<div id="app-back-button" class="span10">
+				<a onclick="history.back(); return false;" href="#" id= "bk">
+					<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+				</a>
+			</div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; ">
+
+			<div style="width:1100px">
+			<table class="table table-bordered table-hover">
+				<table class="table table-bordered table-hover">
+				<thead bgcolor="#B7B7B7"><th>Batch</th><th>Student Class</th></thead>
+				<tbody>
+					<% @supervisors.each do |c| %>
+					<% first_row = true %>
+					<% c.guidance_advisors.each do |b| %>
+					<tr>
+						<td> <%= b.batch.batch_language %> </td>
+						<td> <%= link_to b.student_class.name, b.student_class %> </td>
+					</tr>
+					<% end %>
+					<tr bgcolor="#B7B7B7"><td></td><td></td></tr>
+					
+					<% end %>
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>

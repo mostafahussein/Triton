@@ -4,6 +4,10 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def homepage
+    
+  end
+
   def support_center
  
   end
@@ -17,5 +21,24 @@ class StaticPagesController < ApplicationController
   end
 
   def employee_management
+  end
+
+  def guidance
+  end
+
+  def student_union_board
+    
+  end
+
+  def student_union_activities
+    
+  end
+
+  def student_complaint
+    
+  end
+
+  def settings
+    
   end
 end

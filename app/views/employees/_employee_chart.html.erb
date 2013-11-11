@@ -1,0 +1,151 @@
+<div>
+<h5>This report summary will show statics about employees in Modern Academy</h5>
+<h5>A- Amount of Teaching / Non-teaching Staff:</h5>
+ <div id="chart1" style="width: 100%; height: 400px;"></div>
+        <script type="text/javascript">
+            var chart;
+
+            var chartData = [
+                {
+                    "employee_category": "Teaching Staff",
+                    "employee_number": '<%= @teaching_staff_counter %>',
+                    "color": "#8A0CCF"
+                },
+                {
+                    "employee_category": "Non-teaching Staff",
+                    "employee_number": '<%= @nonteaching_staff_counter %>',
+                    "color": "#CD0D74"
+                }
+            ];
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData;
+                chart.categoryField = "employee_category";
+                chart.startDuration = 1;
+                // the following two lines makes chart 3D
+                chart.depth3D = 20;
+                chart.angle = 30;
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.labelRotation = 90;
+                categoryAxis.dashLength = 5;
+                categoryAxis.gridPosition = "start";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "Number of Employees";
+                valueAxis.dashLength = 5;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH            
+                var graph = new AmCharts.AmGraph();
+                graph.valueField = "employee_number";
+                graph.colorField = "color";
+                graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+                graph.type = "column";
+                graph.lineAlpha = 0;
+                graph.fillAlphas = 1;
+                chart.addGraph(graph);
+                
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorAlpha = 0;
+                chartCursor.zoomable = false;
+                chartCursor.categoryBalloonEnabled = false;
+                chart.addChartCursor(chartCursor);                
+
+                // WRITE
+                chart.write("chart1");
+            });
+        </script>
+        <hr>
+        <h5>B- Amount of Staff for each department:</h5>
+        <div id="chart2" style="width: 100%; height: 400px;"></div>
+        <script type="text/javascript">
+            var chart;
+
+            var chartData2 = [
+                {
+                    "employee_department": "Management Information System",
+                    "employee_number": '<%= @mis_counter %>',
+                    "color": "#FF9E01"
+                },
+                {
+                    "employee_department": "Business Administration",
+                    "employee_number": '<%= @business_counter %>',
+                    "color": "#FCD202"
+                },
+                {
+                    "employee_department": "Accounting",
+                    "employee_number": '<%= @accounting_counter  %>',
+                    "color": "#F8FF01"
+                },
+                {
+                    "employee_department": "Economics",
+                    "employee_number": '<%= @economics_counter %>',
+                    "color": "#B0DE09"
+                },
+                {
+                    "employee_department": "Basic Science",
+                    "employee_number": '<%= @basic_science_counter %>',
+                    "color": "#04D215"
+                },
+                {
+                    "employee_department": "Academic Support",
+                    "employee_number": '<%= @academic_support_counter %>',
+                    "color": "#0D8ECF"
+                }
+            ];
+
+
+            AmCharts.ready(function () {
+                // SERIAL CHART
+                chart = new AmCharts.AmSerialChart();
+                chart.dataProvider = chartData2;
+                chart.categoryField = "employee_department";
+                chart.startDuration = 1;
+                // the following two lines makes chart 3D
+                chart.depth3D = 20;
+                chart.angle = 30;
+
+                // AXES
+                // category
+                var categoryAxis = chart.categoryAxis;
+                categoryAxis.labelRotation = 45;
+                categoryAxis.dashLength = 5;
+                categoryAxis.gridPosition = "start";
+
+                // value
+                var valueAxis = new AmCharts.ValueAxis();
+                valueAxis.title = "Number of Employees";
+                valueAxis.dashLength = 5;
+                chart.addValueAxis(valueAxis);
+
+                // GRAPH            
+                var graph = new AmCharts.AmGraph();
+                graph.valueField = "employee_number";
+                graph.colorField = "color";
+                graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+                graph.type = "column";
+                graph.lineAlpha = 0;
+                graph.fillAlphas = 1;
+                chart.addGraph(graph);
+                
+                // CURSOR
+                var chartCursor = new AmCharts.ChartCursor();
+                chartCursor.cursorAlpha = 0;
+                chartCursor.zoomable = false;
+                chartCursor.categoryBalloonEnabled = false;
+                chart.addChartCursor(chartCursor);                
+
+                // WRITE
+                chart.write("chart2");
+            });
+        </script>
+
+</div>

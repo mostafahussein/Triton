@@ -1,0 +1,32 @@
+<%= render 'batch_counselor_supervisors/counselor_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Blue-Book-icon.png" alt="image" />
+    <h3 class="page-title">Students List</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width:  975px;"></hr>
+  <div>
+  <div>
+  <table class="table table-bordered table-hover">
+        <thead bgcolor="#B7B7B7"><th>ID</th><th>Student Name</th></thead>
+        <tbody>
+          <% @sections.each do |s| %>
+          <% s.students.each do |ss| %>
+          
+          <tr>
+            <td><%= ss.id %></td>
+            <td><%= link_to ss.full_name, ss %></td>
+          </tr>
+          <% end %>
+          <% end %>
+          <tfoot bgcolor="#B7B7B7"><td></td><td></td></tfoot>
+        </tbody>
+      </table>
+  </div>
+</div>

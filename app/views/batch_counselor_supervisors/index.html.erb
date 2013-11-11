@@ -1,0 +1,20 @@
+ <%= render 'batch_counselor_supervisors/counselor_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/engineer-icon.png" alt="image" />
+    <h3>Academic Counselor</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <% if params[:counselor] == "staff" %>
+    <%= render 'batch_counselor_supervisors/counselor_staff' %>
+  <% elsif params[:counselor] == "section" %>
+    <%= render 'batch_counselor_supervisors/counselor_batches' %>
+    <% elsif params[:counselor] == "student" %>
+    <%= render 'batch_counselor_supervisors/counselor_students' %>
+  <% end %>

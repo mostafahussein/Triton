@@ -1,0 +1,2 @@
+module BatchLeadershipSupervisorsHelper
+end

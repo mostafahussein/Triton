@@ -1,43 +1,33 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
-      <!--Body content-->
-      <div class="hr">
-        <img src="/assets/Users-icon.png" alt="image" />
-        <h2>Listing users</h2>
-      </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-
-      <div style="width:1100px">
-      <%= grid(@users_grid, show_filters: :when_filtered) do |g|
-    g.column name:  'ID', attribute: 'id', filter: false
-    g.column name:  'Username', attribute: 'user_name'
-    g.column name:  'First Name', attribute: 'first_name'
-    g.column name:  'Last Name', attribute: 'last_name'
-    g.column name:  'E-mail', attribute: 'email'
-    g.column name:  'Role', attribute: 'user_type'
-    g.column name: 'Profile', html: {style: 'text-align: center'}  do |user|
-      link_to('View', user_path(user), :class => "btn btn-info")
-    end
-    g.column name: 'Details Modifying', html: {style: 'text-align: center'} do |user|
-      link_to('Edit', edit_user_path(user), :class => "btn btn-warning")
-    end
-    g.column  html: {style: 'text-align: center'} do |user|
-      unless current_user == user
-       link_to('Delete', user, method: :delete, data: { confirm: 'You sure?' }, :class => "btn btn-danger")
-     end
-    end
-  end -%>
-  <button class="btn btn-success" type="submit" onclick="location.href='/users/new';">Add new user</button>
-  <%= render 'users_overview' %>
+<%= render 'users/user_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Users-icon.png" alt="image" />
+    <h3>User Management</h3>
   </div>
-          </div>
-        </div>
-      </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <h4>Users List</h4>
+  <div>
+  <table class="table table-bordered table-hover">
+    <tr>
+      <th bgcolor="#B7B7B7">User id</th>
+      <th bgcolor="#B7B7B7">Full Name</th>
+      <th bgcolor="#B7B7B7">Role</th>
+      <th bgcolor="#B7B7B7">Profile</th>
+
+    </tr>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.id %></td>
+      <td><%= user.full_name %></td>
+      <td><%= user.user_type %></td>
+      <td><%= link_to 'View Profile', user_path(user) %></td>
+    </tr>
+    <% end %>
+  </table>
+  </div>

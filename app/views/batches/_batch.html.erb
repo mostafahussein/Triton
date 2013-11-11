@@ -1,0 +1,117 @@
+<script>
+	function showHide()
+	{
+		var batch_name=document.getElementById("batch_name");
+		var batch_school_year=document.getElementById("batch_school_year");
+		if((batch_school_year.options[batch_school_year.selectedIndex].text === "Third Year" || batch_school_year.options[batch_school_year.selectedIndex].text === "Fourth Year") && 
+			(batch_name.options[batch_name.selectedIndex].text === "Business Administration" ) )
+		{
+			document.getElementById("hidden_label").style.display = "";
+			document.getElementById("hidden_selection").style.display = "";
+		}
+		else
+		{
+			document.getElementById("hidden_label").style.display = "none";
+			document.getElementById("hidden_selection").style.display = "none";
+		}
+	}
+</script>
+<!-- Wizard -->
+<div id="rootwizard">
+	<div>
+		<div>
+			<div class="container">
+				<ul>
+					<li><a href="#tab1" data-toggle="tab">Batch</a></li>
+					<li><a href="#tab2" data-toggle="tab">Section</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!--content wizerd-->
+	<div style="width: 1100px;">
+		<div id="bar" class="progress progress-striped active"><div class="bar" style="width: 1100px;"></div>
+
+	</div>
+
+
+	<div class="tab-content" >
+		<div class="tab-pane" id="tab1">
+
+			<!-- Form -->
+
+			<%= simple_form_for(@batch) do |f| %>
+
+			<%= f.input :name, collection: ['Business Administration', 'Management Information System'] , input_html: {onchange: 'showHide()'} ,label: 'Name:'%>
+
+			<%= f.input :language , as: :select,collection: ['Arabic' , 'English'] ,label: 'Language:' ,input_html: {class: 'selectpicker'} %>
+
+			<%= f.input :school_year , collection: ['First Year' , 'Second Year' , 'Third Year' , 'Fourth Year'] , label: 'Academic Year:', input_html: {onchange: 'showHide()'} %>
+
+			<%= f.input :major , collection: ['Accounting', 'Bussiness Administration', 'Economics'] , input_html: { id: 'hidden_selection' ,  style: 'display:none'} ,label_html: {style:'display:none' , id: 'hidden_label'}   %>
+		</div>
+
+
+		<div class="tab-pane" id="tab2">
+
+			<label id="sherif" ><h4>Select Sections:</h4></label>
+
+		
+			<div id="main-checkbox">
+
+				<div id="checkbox1"> <% index = 0 %> 
+
+					<% (1..3).each do |e| %> <%= f.simple_fields_for :student_classes do |a| %> 
+					<% index = index + 1 %>
+					<%= a.input :name , as: :check_boxes , collection: ["Section #{index}"], label: false %>
+					<% end %>
+					<% end %>
+				</div>
+
+				<div id="checkbox2"> <% index = 3 %> 
+
+					<% (1..3).each do |g| %> <%= f.simple_fields_for :student_classes do |b| %> 
+					<% index = index + 1 %>
+					<%= b.input :name , as: :check_boxes , collection: ["Section #{index}"], label: false %>
+					<% end %>
+					<% end %>	
+				</div>
+
+				<div id="checkbox3"> <% index = 6 %> 
+
+					<% (1..3).each do |w| %> <%= f.simple_fields_for :student_classes do |c| %> 
+					<% index = index + 1 %>
+					<%= c.input :name , as: :check_boxes , collection: ["Section #{index}"], label: false %>
+					<% end %>
+					<% end %>
+				</div>
+
+
+				<div id="checkbox4" > <% index = 9 %> 
+
+					<% (1..3).each do |q| %> <%= f.simple_fields_for :student_classes do |d| %> 
+					<% index = index + 1 %>
+					<%= d.input :name , as: :check_boxes , collection: ["Section #{index}"], label: false %>
+					<% end %>
+					<% end %>
+				</div>
+			</div> 
+			<div class="span3 offset2"> 
+				<%= f.submit 'Save', class: 'btn btn btn-success'  %>
+			</div>
+			<% end %>
+		</div>
+	</div>
+
+
+	<ul class="pager wizard">
+		<li class="previous first" style="display:none;"><a href="#">First</a></li>
+		<li class="previous"><a href="#"  style="display:none;">Previous</a></li>
+		<li class="next last" style="display:none;"><a href="#">Last</a></li>
+		<li class="next"><a href="#">Submit</a></li>
+	</ul>
+</div>  
+</div>
+

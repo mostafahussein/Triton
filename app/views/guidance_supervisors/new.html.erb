@@ -1,0 +1,162 @@
+<%= render 'guidance_supervisors/councelor_sidebar' %>
+<div class="span9">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/engineer-icon.png" alt="image" />
+        <h3 class="page-title">Academic Counselor</h3>
+      </div>
+      <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+      <!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Advisor - <span class="step-title">Step 1 of 4</span>
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form action="#" class="form-horizontal" id="submit_form">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> Choose Batch</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Add Supervisor</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab3" data-toggle="tab" class="step active">
+                    <span class="number">3</span>
+                    <span class="desc"><i class="icon-ok"></i> Add Advisors</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab4" data-toggle="tab" class="step">
+                    <span class="number">4</span>
+                    <span class="desc"><i class="icon-ok"></i> Confirm</span>   
+                  </a> 
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+             <%= simple_form_for(@supervisor) do |f| %>
+            <div class="tab-pane active" id="tab1">
+             
+               <h4 class="block">Student's personal details</h4>
+            
+
+           </div>
+           <div class="tab-pane" id="tab2">
+         
+            
+            <h4 class="block">Parent's personal details</h4>
+            
+
+          </div>
+          <div class="tab-pane" id="tab3">
+           
+            <h4 class="block">Student's previous educational details</h4>
+
+          
+          </div>
+          <div class="tab-pane" id="tab4">
+
+          </div>
+        </div>
+        <div class="form-actions clearfix">
+          <a href="javascript:;" class="btn button-previous">
+            <i class="m-icon-swapleft"></i> Back 
+          </a>
+          <a href="javascript:;" class="btn blue button-next">
+            Continue <i class="m-icon-swapright m-icon-white"></i>
+          </a>
+          <a href="javascript:;" class="btn green button-submit">
+            Submit <i class="m-icon-swapright m-icon-white"></i>
+          </a>
+        </div>
+       <% end %>
+      </div>
+    </form>
+  </div>
+</div>
+<!--End Wizard-->
+
+<script>
+  jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+</script>
+
+
+      <h4>Assign Employees to Advisor</h4>
+      <%= simple_form_for(@supervisor) do |f| %>
+      <%= f.error_messages %>
+      <h4>Step 1 - Select Guidance Supervisor</h4>
+      <%= f.association :employee_department, as: :select, include_blank: false %>
+      <%= f.input :employee_id , collection: @departments, as: :grouped_select, group_method: :employees, include_blank: false %>
+      <table border="0" width="975">
+        <tr>
+          <td>
+            <% index = -1 %>
+      <% (1..2).each do |i| %>
+      <%= f.simple_fields_for :guidance_advisors do |p| %>
+      <hr>
+      <% index = index + 2 %>
+       <h4>Assign Advisor <%= "#{index}" %> </h4>
+       <%= p.association :employee_department, as: :select, include_blank: false  %>
+       <%= p.association :employee, :collection => @advisors_list, :label_method => :full_name, :value_method => :id, include_blank: false  %>
+       <%= p.association :batch , as: :select, :label_method => :batch_language,include_blank: false  %>
+       <%= p.association :student_class , as: :select , :label_method => :student_section,include_blank: false %>
+       <% end %>
+       <% end %>
+          </td>
+
+          <td>
+          <% index = 0 %>
+            <% (1..2).each do |n| %>
+      <%= f.simple_fields_for :guidance_advisors do |c| %>
+      <hr>
+      <% index = index + 2 %>
+       <h4>Assign Advisor <%= "#{index}" %> </h4>
+       <%= c.association :employee_department, as: :select, include_blank: false  %>
+       <%= c.association :employee, :collection => @advisors_list, :label_method => :full_name, :value_method => :id, include_blank: false  %>
+       <%= c.association :batch , as: :select, :label_method => :batch_language, include_blank: false  %>
+       <%= c.association :student_class , as: :select, :label_method => :student_section,include_blank: false  %>
+       <% end %>
+       <% end %>
+          </td>
+        </tr>
+           
+            </table> 
+
+     <%= f.submit 'Save & Proceed', class: 'btn btn btn-success' %>
+     <% end %>
+   </div>
+ </div>
+</div>

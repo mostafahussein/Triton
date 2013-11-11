@@ -1,0 +1,22 @@
+<div class="span3">
+    <ul class="nav nav-tabs nav-stacked main-menu" data-spy="affix" style="width:300px">
+    <% if current_user.has_role? :administrator %>
+  <li class="nav-header">Academic Support Dashboard</li>
+  <li><a href="/tickets?ticket=activity">Ticket Activity</a></li>
+  <li><a href="/tickets?ticket=staff">Staff Directory</a></li>
+  <% end %>
+  <% if current_user.has_role? :complainer %>
+  <li class="nav-header">Student Area</li>
+  <li><a href="/tickets/new">New Ticket</a></li>
+  <li><a href="/tickets?ticket=tickets">My Tickets</a></li>
+  <% end %>
+  <% if (current_user.has_role? :administrator) || (current_user.has_role? :academic_support) || (current_user.has_role? :complaint_manager) || ( current_user.has_role? :complaint_staff) %>
+  <li class="nav-header">Tickets</li>
+  <li><a href="/tickets?ticket=tickets">All Tickets</a></li>
+  <li><a href="#">My Tickets</a></li>
+  <li><a href="/tickets?ticket=new">New Ticket</a></li>
+  <li class="nav-header">Knowledge Base</li>
+  <li><a href="#">FAQ</a></li>
+  <% end %>
+</ul>
+  </div>

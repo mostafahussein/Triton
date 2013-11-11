@@ -1,0 +1,90 @@
+<%= render 'batch_leadership_supervisors/leadership_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Caucasian-Boss-icon.png" alt="image" />
+    <h3 class="page-title">Create Leader</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width:  975px;"></hr>
+  <!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Leader - <span class="step-title">Step 1 of 2</span>
+      </div>
+    </div>
+    <div class="portlet-body form">
+      <form action="/leadership_leaders" class="form-horizontal" id="submit_form" method="POST">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> Create Leader</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Confirm</span>   
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+            <div class="tab-pane active" id="tab1">
+              <%= simple_form_for(@leader) do |f| %>
+              <%= f.error_messages %>
+              <%= f.association :employee_department, as: :select %>
+              <%= f.input :employee_position_id , collection: @departments, as: :grouped_select, group_method: :employee_positions %>
+              <%= f.input :employee_id , collection: @positions, as: :grouped_select, group_method: :employees %>
+             
+            </div>
+            <div class="tab-pane" id="tab2">
+             
+            </div>
+          </div>
+          <div class="form-actions clearfix">
+            <a href="javascript:;" class="btn button-previous">
+              <i class="m-icon-swapleft"></i> Back 
+            </a>
+            <a href="javascript:;" class="btn blue button-next">
+              Continue <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+            <a href="javascript:;" class="btn green button-submit">
+              Submit <i class="m-icon-swapright m-icon-white"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% end %>
+  </div>
+  <!--End Wizard-->
+
+  <script>
+    jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+  </script>

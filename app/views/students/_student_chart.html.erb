@@ -1,0 +1,151 @@
+<div>
+<h4>Total of students</h4>
+<h5>This report summary will show the number of students for each batch by department in Modern Academy</h5>
+<h5>A- Business Administration Department:</h5>
+<div id="business_batch" style=" height: 250px;"></div>
+<script type="text/javascript">
+var chart;
+
+var chartData = [
+    {
+        "school_year": "First Year",
+        "total_students": '<%= @batch_counter1 %>',
+        "color": "#FF0F00"
+    },
+    {
+        "school_year": "Second Year",
+        "total_students": '30',
+        "color": "#097C1F"
+    },
+    {
+        "school_year": "Third Year",
+        "total_students": '60',
+        "color": "#FF6600"
+    },
+    {
+        "school_year": "Forth Year",
+        "total_students": '20',
+        "color": "#0D52D1"
+    }
+];
+
+
+AmCharts.ready(function () {
+    // SERIAL CHART
+    chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = chartData;
+    chart.categoryField = "school_year";
+     chart.startDuration = 1;
+    // the following two lines makes chart 3D
+    chart.depth3D = 20;
+    chart.angle = 30;
+    
+    // AXES
+    // category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.labelRotation = 45;
+    categoryAxis.dashLength = 5;
+    categoryAxis.gridPosition = "start";
+    
+    // value
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.title = "Number of Students";
+    valueAxis.dashLength = 5;
+    chart.addValueAxis(valueAxis);
+    
+    // GRAPH            
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "total_students";
+    graph.colorField = "color";
+    graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 1;
+    chart.addGraph(graph);
+    
+    // CURSOR
+    var chartCursor = new AmCharts.ChartCursor();
+    chartCursor.cursorAlpha = 0;
+    chartCursor.zoomable = false;
+    chartCursor.categoryBalloonEnabled = false;
+    chart.addChartCursor(chartCursor);                
+    
+    // WRITE
+    chart.write("business_batch");
+});
+</script>
+<hr>
+<h5>B- Management Information System Department:</h5>
+<div id="mis_batch" style=" height: 250px;"></div>
+<script type="text/javascript">
+var chart;
+
+var chartData1 = [
+    {
+        "school_year": "First Year",
+        "total_students": '50',
+        "color": "#FF0F00"
+    },
+    {
+        "school_year": "Second Year",
+        "total_students": '60',
+        "color": "#097C1F"
+    },
+    {
+        "school_year": "Third Year",
+        "total_students": '70',
+        "color": "#FF6600"
+    },
+    {
+        "school_year": "Forth Year",
+        "total_students": '80',
+        "color": "#0D52D1"
+    }
+];
+
+
+AmCharts.ready(function () {
+    // SERIAL CHART
+    chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = chartData1;
+    chart.categoryField = "school_year";
+     chart.startDuration = 1;
+    // the following two lines makes chart 3D
+    chart.depth3D = 20;
+    chart.angle = 30;
+    
+    // AXES
+    // category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.labelRotation = 45;
+    categoryAxis.dashLength = 5;
+    categoryAxis.gridPosition = "start";
+    
+    // value
+    var valueAxis = new AmCharts.ValueAxis();
+    valueAxis.title = "Number of Students";
+    valueAxis.dashLength = 5;
+    chart.addValueAxis(valueAxis);
+    
+    // GRAPH            
+    var graph = new AmCharts.AmGraph();
+    graph.valueField = "total_students";
+    graph.colorField = "color";
+    graph.balloonText = "<span style='font-size:14px'>[[category]]: <b>[[value]]</b></span>";
+    graph.type = "column";
+    graph.lineAlpha = 0;
+    graph.fillAlphas = 1;
+    chart.addGraph(graph);
+    
+    // CURSOR
+    var chartCursor = new AmCharts.ChartCursor();
+    chartCursor.cursorAlpha = 0;
+    chartCursor.zoomable = false;
+    chartCursor.categoryBalloonEnabled = false;
+    chart.addChartCursor(chartCursor);                
+    
+    // WRITE
+    chart.write("mis_batch");
+});
+</script>
+</div>

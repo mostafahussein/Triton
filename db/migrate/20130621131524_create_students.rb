@@ -20,6 +20,14 @@ class CreateStudents < ActiveRecord::Migration
       t.string :phone1
       t.string :phone2
       t.string :email
+      t.integer :country_id
+      t.integer :user_id
+      t.integer :nationality_id
+      t.text :passport_number
+      t.boolean :has_paid_fees
+      t.date :enrollment_date 
+      t.integer :batch_id
+      t.integer :student_class_id 
 
       t.timestamps
     end

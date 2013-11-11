@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  before_save :default_roles, on: :create
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :validatable,:confirmable and :omniauthable
   devise  :database_authenticatable, :registerable, :recoverable, :rememberable,
@@ -60,6 +62,18 @@ class User < ActiveRecord::Base
   #end
 
 
+  def default_roles
+    if self.user_type == "admin"
+      self.role_ids = 1
+    elsif self.user_type == "student"
+      self.role_ids = 10
+    end
+  end
+
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
 
   def has_role?(role_sym)
     roles.any? { |r| r.role_name.underscore.to_sym == role_sym }

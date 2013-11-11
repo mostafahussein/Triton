@@ -15,6 +15,10 @@ class CreateGuardians < ActiveRecord::Migration
       t.string :occupation
       t.string :income
       t.string :education
+      t.integer :country_id
+      t.integer :user_id
+      t.integer :student_id
+
 
       t.timestamps
     end

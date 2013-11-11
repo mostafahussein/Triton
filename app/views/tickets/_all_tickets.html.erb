@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+    <thead bgcolor="#B7B7B7"><th>Ticket No.</th><th>Date</th><th>Subject</th><th>From</th><th>Priority</th><th>Assigned To</th></thead>
+    <tbody>
+     <% @tickets.each do |ticket| %>
+     <tr>
+      <td><%= ticket.id %></td>
+      <td><%= ticket.created_at.localtime %></td>
+      <td><%= link_to ticket.title, ticket %></td>
+      <td><%= ticket.user.full_name %></td>
+      <% if ticket.state %>
+      <td id="state_<%= ticket.state.name.parameterize if ticket.state %>"><%= ticket.state.name %></td>
+      <% else %>
+      <td>undefined</td>
+      <% end %>
+      <% if ticket.employee %>
+      <td><%= ticket.employee.full_name %></td>
+      <% else %>
+      <td>no employee has assigned</td>
+      <% end %>
+    </tr>
+    <% end %>
+    <tr bgcolor="#B7B7B7"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>

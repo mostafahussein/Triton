@@ -1,0 +1,2 @@
+module CounselorBatchesHelper
+end

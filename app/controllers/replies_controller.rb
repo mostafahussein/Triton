@@ -1,5 +1,5 @@
 class RepliesController < ApplicationController
-	load_and_authorize_resource
+	load_resource
 		before_filter :load_ticket
 
 	def create

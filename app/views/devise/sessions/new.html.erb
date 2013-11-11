@@ -1,14 +1,9 @@
-<%= render 'shared/root_nav_bar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
       <!--Body content-->
       <!-- page content goes here -->
 
       <div class="modal" id="loginModal">
         <div class="modal-header">
-          <h3>Welcome aboard!</h3>
+          <h3>Welcome to Modern Academy - Sign in</h3>
         </div>
         <div class="modal-body">
           <!-- Login form here -->
@@ -18,11 +13,12 @@
             <%= f.input :email, :required => false, :autofocus => true %>
             <%= f.input :password, :required => false %>
             <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-            <div class="offset1">
-              <center><%= f.button :submit, "Sign in", :class => 'btn btn-success' %>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <%= render "links" %></center>
+            <div  style="float: left; position:absolute; left:160px;">
+              <%= f.button :submit, "Sign in", :class => 'btn btn-success' %>
             </div>
+            <div style="padding-left: 250px;">
+                  <%= render "links" %>
+                  </div>
             <% end %>
           </div>
         </div>

@@ -1,0 +1,42 @@
+<div>
+  <div style="float:left;">
+  <h4>Staff Members</h4>
+  </div>
+  <ul class="nav pull-right">
+    <%= form_tag '/academic_counselor', method: :get do %>
+    <div style="float:left; padding-right:10px;">
+      <%= text_field_tag :search , params[:search] %>
+      </div>
+      <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+      <div style="clear:left;">
+      <%= link_to 'Advanced Search', '#' %>
+      </div>
+    <% end %>
+  </ul>
+  <div>
+  <table class="table table-bordered table-hover">
+        <thead bgcolor="#B7B7B7"><th>Counselor Supervisor</th><th>Counselor Advisor</th><th>Batch</th><th>Student Class</th></thead>
+        <tbody>
+          <% @batch_counselor_supervisors.each do |s| %>
+          <% first_row = true %>
+          <% s.batch_counselor_advisors.each do |a| %>
+          <tr>
+            <% if first_row == true %>
+            <td> <%= s.counselor_supervisor.employee.full_name if s.counselor_supervisor %> </td>
+            <% first_row = false %>
+            <% else %>
+            <td></td>
+            <% end %>
+            <td> <%= a.counselor_advisor.employee.full_name %> </td>
+            <td> <%= s.counselor_batch.batch.batch_language %> </td>
+            <td> <%= a.student_class.name %> </td>
+          </tr>
+          <% end %>
+          
+          
+          <% end %>
+          <tfoot bgcolor="#B7B7B7"><td></td><td></td><td></td><td></td></tfoot>
+        </tbody>
+      </table>
+  </div>
+</div>

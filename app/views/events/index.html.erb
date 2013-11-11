@@ -1,0 +1,45 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+	<div class="row-fluid">
+
+		<div class="offset1 span11">
+			<!--Body content-->
+			<div class="hr">
+				<img src="/assets/student-activity.png" alt="image" />
+				<h2>Events</h2>
+			</div>
+			<div id="app-back-button" class="span10">
+				<a onclick="history.back(); return false;" href="#" id= "bk">
+					<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+				</a>
+			</div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+			<div style="width:1100px">
+				<ul class="nav pull-right">
+					<a href="/events/new" role="button" class="btn btn-primary">Publish New Event</a>
+				</ul></div>
+				<!--		// modal -->
+				<!--	// calendar -->
+				<div style="width:1100px;">
+					<div id="events">
+						<h2 id="month">
+							<%= link_to '<', date: @date.prev_month %>
+							<%= @date.strftime("%B %Y") %>
+							<%= link_to '>', date: @date.next_month %>
+						</h2>
+						<%= calendar @date do |date| %>
+						<%= date.day %>
+						<% if @events_by_date[date] %>
+						<ul>
+							<% @events_by_date[date].each do |event| %>
+							<h5><%= link_to event.event_name, event %></h5>
+							<% end %>
+						</ul>
+						<% end %>
+						<% end %>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>

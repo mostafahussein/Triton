@@ -1,0 +1,20 @@
+<div>
+  <h4>Batches List</h4>
+  <div>
+  <table class="table table-bordered table-hover">
+        <thead bgcolor="#B7B7B7"><th>Batch</th><th>Section</th></thead>
+        <tbody>
+          <% @batch_counselors.each do |bc| %>
+          <% bc.batch.student_classes.each do |bs| %>
+          
+          <tr>
+            <td><%= bc.batch.batch_language %></td>
+            <td><%= link_to bs.name, bs %></td>
+          </tr>
+          <% end %>
+          <% end %>
+          <tfoot bgcolor="#B7B7B7"><td></td><td></td></tfoot>
+        </tbody>
+      </table>
+  </div>
+</div>

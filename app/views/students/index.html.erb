@@ -1,2 +1,18 @@
-<h1>Students#index</h1>
-<p>Find me in app/views/students/index.html.erb</p>
+<%= render 'students/student_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Users-icon.png" alt="image" />
+    <h3>Student Management</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <% if params[:student] == "students_list" %>
+ <%= render 'students/students_list' %>
+ <% elsif params[:student] == "student_status" %>
+ <%= render 'students/student_chart' %> 
+ <% end %>

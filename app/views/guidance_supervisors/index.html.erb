@@ -1,0 +1,8 @@
+<%= render 'guidance_supervisors/councelor_sidebar' %>
+<div class="span9">
+<% if (current_user.user_type == "admin") %>
+<%= render 'academic_counselor_index' %>
+<% end %> 
+<% if (current_user.has_role? :academic_advisor)%>
+<%= render 'advisor_index' %>
+<% end %>

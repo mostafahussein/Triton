@@ -1,0 +1,8 @@
+<div class="span3">
+    <ul class="nav nav-tabs nav-stacked main-menu" data-spy="affix" style="width:300px">
+  <li class="nav-header">Your Messages</li>
+  <li><a href="<%= new_user_message_path(@user)%>">Compose New Message</a></li>
+  <li><a href="<%= user_messages_path(current_user, :mailbox=>:inbox) %>">Inbox <% if current_user.unread_messages.count > 0 %><span class="badge badge-important"><%= current_user.unread_messages.count %></span><% end %></a></li>
+  <li><a href="<%= user_messages_path(current_user, :mailbox => :sent) %>">Sent</a></li>
+</ul>
+  </div>

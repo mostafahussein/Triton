@@ -1,44 +1,40 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
-      <!--Body content-->
-      <div class="hr">
-        <img src="/assets/Users-icon.png" alt="image" />
-        <h2>Add a new user</h2>
-      </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-      <!-- page content goes here -->
-
-       <%= simple_form_for(@user) do |f| %>
-    <%= f.error_notification %>
-
-    <div class="inputs">
-      <%= f.input :first_name, :required => true,:autofocus => true %>
-      <hr style="width: 1100px; ">
-      <%= f.input :last_name, :required => true %>
-      <hr style="width: 1100px; ">
-      <%= f.input :email, :required => true%>
-      <hr style="width: 1100px; ">
-      <%= f.input :password, :required => true %>
-      <hr style="width: 1100px; ">
-      <%= f.input :password_confirmation, :required => true %>
-      <hr style="width: 1100px; ">
-      <%= f.input :user_type, collection: ['Admin','Employee','Student','Parent'], include_blank: false %>
-      
-    </div>
-
-    <div class="actions">
-      <%= f.button :submit, "Accept", :class => "btn btn-inverse" %>
-    </div>
-    <% end %>
-
-    </div>
+<%= render 'users/user_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/Users-icon.png" alt="image" />
+    <h3 class="page-title">Users Management</h3>
   </div>
-</div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <div class="portlet box blue">
+    <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>Add New User</div></div>
+      <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="/users" class="form-horizontal" method="POST">
+          <%= simple_form_for(@user) do |f| %>
+              <%= f.error_messages %>
+              <h4 class="block">User's details</h4>
+              <%= f.input :user_name,:autofocus => true%>
+              <%= f.input :first_name %>
+              <%= f.input :last_name %>
+              <%= f.input :email %>
+
+              <%= f.input :password %>
+              <%= f.input :password_confirmation %>
+              <%= f.input :user_type, collection: ['Admin'], include_blank: false %>
+
+          <div class="form-actions">
+            <button type="submit" class="btn blue"><i class="icon-ok"></i> Save</button>
+            <button type="button" class="btn">Cancel</button>
+          </div>
+        </form>
+        <% end %>
+        <!-- END FORM--> 
+      </div>
+    </div>

@@ -1,0 +1,44 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+	<div class="row-fluid">
+
+		<div class="offset1 span11">
+			<!--Body content-->
+			<div class="hr">
+				<img src="/assets/engineer-icon.png" alt="image" />
+				<h2>Academic Counselor</h2>
+			</div>
+			<div id="app-back-button" class="span10">
+				<a onclick="history.back(); return false;" href="#" id= "bk">
+					<img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+				</a>
+			</div>
+			<hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+			<div class="offset1">
+			<table border="0" width="700" height="200">
+				<tr>
+					<td><a href='/guidance_supervisors/new'><span><font size="3"><b>Assign New Advisors
+						</b></font><br></span></a><i>
+						Add Supervisor and thier Advisors with Batces and Sections</i>
+					</td>
+					<td><a href='/guidance_supervisors'><span><font size="3"><b>Advisors List
+						</b></font><br></span></a><i>
+						A List of all Advisors</i>
+					</td>
+				</tr>
+				<tr>
+					<td><a href='/guidance_supervisors/new'><span><font size="3"><b>Employees Configuration
+						</b></font><br></span></a><i>
+						Add New Advisors from Employees</i>
+					</td>
+					<td><a href='/guidance_supervisors'><span><font size="3"><b>Batches Configuration
+						</b></font><br></span></a><i>
+						Add New Batches to Advisor</i>
+					</td>
+				</tr>
+
+			</table>
+			</div>
+		</div>
+	</div>
+</div>

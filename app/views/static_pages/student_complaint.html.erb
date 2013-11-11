@@ -1,0 +1,68 @@
+<%= render 'shared/image_navbar' %>
+<div class="container-fluid" style="margin-top: 40px">
+  <div class="row-fluid">
+
+    <div class="offset1 span11">
+      <!--Body content-->
+      <div class="hr">
+        <img src="/assets/boss-icon.png" alt="image" />
+        <h2>Academic Leadership</h2>
+      </div>
+      <div id="app-back-button" class="span10">
+        <a onclick="history.back(); return false;" href="#" id= "bk">
+          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+        </a>
+      </div>
+      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
+      <h4>Type of problem:</h4>
+      <input type="checkbox" value="Section 1"> Problem 1<br>
+      <input type="checkbox" value="Section 1"> Problem 2<br>
+      <input type="checkbox" value="Section 1"> Problem 3<br>
+       <script>
+    function showHide()
+    {
+      var department=document.getElementById("department");
+      var mylist=document.getElementById("myList");
+      if((mylist.options[mylist.selectedIndex].text === "Third Year" || mylist.options[mylist.selectedIndex].text === "Fourth Year") && (department.options[department.selectedIndex].text === "Business Administration") )
+      {
+        document.getElementById("hidden_label").style.display = "";
+        document.getElementById("hidden_selection").style.display = "";
+      }
+      else
+      {
+        document.getElementById("hidden_label").style.display = "none";
+        document.getElementById("hidden_selection").style.display = "none";
+      }
+    }
+  </script>
+  <br>
+  <form>
+  <label><h4>Select Department:</h4></label>
+    <select id="department" onchange="showHide()">
+      <option>--select department--</option>
+      <option>Business Administration</option>
+      <option>Management Information System</option>
+    </select><br><br>
+    <label><h4>Select Year:</h4></label>
+    <select id="myList" onchange="showHide()">
+      <option>--select year--</option>
+      <option>First Year</option>
+      <option>Second Year</option>  
+      <option>Third Year</option>
+      <option>Fourth Year</option>
+    </select><br><br>
+    <label id="hidden_label" style="display:none;"><h4>Select Specialization:</h4></label>
+    <select id="hidden_selection" style="display:none;">
+      <option>Accounting</option>
+      <option>Business Administration</option>
+      <option>Economics</option>
+    </select>
+  </form>
+  <h4>Your Problem:</h4>
+      <textarea class="input-xxlarge" rows="4" cols="90">
+</textarea>
+  <h4>Proposed Solution:</h4>
+      <textarea class="input-xxlarge" rows="4" cols="50">
+</textarea>
+<br>
+<button class="btn btn-primary" type="button">Submit</button>

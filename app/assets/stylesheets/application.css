@@ -11,6 +11,10 @@
  *= require_self
  *= require jquery.ui.all
  *= require bootstrap-datepicker
+ *= require bootstrap-timepicker
  *= require bootstrap_form
+ *= require style-metro
+ *= require login
+ *= require font
  *= require_tree .
  */

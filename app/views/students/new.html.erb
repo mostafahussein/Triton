@@ -1,60 +1,218 @@
-<%= render 'shared/navbar' %>
-<div class="container-fluid">
-  <div class="row-fluid">
-
-    <div class="offset1 span11">
-      <!--Body content-->
-      <div class="hr">
-        <img src="/assets/korganizer-icon.png" alt="image" />
-        <h2>Student Admission</h2>
+<%= render 'students/student_sidebar' %>
+<div class="span9">
+  <!--Body content-->
+  <div class="hr">
+    <img src="/assets/korganizer-icon.png" alt="image" />
+    <h3 class="page-title">Student Management</h3>
+  </div>
+  <div id="app-back-button" style="padding-right: 50px;">
+    <a onclick="history.back(); return false;" href="#" id= "bk">
+      <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
+    </a>
+  </div>
+  <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 975px; "></hr>
+  <h4>Student Admission</h4>
+  <!--Start Wizard-->
+  <div class="portlet box blue" id="form_wizard_1">
+    <div class="portlet-title">
+      <div class="caption">
+        <i class="icon-reorder"></i> New Student - <span class="step-title">Step 1 of 4</span>
       </div>
-      <div id="app-back-button" class="span10">
-        <a onclick="history.back(); return false;" href="#" id= "bk">
-          <img border="0" src="/assets/back-icon.png" alt="Back" id="bak" >
-        </a>
-      </div>
-      <hr style="color: #049cdb; background-color: #049cdb; height: 5px; width: 1100px; "></hr>
-      <!-- page content goes here -->
-      <div class="row">
-
-  <div class="offset1 span4">
-
-     <h4>Step 1 - Student details</h4>
-     <%= simple_form_for(@student) do |f| %>
-     <%= f.error_messages %>
-    <%= f.input :admission_no %>
-    <%= f.input :admission_date, :as => :string, :input_html => { class: 'admission'}, label: 'Admission Date' %>
-    <h4>Student - Personal Details</h4>
-    <%= f.input :first_name %>
-    <%= f.input :middle_name %>
-    <%= f.input :last_name %>
-    <%= f.input :date_of_birth, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
-     <%= f.association :batch, as: :select, label: 'Course & Batch' %>
-      <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @student.gender, item_wrapper_class: 'inline'%>
-    <%= f.input :blood_group, prompt: 'Unknown', collection: ['A+','A-','B+','B-','O+', 'O-', 'AB+', 'AB-'] %>
-     <%= f.input :birth_place %>
-     <%= f.association :nationality, as: :select, include_blank: false %>
-     <%= f.input :language, label: 'Mother tongue' %>
- </div>
- 
- <div class="offset3 span4">
-
-   <h4>Student - Contact Details</h4>
-   <%= f.input :address_line1, label: 'Address line 1' %>
-   <%= f.input :address_line2, label: 'Address Line 2' %>
-   <%= f.input :city %>
-   <%= f.input :post_code %>
-   <%= f.association :country, as: :select, label: 'Country', include_blank: false %>
-   <%= f.input :phone1, label: 'Phone' %>
-   <%= f.input :phone2, label: 'Mobile' %>
-   <%= f.input :email %>
-   <button class="btn btn-large btn-success" type="submit">Save & Proceed</button>
-   <% end %>
- 
-</div>
-
-</div>
-
     </div>
+    <div class="portlet-body form">
+      <form action="/students" class="form-horizontal" id="submit_form" method="POST">
+        <div class="form-wizard">
+          <div class="navbar steps">
+            <div class="navbar-inner">
+              <ul class="row-fluid">
+                <li class="span3">
+                  <a href="#tab1" data-toggle="tab" class="step ">
+                    <span class="number">1</span>
+                    <span class="desc"><i class="icon-ok"></i> Student Details</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab2" data-toggle="tab" class="step">
+                    <span class="number">2</span>
+                    <span class="desc"><i class="icon-ok"></i> Parent Details</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab3" data-toggle="tab" class="step active">
+                    <span class="number">3</span>
+                    <span class="desc"><i class="icon-ok"></i> Previous Details</span>   
+                  </a>
+                </li>
+                <li class="span3">
+                  <a href="#tab4" data-toggle="tab" class="step">
+                    <span class="number">4</span>
+                    <span class="desc"><i class="icon-ok"></i> Confirm</span>   
+                  </a> 
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div id="bar" class="progress progress-success progress-striped">
+            <div class="bar"></div>
+          </div>
+          <div class="tab-content">
+            <div class="alert alert-error hide">
+              <button class="close" data-dismiss="alert"></button>
+              You have some form errors. Please check below.
+            </div>
+            <div class="alert alert-success hide">
+              <button class="close" data-dismiss="alert"></button>
+              Your form validation is successful!
+            </div>
+            <div class="tab-pane active" id="tab1">
+             <%= simple_form_for(@student) do |f| %>
+             <%= f.error_messages %>
+             <div style="float: left;">
+               <%= f.input :admission_no %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :admission_date, :as => :string, :input_html => { class: 'admission'}, label: 'Admission Date' %>
+             </div>
+             <div style="clear: left;">
+               <h4 class="block">Student's personal details</h4>
+             </div>
+             <div style="float: left;">
+               <%= f.input :first_name %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :middle_name %>
+             </div>
+             <%= f.input :last_name %>
+             <%= f.input :date_of_birth, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
+             <%= f.association :batch, as: :select, label: 'Course & Batch' %>
+             <div style="float: left;">
+               <%= f.input :gender, label: 'What is your gender?', collection: [ ['M', 'Male' ], ['F', 'Female'] ], as: :radio_buttons, label_method: :last, value_method: :first, checked: @student.gender, item_wrapper_class: 'inline'%>
+             </div>
+             <div style="float: left; padding-left:90px;">
+               <%= f.input :blood_group, prompt: '--select blood group--', collection: ['A+','A-','B+','B-','O+', 'O-', 'AB+', 'AB-'] %>
+             </div>
+             <div style="clear: left;">
+               <%= f.input :birth_place %>
+             </div>
+             <div style="float: left;">
+               <%= f.association :nationality, as: :select, include_blank: false %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :language, label: 'Mother tongue' %>
+             </div>
+             <div style="clear: left">
+               <h4>Student's contact Details</h4>
+             </div>
+             <div style="float: left;">
+               <%= f.input :address_line1, label: 'Address line 1' %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :address_line2, label: 'Address Line 2' %>
+             </div>
+             <div style="clear: left;">
+               <%= f.association :country, as: :select, label: 'Country', include_blank: false %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :city %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :post_code %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :phone1, label: 'Phone' %>
+             </div>
+             <div style="float: left;">
+               <%= f.input :phone2, label: 'Mobile' %>
+             </div>
+             <%= f.input :email %>
+
+           </div>
+           <div class="tab-pane" id="tab2">
+            <%= f.simple_fields_for :guardians do |p| %>
+            <%= p.input :student_id, as: :hidden, :input_html => { value: @student.id } %>
+            <h4 class="block">Parent's personal details</h4>
+            <div style="float: left;">
+              <%= p.input :first_name, :input_html => { value: @student.middle_name }, readonly: true %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :last_name, :input_html => { value: @student.last_name }, readonly: true %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :relation %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :dob, :as => :string, :input_html => { class: 'birth'}, label: 'Date of Birth' %>
+            </div>
+            <%= p.input :education %>
+            <div style="float: left;">
+              <%= p.input :occupation %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :income %>
+            </div>
+            <div style="clear: left;">
+              <h4>Parent's contact details</h4>
+            </div>
+            <%= p.input :email %>
+            <div style="float: left;">
+              <%= p.input :office_address_line1 %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :office_address_line2 %>
+            </div>
+            <div style="float: left;">
+              <%= p.association :country , as: :select %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :city %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :office_phone1 %>
+            </div>
+            <div style="float: left;">
+              <%= p.input :office_phone2 %>
+            </div>
+            <%= p.input :mobile_phone %>
+            <% end %>
+
+          </div>
+          <div class="tab-pane" id="tab3">
+            <%= f.simple_fields_for :previous_details do |pd| %>
+            <h4 class="block">Student's previous educational details</h4>
+            <%= pd.input :student_id, as: :hidden, :input_html => { value: @student.id } %>
+            <%= pd.input :institution, label: 'Institution Name'%>
+            <%= pd.input :course, label: 'Course'%>
+            <%= pd.input :year, :as => :string, :input_html => { class: 'year' }, label: 'Year' %>
+            <%= pd.input :total_mark, label: 'Total Mark'%>
+            <% end %>
+          </div>
+          <div class="tab-pane" id="tab4">
+
+          </div>
+        </div>
+        <div class="form-actions clearfix">
+          <a href="javascript:;" class="btn button-previous">
+            <i class="m-icon-swapleft"></i> Back 
+          </a>
+          <a href="javascript:;" class="btn blue button-next">
+            Continue <i class="m-icon-swapright m-icon-white"></i>
+          </a>
+          <a href="javascript:;" class="btn green button-submit">
+            Submit <i class="m-icon-swapright m-icon-white"></i>
+          </a>
+        </div>
+        <% end %>
+      </div>
+    </form>
   </div>
 </div>
+<!--End Wizard-->
+
+<script>
+  jQuery(document).ready(function() {       
+       // initiate layout and plugins
+       App.init();
+       FormWizard.init();
+     });
+</script>
+<!-- page content goes here -->
