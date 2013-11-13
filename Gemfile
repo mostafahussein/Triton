@@ -4,11 +4,11 @@ ruby '1.9.3'
 gem 'rails', '3.2.12'
 gem 'devise', '3.2'
 gem 'jquery-rails'
-gem 'bootstrap-sass'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate'
+gem 'bootstrap-sass', '2.3.2.0'
 gem 'bootswatch-rails'
 gem 'simple_form'
 gem 'wice_grid', '3.2.1'
@@ -39,6 +39,7 @@ end
 # in production environments by default.
 group :assets do
   gem 'sass-rails', '3.2.4'
+  
   gem 'uglifier', '1.2.3'
   gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
